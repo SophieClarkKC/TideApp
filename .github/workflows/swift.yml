@@ -1,0 +1,21 @@
+name: Swift
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      XC_VERSION: ${{ '12.4' }}
+      XC_PROJECT: ${{ 'TideApp/TideApp.xcodeproj' }}
+      XC_SCHEME: ${{ 'TideApp' }}
+    steps:
+    - name: Use Xcode "$XC_VERSION"
+      run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
+    - uses: actions/checkout@v2
+    - name: Run Unit and UI Tests
+      run: /usr/bin/xcodebuild test -project "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'

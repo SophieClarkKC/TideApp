@@ -3,3 +3,4 @@ DerivedData/
 *.pbxuser
 xcuserdata/
 **/.DS_Store
+*.xcuserstate
