@@ -8,12 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
+    env:
+      XC_VERSION: ${{ '12.5' }}
+      XC_WORKSPACE: ${{ 'TideApp.xcworkspace' }}
+      XC_SCHEME: ${{ 'TideApp' }}
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
+    - name: Select Xcode
+      run: "sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app"
+    - name: Run Unit and UI tests
+      run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+    
     - name: Run tests
       run: swift test -v
