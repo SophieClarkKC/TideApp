@@ -18,5 +18,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Use Xcode $XC_VERSION
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
-    - name: Run Unit and UI Tests
+    - name: Run Unit and UI Tests 
       run: /usr/bin/xcodebuild test -project "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
