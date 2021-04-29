@@ -3,4 +3,4 @@ DerivedData/
 *.pbxuser
 xcuserdata/
 **/.DS_Store
-TideApp/TideApp.xcodeproj/project.xcworkspace/xcuserdata/sophieclark.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate

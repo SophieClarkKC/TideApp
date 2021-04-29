@@ -19,7 +19,7 @@ class TideAppTests: XCTestCase {
     }
 
     func testExample() throws {
-        XCTAssert(false)
+        
     }
 
     func testPerformanceExample() throws {

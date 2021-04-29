@@ -14,7 +14,7 @@ jobs:
       XC_PROJECT: ${{ 'TideApp/TideApp.xcodeproj' }}
       XC_SCHEME: ${{ 'TideApp' }}
     steps:
-    - name: Use Xcode $XC_VERSION
+    - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
     - name: Run Unit and UI Tests
