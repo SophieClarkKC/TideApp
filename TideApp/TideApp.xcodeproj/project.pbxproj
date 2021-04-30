@@ -13,6 +13,8 @@
 		3600745A263AB73300C53715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007459263AB73300C53715 /* Preview Assets.xcassets */; };
 		36007465263AB73400C53715 /* TideAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007464263AB73400C53715 /* TideAppTests.swift */; };
 		36007470263AB73400C53715 /* TideAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600746F263AB73400C53715 /* TideAppUITests.swift */; };
+		3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600747D263AE82E00C53715 /* Stylesheet.swift */; };
+		365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
@@ -48,6 +50,8 @@
 		3600746B263AB73400C53715 /* TideAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TideAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3600746F263AB73400C53715 /* TideAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideAppUITests.swift; sourceTree = "<group>"; };
 		36007471263AB73400C53715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3600747D263AE82E00C53715 /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
+		365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		909BA5C4264171E1000FFBD5 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		909BA5C6264171E1000FFBD5 /* Config-Mock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Mock.plist"; sourceTree = "<group>"; };
 		909BA5C7264171E1000FFBD5 /* Mock.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mock.xcconfig; sourceTree = "<group>"; };
@@ -108,10 +112,11 @@
 			children = (
 				909BA5DB26417C2B000FFBD5 /* App */,
 				909BA5C12641715B000FFBD5 /* Configs */,
-				36007452263AB73100C53715 /* TideAppApp.swift */,
 				36007454263AB73100C53715 /* ContentView.swift */,
 				36007456263AB73300C53715 /* Assets.xcassets */,
 				36007458263AB73300C53715 /* Preview Content */,
+				3600747D263AE82E00C53715 /* Stylesheet.swift */,
+				365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */,
 			);
 			path = TideApp;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 		909BA5DB26417C2B000FFBD5 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				36007452263AB73100C53715 /* TideAppApp.swift */,
 				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -354,8 +360,10 @@
 			files = (
 				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
+				365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */,
 				36007455263AB73100C53715 /* ContentView.swift in Sources */,
 				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
+				3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
