@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+// MARK: Colors
+
 extension Color {
     static let titleColor = Color("titleColor")
     static let bodyTextColor = Color("bodyTextColor")
@@ -18,6 +20,8 @@ extension Color {
     static let primaryButtonTextColor = Color("primaryButtonTextColor")
     static let secondaryButtonTextColor = Color("secondaryButtonTextColor")
 }
+
+// MARK: Font size and weights
 
 enum TextSize {
     case title
@@ -39,13 +43,6 @@ enum TextSize {
     }
 }
 
-struct ComponentValues {
-    static let buttonCornerRadius: CGFloat = 5.0
-    static let buttonPressedStateAlpha: Double = 0.7
-    static let buttonNormalStateAlpha: Double = 1.0
-    static let buttonPadding: CGFloat = 5.0
-}
-
 extension Font.Weight {
     static let titleWeight: Font.Weight = .bold
     static let subTitleWeight: Font.Weight = .medium
@@ -53,6 +50,17 @@ extension Font.Weight {
     static let primaryButtonWeight: Font.Weight = .bold
     static let secondaryButtonWeight: Font.Weight = .regular
 }
+
+// MARK: Component Values
+
+struct ComponentValues {
+    static let buttonCornerRadius: CGFloat = 5.0
+    static let buttonPressedStateAlpha: Double = 0.7
+    static let buttonNormalStateAlpha: Double = 1.0
+    static let buttonPadding: CGFloat = 5.0
+}
+
+// MARK: Components - Labels
 
 struct TitleLabel: View {
     @State var text: String
@@ -81,6 +89,8 @@ struct BodyLabel: View {
             .multilineTextAlignment(.leading)
     }
 }
+
+// MARK: Components - Button styles
 
 struct PrimaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
