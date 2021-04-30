@@ -14,6 +14,7 @@
 		36007465263AB73400C53715 /* TideAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007464263AB73400C53715 /* TideAppTests.swift */; };
 		36007470263AB73400C53715 /* TideAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600746F263AB73400C53715 /* TideAppUITests.swift */; };
 		3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600747D263AE82E00C53715 /* Stylesheet.swift */; };
+		365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3600746F263AB73400C53715 /* TideAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideAppUITests.swift; sourceTree = "<group>"; };
 		36007471263AB73400C53715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3600747D263AE82E00C53715 /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
+		365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				3600745B263AB73300C53715 /* Info.plist */,
 				36007458263AB73300C53715 /* Preview Content */,
 				3600747D263AE82E00C53715 /* Stylesheet.swift */,
+				365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */,
 			);
 			path = TideApp;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */,
 				36007455263AB73100C53715 /* ContentView.swift in Sources */,
 				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
 				3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */,

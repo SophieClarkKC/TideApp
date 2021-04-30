@@ -9,35 +9,99 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    /// Custom initialiser to create colors using hex codes
-    ///
-    /// - Parameter hex: An int value whoch should be a hexadecimal. An example is `0x052F5F`
-    init(hex: Int) {
-        let red = Double((hex >> 16) & 0xFF) / 255
-        let green = Double((hex >> 8) & 0xFF) / 255
-        let blue = Double(hex & 0xFF) / 255
-        self.init(red: red, green: green, blue: blue)
+    static let titleColor = Color("titleColor")
+    static let bodyTextColor = Color("bodyTextColor")
+    static let subtitleColor = Color("subtitleColor")
+    static let primaryActionColor = Color("primaryActionColor")
+    static let secondaryActionColor = Color("secondaryActionColor")
+    static let backgroundColor = Color("backgroundColor")
+    static let primaryButtonTextColor = Color("primaryButtonTextColor")
+    static let secondaryButtonTextColor = Color("secondaryButtonTextColor")
+}
+
+enum TextSize {
+    case title
+    case subTitle
+    case body
+    case button
+    
+    func size() -> CGFloat {
+        switch self {
+        case .title:
+            return 23.0
+        case .subTitle:
+            return 18.0
+        case .body:
+            return 15.0
+        case .button:
+            return 21.0
+        }
     }
 }
 
-extension Color {
-    static var prussianBlue: Color {
-        return Color(hex: 0x052F5F)
+struct ComponentValues {
+    static let buttonCornerRadius: CGFloat = 5.0
+    static let buttonPressedStateAlpha: Double = 0.7
+    static let buttonNormalStateAlpha: Double = 1.0
+    static let buttonPadding: CGFloat = 5.0
+}
+
+extension Font.Weight {
+    static let titleWeight: Font.Weight = .bold
+    static let subTitleWeight: Font.Weight = .medium
+    static let bodyWeight: Font.Weight = .medium
+    static let primaryButtonWeight: Font.Weight = .bold
+    static let secondaryButtonWeight: Font.Weight = .regular
+}
+
+struct TitleLabel: View {
+    @State var text: String
+    var body: some View {
+        Text(text)
+            .foregroundColor(.titleColor)
+            .font(.system(size: TextSize.title.size(), weight: .bold, design: .default))
     }
-    
-    static var blueSapphire: Color {
-        return Color(hex: 0x005377)
+}
+
+struct SubtitleLabel: View {
+    @State var text: String
+    var body: some View {
+        Text(text)
+            .foregroundColor(.subtitleColor)
+            .font(.system(size: TextSize.subTitle.size(), weight: .bold, design: .default))
     }
-    
-    static var honeyYellow: Color {
-        return Color(hex: 0xFFB30F)
+}
+
+struct BodyLabel: View {
+    @State var text: String
+    var body: some View {
+        Text(text)
+            .foregroundColor(.bodyTextColor)
+            .font(.system(size: TextSize.body.size(), weight: .medium, design: .default))
+            .multilineTextAlignment(.leading)
     }
-    
-    static var frenchSkyBlue: Color {
-        return Color(hex: 0x65AFFF)
+}
+
+struct PrimaryActionStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(ComponentValues.buttonPadding)
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .foregroundColor(.primaryButtonTextColor)
+            .font(.system(size: TextSize.button.size(), weight: .primaryButtonWeight, design: .default))
+            .background(Color.primaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
+            .cornerRadius(ComponentValues.buttonCornerRadius)
     }
-    
-    static var mintCream: Color {
-        return Color(hex: 0xEBF5EE)
+}
+
+struct SecondaryActionStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(ComponentValues.buttonPadding)
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .foregroundColor(.secondaryButtonTextColor)
+            .font(.system(size: TextSize.button.size(), weight: .secondaryButtonWeight, design: .default))
+            .background(Color.secondaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
+            .cornerRadius(ComponentValues.buttonCornerRadius)
     }
 }
