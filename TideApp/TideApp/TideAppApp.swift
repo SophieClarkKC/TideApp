@@ -11,7 +11,7 @@ import SwiftUI
 struct TideAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TideTimesView(viewModel: TideTimesViewModel())
         }
     }
 }

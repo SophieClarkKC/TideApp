@@ -32,13 +32,13 @@ enum TextSize {
     func size() -> CGFloat {
         switch self {
         case .title:
-            return 23.0
+            return UIFont.preferredFont(forTextStyle: .title1).pointSize
         case .subTitle:
-            return 18.0
+            return UIFont.preferredFont(forTextStyle: .title3).pointSize
         case .body:
-            return 15.0
+            return UIFont.preferredFont(forTextStyle: .body).pointSize
         case .button:
-            return 21.0
+            return UIFont.preferredFont(forTextStyle: .title2).pointSize
         }
     }
 }
