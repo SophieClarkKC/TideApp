@@ -1,3 +1,10 @@
+//
+//  MockServer.swift
+//
+//
+//  Created by Marco Guerrieri on 04/05/2021.
+//
+
 import Foundation
 import Swifter
 
@@ -9,9 +16,11 @@ public class MockServer {
 
   public func start(port: UInt16 = 8123) {
     guard !isStarted else { return }
+
     server = HttpServer()
+
     guard let server = server else {
-      MSLogger.log(">>> MOCK SERVER Error on initialization")
+      MSLogger.log("Error on server initialization")
       return
     }
 
@@ -21,23 +30,31 @@ public class MockServer {
 
     server["/static/:path"] = directoryBrowser("/")
 
-    guard (try? server.start(port)) != nil else {
-      MSLogger.log(">>> MOCK SERVER Error on start")
+    do {
+      try server.start(port)
+    } catch let error as NSError {
+      MSLogger.log("Error on start (\(error.description))")
       return
     }
+
     isStarted = true
-    MSLogger.log(">>> MOCK SERVER Started on port: \(port)")
+    MSLogger.log("Started on port \(port)")
+  }
+
+  public func stop() {
+    server?.stop()
+    isStarted = false
   }
 
   private func processRequest(_ request: HttpRequest) -> HttpResponse {
-    MSLogger.log(">>> MOCK SERVER received request at \(request.path)")
+    MSLogger.log("Received request at \(request.path)")
     guard let endpoint = request.path.components(separatedBy: "?").first else {
-      MSLogger.log(">>> MOCK SERVER error no endpoint")
+      MSLogger.log("Error no endpoint found on path \(request.path)")
       return Response.Error.generic
     }
 
     guard let route = Routes.allRoutes()[endpoint] else {
-      MSLogger.log(">>> MOCK SERVER error no route found")
+      MSLogger.log("Error no route found for endpoint \(endpoint)")
       return Response.Error.generic
     }
 
