@@ -15,6 +15,7 @@
 		36007470263AB73400C53715 /* TideAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600746F263AB73400C53715 /* TideAppUITests.swift */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
+		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		909BA5CA264171E1000FFBD5 /* Config-Prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Prod.plist"; sourceTree = "<group>"; };
 		909BA5CB264171E1000FFBD5 /* Prod.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Prod.xcconfig; sourceTree = "<group>"; };
 		909BA5CC264171E1000FFBD5 /* CommonConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonConfig.xcconfig; sourceTree = "<group>"; };
+		909BA5DC26417C48000FFBD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		36007451263AB73100C53715 /* TideApp */ = {
 			isa = PBXGroup;
 			children = (
+				909BA5DB26417C2B000FFBD5 /* App */,
 				909BA5C12641715B000FFBD5 /* Configs */,
 				36007452263AB73100C53715 /* TideAppApp.swift */,
 				36007454263AB73100C53715 /* ContentView.swift */,
@@ -168,6 +171,14 @@
 				909BA5CB264171E1000FFBD5 /* Prod.xcconfig */,
 			);
 			path = Prod;
+			sourceTree = "<group>";
+		};
+		909BA5DB26417C2B000FFBD5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
 				36007455263AB73100C53715 /* ContentView.swift in Sources */,
 				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
