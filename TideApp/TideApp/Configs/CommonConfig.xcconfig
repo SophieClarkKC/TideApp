@@ -1,0 +1,8 @@
+//
+//  CommonConfig.xcconfig
+//  TideApp
+//
+//  Created by Marco Guerrieri on 04/05/2021.
+//
+
+BUNDLE_VERSION = 1
