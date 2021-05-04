@@ -58,6 +58,15 @@ struct ComponentValues {
     static let buttonPressedStateAlpha: Double = 0.7
     static let buttonNormalStateAlpha: Double = 1.0
     static let buttonPadding: CGFloat = 5.0
+    static let buttonMinimumHeight: CGFloat = 50.0
+}
+
+struct PaddingValues {
+    static let huge: CGFloat = 32
+    static let large: CGFloat = 24
+    static let medium: CGFloat = 16
+    static let small: CGFloat = 8
+    static let tiny: CGFloat = 4
 }
 
 // MARK: Components - Labels
@@ -96,7 +105,7 @@ struct PrimaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(ComponentValues.buttonPadding)
-            .frame(maxWidth: .infinity, minHeight: 50)
+            .frame(maxWidth: .infinity, minHeight: ComponentValues.buttonMinimumHeight)
             .foregroundColor(.primaryButtonTextColor)
             .font(.system(size: TextSize.button.size(), weight: .primaryButtonWeight, design: .default))
             .background(Color.primaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
@@ -108,7 +117,7 @@ struct SecondaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(ComponentValues.buttonPadding)
-            .frame(maxWidth: .infinity, minHeight: 50)
+            .frame(maxWidth: .infinity, minHeight: ComponentValues.buttonMinimumHeight)
             .foregroundColor(.secondaryButtonTextColor)
             .font(.system(size: TextSize.button.size(), weight: .secondaryButtonWeight, design: .default))
             .background(Color.secondaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
