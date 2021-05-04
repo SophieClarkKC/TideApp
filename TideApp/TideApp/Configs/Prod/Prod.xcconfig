@@ -1,0 +1,11 @@
+//
+//  Prod.xcconfig
+//  TideApp
+//
+//  Created by Marco Guerrieri on 04/05/2021.
+//
+
+#include "../CommonConfig.xcconfig"
+
+XCC_BUNDLE_NAME = TideApp
+XCC_CONFIG_PATH = Prod/Config-Prod.plist
