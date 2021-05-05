@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct TideAppApp: App {
-    var body: some Scene {
-        WindowGroup {
-            TideTimesView(viewModel: TideTimesViewModel())
-        }
+  var body: some Scene {
+    WindowGroup {
+      TideTimesView(viewModel: TideTimesViewModel())
     }
+  }
 }
