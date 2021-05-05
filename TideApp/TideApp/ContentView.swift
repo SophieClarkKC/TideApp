@@ -8,15 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            TitleLabel(text: "TideApp")
-        }
+  
+  @StateObject var viewModel = TideDataViewModel()
+  
+  var body: some View {
+    VStack {
+      Spacer()
+      
+      TitleLabel(text: "TideApp")
+      
+      Spacer()
+      
+      Text("\(viewModel.requestLocation)")
     }
+    .onAppear {
+      viewModel.getTideData()
+    }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }
