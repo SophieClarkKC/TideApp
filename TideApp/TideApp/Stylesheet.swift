@@ -32,11 +32,11 @@ enum TextSize {
     func size() -> CGFloat {
         switch self {
         case .title:
-            return 23.0
+            return 34.0
         case .subTitle:
-            return 18.0
+            return 24.0
         case .body:
-            return 15.0
+            return 18.0
         case .button:
             return 21.0
         }
