@@ -49,11 +49,23 @@ extension WeatherDataFetcher: WeatherDataFetchable {
 }
 
 extension WeatherDataFetcher {
+
+  private func makeWeatherComponents(lat: Double, lon: Double, numOfDays: Int, includeLocation: Bool, tp: Int) -> URLComponents {
+    var components = URLComponents()
+    components.scheme = WeatherDataAPI.scheme
+    components.host = WeatherDataAPI.host
+    components.path = WeatherDataAPI.path
+    components.queryItems = WeatherDataAPI.makeQueryItems(lat: lat, lon: lon, numOfDays: numOfDays, includeLocation: includeLocation, tp: tp)
+
+    return components
+  }
+
+  // MARK: - WeatherDataAPI
   struct WeatherDataAPI {
     static let scheme = "https"
     static let host = AppConfig.baseURL.host
     static let path = "/premium/v1/marine.ashx"
-    
+
     static func makeQueryItems(lat: Double, lon: Double, numOfDays: Int, includeLocation: Bool, tp: Int) -> [URLQueryItem] {
       let validTP = Set([1, 3, 6, 12, 24]).contains(tp) ? tp : 3 // defaults the value to 3hourly if invalid
       
@@ -66,24 +78,5 @@ extension WeatherDataFetcher {
               URLQueryItem(name: "tp", value: "\(validTP)"),
       ]
     }
-    
-    func validTimePeriod(for timePeriod: Int) -> Int {
-      switch timePeriod {
-      case 1, 3, 6, 12, 24:
-        return timePeriod
-      default:
-        return 3
-      }
-    }
-  }
-  
-  func makeWeatherComponents(lat: Double, lon: Double, numOfDays: Int, includeLocation: Bool, tp: Int) -> URLComponents {
-    var components = URLComponents()
-    components.scheme = WeatherDataAPI.scheme
-    components.host = WeatherDataAPI.host
-    components.path = WeatherDataAPI.path
-    components.queryItems = WeatherDataAPI.makeQueryItems(lat: lat, lon: lon, numOfDays: numOfDays, includeLocation: includeLocation, tp: tp)
-    
-    return components
   }
 }
