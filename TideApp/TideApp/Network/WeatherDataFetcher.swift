@@ -65,7 +65,18 @@ extension WeatherDataFetcher {
     static let scheme = "https"
     static let host = AppConfig.baseURL.host
     static let path = "/premium/v1/marine.ashx"
-
+    
+    /// Returns an array of composed `URLQueryItem` for the given parameters.
+    ///
+    /// - Parameters:
+    ///   - lat: Latitude of the request location
+    ///   - lon: Longitude of the request location
+    ///   - numOfDays: The number of days forecast we want to request
+    ///   - includeLocation: Whether we want the location of the nearest weather station to the requested lat,lon
+    ///   - tp: The hourly _Time period_ for the weather forecast.
+    ///         Possible values are 1, 3, 6, 12 or 24 hour periods.
+    ///         For 24 hourly periods we receive one forecast with the average temperature for the day,
+    ///         but the full range of tide times and heights.
     static func makeQueryItems(lat: Double, lon: Double, numOfDays: Int, includeLocation: Bool, tp: Int) -> [URLQueryItem] {
       let validTP = Set([1, 3, 6, 12, 24]).contains(tp) ? tp : 3 // defaults the value to 3hourly if invalid
       
