@@ -22,7 +22,6 @@ struct WeatherData: Decodable {
     case weather
   }
 
-
   // MARK: - LocationRequest
   struct LocationRequest: Decodable {
     let query: String
@@ -47,7 +46,6 @@ struct WeatherData: Decodable {
         case tideData = "tide_data"
       }
 
-
       // MARK: - TideData
       struct TideData: Decodable {
         let tideTime, tideHeightM, tideDateTime, tideType: String
@@ -57,7 +55,6 @@ struct WeatherData: Decodable {
           case tideHeightM = "tideHeight_mt"
           case tideDateTime
           case tideType = "tide_type"
-
         }
       }
     }
