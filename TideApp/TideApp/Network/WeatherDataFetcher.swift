@@ -40,7 +40,6 @@ extension WeatherDataFetcher: WeatherDataFetchable {
       .mapError { error in
         WeatherError.network(description: error.localizedDescription)
       }
-      
       .flatMap(maxPublishers: .max(1)) { pair in
         WeatherDecoder().decode(pair.data)
       }

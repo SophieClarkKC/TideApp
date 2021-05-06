@@ -72,7 +72,7 @@ struct PaddingValues {
 // MARK: Components - Labels
 
 struct TitleLabel: View {
-  @State var text: String
+  var text: String
   var body: some View {
     Text(text)
       .foregroundColor(.titleColor)
@@ -81,7 +81,7 @@ struct TitleLabel: View {
 }
 
 struct SubtitleLabel: View {
-  @State var text: String
+  var text: String
   var body: some View {
     Text(text)
       .foregroundColor(.subtitleColor)
@@ -90,7 +90,7 @@ struct SubtitleLabel: View {
 }
 
 struct BodyLabel: View {
-  @State var text: String
+  var text: String
   var body: some View {
     Text(text)
       .foregroundColor(.bodyTextColor)

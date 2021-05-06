@@ -7,28 +7,42 @@
 
 import Foundation
 import Combine
+import CoreLocation
 
 final class TideTimesViewModel: ObservableObject {
   
   @Published var locationName: String = ""
   @Published var subTitle: String = ""
-  @Published var tideTimes: [TideTimeTempObject] = []
+  @Published var tideTimes: [WeatherData.Weather.Tide.TideData] = []
   @Published var tideHeight: String = ""
+  @Published var error: WeatherError?
   
-  init() {
-    getTideTimes()
+  private var weatherFetcher: WeatherDataFetchable
+  private var cancellables = [AnyCancellable]()
+
+  init(weatherFetcher: WeatherDataFetchable) {
+    self.weatherFetcher = weatherFetcher
   }
   
-  private func getTideTimes() {
-    // TODO: add call to network layer to get data
-    locationName = "Hammersmith Bridge"
-    subTitle = "Tide times"
-    tideTimes = [TideTimeTempObject(tideTime: "High: 3:28 AM"), TideTimeTempObject(tideTime: "Low: 9:41 AM"), TideTimeTempObject(tideTime: "High: 3:55 PM"), TideTimeTempObject(tideTime: "Low: 9:55 PM")]
+  func getTideTimes() {
+    // TODO: calculate current tide height
+    weatherFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
+      .receive(on: DispatchQueue.main)
+      .flatMap { CLGeocoder().getLocationName(for: $0) }
+      .sink { completion in
+        switch completion {
+        case .failure(let error):
+          self.error = error
+        case .finished:
+          break
+        }
+      } receiveValue: { (placeName, weatherData) in
+        self.subTitle = "Tide times"
+        self.tideTimes = weatherData.weather.first?.tides.first?.tideData ?? []
+        self.locationName = placeName
+      }
+      .store(in: &cancellables)
+
     tideHeight = "Current tide height: 0.78m"
   }
-}
-
-struct TideTimeTempObject: Identifiable {
-  let id = UUID()
-  let tideTime: String
 }
