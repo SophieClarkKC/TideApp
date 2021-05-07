@@ -28,7 +28,7 @@ extension CLGeocoder {
           } else if let placemark = placemarks?.first(where: { $0.subAdministrativeArea != nil }), let locationName = placemark.subAdministrativeArea {
             promise(.success((locationName, weatherData)))
           } else {
-            promise(.success(("Dunno", weatherData)))
+            promise(.success(("Lat: \(latitude), Lon: \(longitude)", weatherData)))
           }
         }
       }
