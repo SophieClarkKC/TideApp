@@ -13,7 +13,6 @@
 		12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
 		12FE3E952642B778000F7476 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
 		12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */; };
-		36007453263AB73100C53715 /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007452263AB73100C53715 /* TideAppApp.swift */; };
 		36007455263AB73100C53715 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007454263AB73100C53715 /* ContentView.swift */; };
 		36007457263AB73300C53715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007456263AB73300C53715 /* Assets.xcassets */; };
 		3600745A263AB73300C53715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007459263AB73300C53715 /* Preview Assets.xcassets */; };
@@ -21,6 +20,7 @@
 		36007470263AB73400C53715 /* TideAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600746F263AB73400C53715 /* TideAppUITests.swift */; };
 		3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3600747D263AE82E00C53715 /* Stylesheet.swift */; };
 		365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */; };
+		908AD3D62645854900D45801 /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AD3D52645854900D45801 /* TideAppApp.swift */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
@@ -51,7 +51,6 @@
 		12FE3E942642B778000F7476 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDecoder.swift; sourceTree = "<group>"; };
 		3600744F263AB73100C53715 /* TideApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TideApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		36007452263AB73100C53715 /* TideAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
 		36007454263AB73100C53715 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		36007456263AB73300C53715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36007459263AB73300C53715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		36007471263AB73400C53715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3600747D263AE82E00C53715 /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
+		908AD3D52645854900D45801 /* TideAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
 		909BA5C4264171E1000FFBD5 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		909BA5C6264171E1000FFBD5 /* Config-Mock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Mock.plist"; sourceTree = "<group>"; };
 		909BA5C7264171E1000FFBD5 /* Mock.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mock.xcconfig; sourceTree = "<group>"; };
@@ -166,7 +166,6 @@
 				36007458263AB73300C53715 /* Preview Content */,
 				3600747D263AE82E00C53715 /* Stylesheet.swift */,
 				365F2914263C0CAE004252D3 /* StylesheetComponentExample.swift */,
-				36007452263AB73100C53715 /* TideAppApp.swift */,
 				1264770F2643FFB800D4432D /* ViewModels */,
 			);
 			path = TideApp;
@@ -232,7 +231,7 @@
 		909BA5DB26417C2B000FFBD5 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				36007452263AB73100C53715 /* TideAppApp.swift */,
+				908AD3D52645854900D45801 /* TideAppApp.swift */,
 				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -415,9 +414,9 @@
 				365F2915263C0CAE004252D3 /* StylesheetComponentExample.swift in Sources */,
 				36007455263AB73100C53715 /* ContentView.swift in Sources */,
 				126477112644001600D4432D /* TideDataViewModel.swift in Sources */,
-				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
 				3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
+				908AD3D62645854900D45801 /* TideAppApp.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
 				12FE3E952642B778000F7476 /* WeatherError.swift in Sources */,
 				12EF61A82643F41F002C94B4 /* Keys.swift in Sources */,
