@@ -22,7 +22,6 @@ final class TideDataViewModel: ObservableObject {
   func getTideData() {
     weatherDataFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
       .receive(on: DispatchQueue.main).sink { [weak self] (value) in
-        guard let self = self else { return }
         switch value {
         case .failure(let error):
           print(error)

@@ -67,12 +67,12 @@ final class TideTimesViewModel: ObservableObject {
       data.tideDateTime.date(with: .dateTime) == closestDates.last
     })
     
-    guard let lastTideHeight = lastTideData?.tideHeightM,
-          let nextTideHeight = nextTideData?.tideHeightM,
+    guard let lastTideHeightString = lastTideData?.tideHeightM,
+          let nextTideHeightString = nextTideData?.tideHeightM,
           let lastTideTime = closestDates.first,
           let nextTideTime = closestDates.last,
-          let lastTideHeight = Double(lastTideHeight),
-          let nextTideHeight = Double(nextTideHeight) else {
+          let lastTideHeight = Double(lastTideHeightString),
+          let nextTideHeight = Double(nextTideHeightString) else {
       return 0
     }
     
