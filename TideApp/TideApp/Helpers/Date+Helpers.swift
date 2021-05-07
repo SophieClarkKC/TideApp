@@ -20,10 +20,7 @@ extension Date {
     return [closestPastDate, closestFutureDate].compactMap { $0 }
   }
   
-  func difference(from date: Date?) -> Double {
-    guard let date = date else {
-      return 0
-    }
+  func difference(from date: Date) -> Double {
     return self.timeIntervalSince1970 - date.timeIntervalSince1970
   }
 }
