@@ -30,7 +30,7 @@ struct TideTimesView: View {
       .padding([.leading, .trailing], PaddingValues.medium)
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-    .background(Color.backgroundColor.ignoresSafeArea(.all, edges: .top))
+    .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
     .onAppear(perform: {
       viewModel.getTideTimes()
     })
