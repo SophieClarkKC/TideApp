@@ -276,6 +276,7 @@
 		909BA5DB26417C2B000FFBD5 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				36007452263AB73100C53715 /* TideAppApp.swift */,
 				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
 			);
 			path = App;
