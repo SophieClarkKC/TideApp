@@ -11,6 +11,7 @@ import CoreLocation
 
 final class TideTimesViewModel: ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
+  typealias Hourly = WeatherData.Weather.Hourly
   
   @Published var locationName: String = ""
   @Published var subTitle: String = ""
@@ -43,7 +44,11 @@ final class TideTimesViewModel: ObservableObject {
         self.tideTimes = tideData
         self.locationName = placeName
         let currentTideHeight = self.calculateCurrentTideHeight(from: tideData)
-        self.tideHeight = "Current tide height: \(String(format: "%.2f", currentTideHeight))m"
+        self.tideHeight = "Current tide height: ~\(String(format: "%.2f", currentTideHeight))m"
+        if let hourly = weatherData.weather.first?.hourly {
+          let currentTemperature = self.currentWaterTemperature(from: hourly)
+          self.waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
+        }
       }
       .store(in: &cancellables)
   }
@@ -55,31 +60,61 @@ final class TideTimesViewModel: ObservableObject {
     }
     let closestDates = now.closestDates(in: tideDates)
     
-    let lastTideTime = tideData.filter { data in
+    let lastTideData = tideData.first(where: { data in
       data.tideDateTime.date(with: .dateTime) == closestDates.first
-    }.first
-    let nextTideTime = tideData.filter { data in
+    })
+    let nextTideData = tideData.first(where: { data in
       data.tideDateTime.date(with: .dateTime) == closestDates.last
-    }.first
+    })
     
-    guard let lastTideTime = lastTideTime, let nextTideTime = nextTideTime else {
+    guard let lastTideData = lastTideData,
+          let nextTideData = nextTideData,
+          let lastTideTime = closestDates.first,
+          let nextTideTime = closestDates.last,
+          let lastTideHeight = Double(lastTideData.tideHeightM),
+          let nextTideHeight = Double(nextTideData.tideHeightM) else {
       return 0
     }
     
-    let timeDifferenceBetweenTides = nextTideTime.tideDateTime.date(with: .dateTime)?.difference(from: lastTideTime.tideDateTime.date(with: .dateTime))
-    let lastTimeDifference = now.difference(from: lastTideTime.tideDateTime.date(with: .dateTime))
-    
-    guard let timeDifferenceBetweenTides = timeDifferenceBetweenTides else {
+    return getWeightedValue(from: lastTideTime, middleDate: now, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
+  }
+  
+  private func currentWaterTemperature(from hourlyData: [Hourly]) -> Double {
+    let timeNowDate = Date().string(with: .timeNoColon).date(with: .timeNoColon)
+    let closestTwoDates = timeNowDate?.closestDates(in: hourlyData.compactMap { $0.time.date(with: .timeNoColon) })
+    guard let closestDates = closestTwoDates else {
       return 0
     }
     
-    let safeLastTimeDifference = lastTimeDifference == 0 ? 1 : lastTimeDifference
-    let safeTimeDifferenceBetweenTides = timeDifferenceBetweenTides == 0 ? 1 : timeDifferenceBetweenTides
+    guard let lastTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
+      return 0
+    }
+    guard let nextTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
+      return Double(lastTempData.waterTempC) ?? 0
+    }
     
-    let timeFraction = safeLastTimeDifference / safeTimeDifferenceBetweenTides
-    let deltaLowHigh = (Double(lastTideTime.tideHeightM) ?? 0) - (Double(nextTideTime.tideHeightM) ?? 0)
+    guard let timeNow = timeNowDate,
+          let lastTempTime = closestDates.first,
+          let nextTempTime = closestDates.last,
+          let lastTemp = Double(lastTempData.waterTempC),
+          let nextTemp = Double(nextTempData.waterTempC) else {
+      return 0
+    }
+    
+    return getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
+  }
+  
+  private func getWeightedValue(from beginDate: Date, middleDate: Date, endDate: Date, startValue: Double, endValue: Double) -> Double {
+    let beginningAndEndDifference = endDate.difference(from: beginDate)
+    let middleAndBeginningDifference = middleDate.difference(from: beginDate)
+    
+    let safeMiddleAndBeginningDifference = middleAndBeginningDifference == 0 ? 1 : middleAndBeginningDifference
+    let safeTimeDifferenceBetweenTides = beginningAndEndDifference == 0 ? 1 : beginningAndEndDifference
+    
+    let timeFraction = safeMiddleAndBeginningDifference / safeTimeDifferenceBetweenTides
+    let deltaLowHigh = startValue - endValue
     let heightFraction = timeFraction * deltaLowHigh
-    let currentHeight = heightFraction + (Double(nextTideTime.tideHeightM) ?? 0)
+    let currentHeight = heightFraction + endValue
     
     return currentHeight
   }

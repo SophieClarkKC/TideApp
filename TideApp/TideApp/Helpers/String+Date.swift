@@ -9,8 +9,9 @@ import Foundation
 
 extension String {
   enum DateFormat: String {
-    case dateTime = "yyyy-MM-dd HH:mm" //2021-04-29 03:28
-    case time = "HH:mm a" // 09:15 AM
+    case dateTime = "yyyy-MM-dd HH:mm" // i.e. 2021-04-29 03:28
+    case time = "HH:mm a" // i.e 09:15 AM
+    case timeNoColon = "hhmm" // i.e. 300 which is 3AM
     
     func dateFormatter() -> DateFormatter {
       let dateFormatter = DateFormatter()

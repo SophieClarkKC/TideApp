@@ -21,6 +21,7 @@
 		36D04EA726453128006EB2DC /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA626453128006EB2DC /* String+Date.swift */; };
 		36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA826453521006EB2DC /* Date+Helpers.swift */; };
 		36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAA2645499C006EB2DC /* TideAppApp.swift */; };
+		36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAC264567EB006EB2DC /* Date+String.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
@@ -68,6 +69,7 @@
 		36D04EA626453128006EB2DC /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		36D04EA826453521006EB2DC /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		36D04EAA2645499C006EB2DC /* TideAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
+		36D04EAC264567EB006EB2DC /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7526443336005CA64F /* TideTimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */,
 				36D04EA626453128006EB2DC /* String+Date.swift */,
 				36D04EA826453521006EB2DC /* Date+Helpers.swift */,
+				36D04EAC264567EB006EB2DC /* Date+String.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
+				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
 				36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */,
 				36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */,

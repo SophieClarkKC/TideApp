@@ -22,6 +22,7 @@ struct TideTimesView: View {
         BodyLabel(text: "\(tideTime.tideType): \(tideTime.tideTime)")
       }
       SubtitleLabel(text: viewModel.tideHeight)
+      SubtitleLabel(text: viewModel.waterTemperature)
         //.padding(EdgeInsets(top: PaddingValues.small, leading: 0, bottom: PaddingValues.small, trailing: 0))
     })
     .padding(PaddingValues.medium)
