@@ -47,7 +47,8 @@ struct WeatherData: Decodable {
       }
 
       // MARK: - TideData
-      struct TideData: Decodable {
+      struct TideData: Identifiable, Decodable {
+        let id = UUID()
         let tideTime, tideHeightM, tideDateTime, tideType: String
 
         enum CodingKeys: String, CodingKey {

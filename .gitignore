@@ -5,3 +5,4 @@ xcuserdata/
 **/.DS_Store
 *.xcuserstate
 **/Keys.swift # Don't track api key file
+TideApp/TideApp/Keys.swift

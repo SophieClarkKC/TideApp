@@ -11,10 +11,10 @@ import SwiftUI
 @main
 struct TideAppApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+  
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      TideTimesView(viewModel: TideTimesViewModel(weatherFetcher: WeatherDataFetcher()))
     }
   }
 }
