@@ -12,26 +12,28 @@ struct TideTimesView: View {
   @ObservedObject var viewModel: TideTimesViewModel
   
   var body: some View {
-    VStack(alignment: .leading, spacing: PaddingValues.small, content: {
-      TitleLabel(text: viewModel.locationName)
-        .accessibility(label: Text("You are looking at tide times for \(viewModel.locationName)"))
-        //.padding(EdgeInsets(top: PaddingValues.small, leading: 0, bottom: PaddingValues.small, trailing: 0))
-      SubtitleLabel(text: viewModel.subTitle)
-        //.padding(EdgeInsets(top: PaddingValues.small, leading: 0, bottom: PaddingValues.small, trailing: 0))
-      ForEach(viewModel.tideTimes) { tideTime in
-        BodyLabel(text: "\(tideTime.tideType): \(tideTime.tideTime)")
-      }
-      SubtitleLabel(text: viewModel.tideHeight)
-      SubtitleLabel(text: viewModel.waterTemperature)
-        //.padding(EdgeInsets(top: PaddingValues.small, leading: 0, bottom: PaddingValues.small, trailing: 0))
+    ScrollView(.vertical, showsIndicators: false, content: {
+      VStack(alignment: .leading, spacing: nil, content: {
+        TitleLabel(text: viewModel.locationName)
+          .accessibility(label: Text("You are looking at tide times for \(viewModel.locationName)"))
+          .padding([.bottom, .top], PaddingValues.medium)
+        SubtitleLabel(text: viewModel.subTitle)
+          .padding(.bottom, PaddingValues.tiny)
+        ForEach(viewModel.tideTimes) { tideTime in
+          BodyLabel(text: "\(tideTime.tideType): \(tideTime.tideTime)")
+        }
+        SubtitleLabel(text: viewModel.tideHeight)
+          .padding([.bottom, .top], PaddingValues.small)
+        SubtitleLabel(text: viewModel.waterTemperature)
+          .padding([.bottom, .top], PaddingValues.small)
+      })
+      .padding([.leading, .trailing], PaddingValues.medium)
     })
-    .padding(PaddingValues.medium)
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     .background(Color.backgroundColor.ignoresSafeArea(.all, edges: .top))
     .onAppear(perform: {
       viewModel.getTideTimes()
     })
-    
   }
 }
 
