@@ -1,0 +1,11 @@
+//
+//  Mock.xcconfig
+//  TideApp
+//
+//  Created by Marco Guerrieri on 04/05/2021.
+//
+
+#include "../CommonConfig.xcconfig"
+
+XCC_BUNDLE_NAME = TideApp-Mock
+XCC_CONFIG_PATH = Mock/Config-Mock.plist
