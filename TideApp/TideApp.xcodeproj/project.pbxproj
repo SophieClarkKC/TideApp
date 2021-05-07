@@ -149,7 +149,6 @@
 				36007463263AB73400C53715 /* TideAppTests */,
 				3600746E263AB73400C53715 /* TideAppUITests */,
 				36007450263AB73100C53715 /* Products */,
-				36D4BE6C2644321A005CA64F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,13 +216,6 @@
 				36D04EAC264567EB006EB2DC /* Date+String.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		36D4BE6C2644321A005CA64F /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		36D4BE7326443311005CA64F /* Styling */ = {
