@@ -459,6 +459,7 @@
 				126477112644001600D4432D /* TideDataViewModel.swift in Sources */,
 				36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */,
 				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
+				3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
