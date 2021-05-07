@@ -13,7 +13,6 @@
 		12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
 		12FE3E952642B778000F7476 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
 		12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */; };
-		36007453263AB73100C53715 /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007452263AB73100C53715 /* TideAppApp.swift */; };
 		36007457263AB73300C53715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007456263AB73300C53715 /* Assets.xcassets */; };
 		3600745A263AB73300C53715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007459263AB73300C53715 /* Preview Assets.xcassets */; };
 		36007465263AB73400C53715 /* TideAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007464263AB73400C53715 /* TideAppTests.swift */; };
@@ -21,6 +20,7 @@
 		36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */; };
 		36D04EA726453128006EB2DC /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA626453128006EB2DC /* String+Date.swift */; };
 		36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA826453521006EB2DC /* Date+Helpers.swift */; };
+		36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAA2645499C006EB2DC /* TideAppApp.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
@@ -55,7 +55,6 @@
 		12FE3E942642B778000F7476 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDecoder.swift; sourceTree = "<group>"; };
 		3600744F263AB73100C53715 /* TideApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TideApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		36007452263AB73100C53715 /* TideAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
 		36007456263AB73300C53715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36007459263AB73300C53715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3600745B263AB73300C53715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLGeocoder+LocationName.swift"; sourceTree = "<group>"; };
 		36D04EA626453128006EB2DC /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		36D04EA826453521006EB2DC /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
+		36D04EAA2645499C006EB2DC /* TideAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7526443336005CA64F /* TideTimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
@@ -174,7 +174,6 @@
 				12FE3E8B2642B6DA000F7476 /* Model */,
 				12FE3E842642B5CA000F7476 /* Network */,
 				36007458263AB73300C53715 /* Preview Content */,
-				36007452263AB73100C53715 /* TideAppApp.swift */,
 				1264770F2643FFB800D4432D /* ViewModels */,
 				36D04EA326444184006EB2DC /* Helpers */,
 			);
@@ -276,7 +275,7 @@
 		909BA5DB26417C2B000FFBD5 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				36007452263AB73100C53715 /* TideAppApp.swift */,
+				36D04EAA2645499C006EB2DC /* TideAppApp.swift */,
 				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
 			);
 			path = App;
@@ -453,13 +452,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */,
 				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
 				12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
 				126477112644001600D4432D /* TideDataViewModel.swift in Sources */,
 				36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */,
-				36007453263AB73100C53715 /* TideAppApp.swift in Sources */,
-				3600747E263AE82E00C53715 /* Stylesheet.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
