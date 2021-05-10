@@ -31,9 +31,6 @@ struct TideTimesView: View {
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
-    .onAppear(perform: {
-      viewModel.getTideTimes()
-    })
   }
 }
 
