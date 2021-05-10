@@ -29,6 +29,23 @@
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
+		90F712172649313D002642DE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712162649313D002642DE /* WidgetKit.framework */; };
+		90F712192649313D002642DE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712182649313D002642DE /* SwiftUI.framework */; };
+		90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121B2649313D002642DE /* TideAppWidget.swift */; };
+		90F7121F2649313F002642DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90F7121E2649313F002642DE /* Assets.xcassets */; };
+		90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */; };
+		90F712252649313F002642DE /* TideAppWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 90F712152649313D002642DE /* TideAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		90F7122E26493207002642DE /* TidesEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7122C26493203002642DE /* TidesEntryView.swift */; };
+		90F7122F26493300002642DE /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
+		90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
+		90F71231264934A0002642DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007456263AB73300C53715 /* Assets.xcassets */; };
+		90F71236264937C8002642DE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA626453128006EB2DC /* String+Date.swift */; };
+		90F71237264937FC002642DE /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAC264567EB006EB2DC /* Date+String.swift */; };
+		90F7123E26494625002642DE /* TidesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123C26494622002642DE /* TidesDataProvider.swift */; };
+		90F71243264948B7002642DE /* TidesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123F2649489D002642DE /* TidesContentView.swift */; };
+		90F71244264948D3002642DE /* TidesErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F71241264948A5002642DE /* TidesErrorView.swift */; };
+		90F7124626494A36002642DE /* TidesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123326493617002642DE /* TidesEntry.swift */; };
+		90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +63,28 @@
 			remoteGlobalIDString = 3600744E263AB73100C53715;
 			remoteInfo = TideApp;
 		};
+		90F712232649313F002642DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36007447263AB73100C53715 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90F712142649313D002642DE;
+			remoteInfo = TideAppWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		90F712262649313F002642DE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				90F712252649313F002642DE /* TideAppWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		12EF61A72643F41F002C94B4 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -81,6 +119,18 @@
 		909BA5CB264171E1000FFBD5 /* Prod.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Prod.xcconfig; sourceTree = "<group>"; };
 		909BA5CC264171E1000FFBD5 /* CommonConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonConfig.xcconfig; sourceTree = "<group>"; };
 		909BA5DC26417C48000FFBD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		90F712152649313D002642DE /* TideAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TideAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F712162649313D002642DE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		90F712182649313D002642DE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		90F7121B2649313D002642DE /* TideAppWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideAppWidget.swift; sourceTree = "<group>"; };
+		90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = TideAppWidget.intentdefinition; sourceTree = "<group>"; };
+		90F7121E2649313F002642DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		90F712202649313F002642DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90F7122C26493203002642DE /* TidesEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesEntryView.swift; sourceTree = "<group>"; };
+		90F7123326493617002642DE /* TidesEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesEntry.swift; sourceTree = "<group>"; };
+		90F7123C26494622002642DE /* TidesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesDataProvider.swift; sourceTree = "<group>"; };
+		90F7123F2649489D002642DE /* TidesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesContentView.swift; sourceTree = "<group>"; };
+		90F71241264948A5002642DE /* TidesErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +153,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90F712122649313D002642DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90F712192649313D002642DE /* SwiftUI.framework in Frameworks */,
+				90F712172649313D002642DE /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				36007451263AB73100C53715 /* TideApp */,
+				90F7121A2649313D002642DE /* TideAppWidget */,
 				36007463263AB73400C53715 /* TideAppTests */,
 				3600746E263AB73400C53715 /* TideAppUITests */,
 				36007450263AB73100C53715 /* Products */,
@@ -151,6 +211,7 @@
 				3600744F263AB73100C53715 /* TideApp.app */,
 				36007460263AB73400C53715 /* TideAppTests.xctest */,
 				3600746B263AB73400C53715 /* TideAppUITests.xctest */,
+				90F712152649313D002642DE /* TideAppWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +316,8 @@
 		908AD3DC2645A32300D45801 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90F712162649313D002642DE /* WidgetKit.framework */,
+				90F712182649313D002642DE /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -299,6 +362,54 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		90F7121A2649313D002642DE /* TideAppWidget */ = {
+			isa = PBXGroup;
+			children = (
+				90F7121E2649313F002642DE /* Assets.xcassets */,
+				90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */,
+				90F7121B2649313D002642DE /* TideAppWidget.swift */,
+				90F7123A26493865002642DE /* Configs */,
+				90F7123B2649460D002642DE /* Domain */,
+				90F7122B264931EF002642DE /* Views */,
+			);
+			path = TideAppWidget;
+			sourceTree = "<group>";
+		};
+		90F7122B264931EF002642DE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				90F7122C26493203002642DE /* TidesEntryView.swift */,
+				90F7123F2649489D002642DE /* TidesContentView.swift */,
+				90F71241264948A5002642DE /* TidesErrorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		90F712322649360A002642DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				90F7123326493617002642DE /* TidesEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		90F7123A26493865002642DE /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				90F712202649313F002642DE /* Info.plist */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		90F7123B2649460D002642DE /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				90F712322649360A002642DE /* Models */,
+				90F7123C26494622002642DE /* TidesDataProvider.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,10 +422,12 @@
 				3600744C263AB73100C53715 /* Frameworks */,
 				3600744D263AB73100C53715 /* Resources */,
 				909BA5DA264175D6000FFBD5 /* TODO FIXME as Warning Script */,
+				90F712262649313F002642DE /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				90F712242649313F002642DE /* PBXTargetDependency */,
 			);
 			name = TideApp;
 			packageProductDependencies = (
@@ -360,6 +473,23 @@
 			productReference = 3600746B263AB73400C53715 /* TideAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		90F712142649313D002642DE /* TideAppWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90F7122A2649313F002642DE /* Build configuration list for PBXNativeTarget "TideAppWidgetExtension" */;
+			buildPhases = (
+				90F712112649313D002642DE /* Sources */,
+				90F712122649313D002642DE /* Frameworks */,
+				90F712132649313D002642DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TideAppWidgetExtension;
+			productName = TideAppWidgetExtension;
+			productReference = 90F712152649313D002642DE /* TideAppWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -380,6 +510,9 @@
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 3600744E263AB73100C53715;
 					};
+					90F712142649313D002642DE = {
+						CreatedOnToolsVersion = 12.5;
+					};
 				};
 			};
 			buildConfigurationList = 3600744A263AB73100C53715 /* Build configuration list for PBXProject "TideApp" */;
@@ -398,6 +531,7 @@
 				3600744E263AB73100C53715 /* TideApp */,
 				3600745F263AB73400C53715 /* TideAppTests */,
 				3600746A263AB73400C53715 /* TideAppUITests */,
+				90F712142649313D002642DE /* TideAppWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -424,6 +558,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90F712132649313D002642DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90F71231264934A0002642DE /* Assets.xcassets in Resources */,
+				90F7121F2649313F002642DE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +620,7 @@
 				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
 				12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
+				90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */,
 				36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
@@ -508,6 +652,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90F712112649313D002642DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90F71236264937C8002642DE /* String+Date.swift in Sources */,
+				90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */,
+				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
+				90F7122F26493300002642DE /* Stylesheet.swift in Sources */,
+				90F71243264948B7002642DE /* TidesContentView.swift in Sources */,
+				90F71237264937FC002642DE /* Date+String.swift in Sources */,
+				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
+				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
+				90F7123E26494625002642DE /* TidesDataProvider.swift in Sources */,
+				90F71244264948D3002642DE /* TidesErrorView.swift in Sources */,
+				90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -520,6 +682,11 @@
 			isa = PBXTargetDependency;
 			target = 3600744E263AB73100C53715 /* TideApp */;
 			targetProxy = 3600746C263AB73400C53715 /* PBXContainerItemProxy */;
+		};
+		90F712242649313F002642DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90F712142649313D002642DE /* TideAppWidgetExtension */;
+			targetProxy = 90F712232649313F002642DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -645,6 +812,7 @@
 		36007475263AB73400C53715 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -667,6 +835,7 @@
 		36007476263AB73400C53715 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -835,6 +1004,7 @@
 		909BA5D5264173CA000FFBD5 /* Mock */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -896,6 +1066,69 @@
 			};
 			name = Mock;
 		};
+		90F712272649313F002642DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		90F712282649313F002642DE /* Mock */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Mock;
+		};
+		90F712292649313F002642DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -935,6 +1168,16 @@
 				3600747B263AB73400C53715 /* Debug */,
 				909BA5D7264173CA000FFBD5 /* Mock */,
 				3600747C263AB73400C53715 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90F7122A2649313F002642DE /* Build configuration list for PBXNativeTarget "TideAppWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90F712272649313F002642DE /* Debug */,
+				90F712282649313F002642DE /* Mock */,
+				90F712292649313F002642DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
