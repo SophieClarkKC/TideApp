@@ -9,26 +9,38 @@ import Foundation
 import Combine
 import CoreLocation
 
-final class TideTimesViewModel: ObservableObject {
+final class TideTimesViewModel: NSObject, ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
   typealias Hourly = WeatherData.Weather.Hourly
-  
+
+  // MARK: - Properties -
+  // MARK: Published
+  @Published var error: WeatherError?
   @Published var locationName: String = ""
   @Published var subTitle: String = ""
-  @Published var tideTimes: [TideData] = []
   @Published var tideHeight: String = ""
+  @Published var tideTimes: [TideData] = []
+  @Published var userLatitude: Double = 0
+  @Published var userLongitude: Double = 0
   @Published var waterTemperature: String = ""
-  @Published var error: WeatherError?
-  
+
+  // MARK: Private
+  private let locationManager = CLLocationManager()
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
 
+  // MARK: - Initialisation -
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
+    super.init()
+    self.locationManager.delegate = self
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    self.locationManager.requestWhenInUseAuthorization()
+    self.locationManager.startUpdatingLocation()
   }
   
   func getTideTimes() {
-    weatherFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
+    weatherFetcher.getStandardWeatherData(lat: userLatitude, lon: userLongitude)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .sink { completion in
@@ -117,5 +129,17 @@ final class TideTimesViewModel: ObservableObject {
     let currentHeight = heightFraction + endValue
     
     return currentHeight
+  }
+}
+
+// MARK: - Extensions -
+// MARK: CLLocationManagerDelegate
+extension TideTimesViewModel: CLLocationManagerDelegate {
+
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let location = locations.last else { return }
+    userLatitude = location.coordinate.latitude
+    userLongitude = location.coordinate.longitude
+    getTideTimes()
   }
 }
