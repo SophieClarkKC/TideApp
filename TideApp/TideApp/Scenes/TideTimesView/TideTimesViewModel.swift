@@ -19,6 +19,7 @@ final class TideTimesViewModel: ObservableObject {
   @Published var tideHeight: String = ""
   @Published var waterTemperature: String = ""
   @Published var error: WeatherError?
+  @Published var tideStatus: String?
   
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
@@ -49,6 +50,7 @@ final class TideTimesViewModel: ObservableObject {
           let currentTemperature = self.currentWaterTemperature(from: hourly)
           self.waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
         }
+        self.tideStatus = self.calculateTideStatus(from: tideData)
       }
       .store(in: &cancellables)
   }
@@ -77,6 +79,23 @@ final class TideTimesViewModel: ObservableObject {
     }
     
     return getWeightedValue(from: lastTideTime, middleDate: now, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
+  }
+  
+  private func calculateTideStatus(from tideData: [TideData]) -> String {
+    let closestTides = Date().closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
+    
+    let lastTideData = tideData.first(where: { data in
+      data.tideDateTime.date(with: .dateTime) == closestTides.first
+    })
+    
+    switch lastTideData?.tideType {
+    case .high:
+      return "Currently, the tide is going out"
+    case .low:
+      return "Currently, the tide is coming in"
+    default:
+      return ""
+    }
   }
   
   private func currentWaterTemperature(from hourlyData: [Hourly]) -> Double {

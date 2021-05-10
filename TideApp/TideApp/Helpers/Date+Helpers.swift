@@ -14,10 +14,14 @@ extension Date {
   /// - Returns: An array of 2 dates which are the closest
   func closestDates(in dates: [Date]) -> [Date] {
     guard dates.count > 2 else { return dates }
-    let sortedDates = dates.sorted()
-    let closestPastDate = sortedDates.first { $0.timeIntervalSince(self) < 0 }
-    let closestFutureDate = sortedDates.first { $0.timeIntervalSince(self) > 0 }
-    return [closestPastDate, closestFutureDate].compactMap { $0 }
+    let dateTimeIntervals = dates.compactMap({ $0.timeIntervalSince(self) })
+    let pastDates = dateTimeIntervals.filter({ $0 < 0 })
+    let futureDates = dateTimeIntervals.filter({ $0 > 0 })
+    
+    let closestPastDate = pastDates.sorted(by: >).first
+    let closestFutureDate = futureDates.sorted(by: <).first
+
+    return [Date(timeInterval: closestPastDate ?? 0, since: self), Date(timeInterval: closestFutureDate ?? 0, since: self)].compactMap { $0 }
   }
   
   func difference(from date: Date) -> Double {
