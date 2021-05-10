@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
 		36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7626443336005CA64F /* TideTimesView.swift */; };
+		908AD3DE2645A32300D45801 /* MockServer in Frameworks */ = {isa = PBXBuildFile; productRef = 908AD3DD2645A32300D45801 /* MockServer */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908AD3DE2645A32300D45801 /* MockServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +141,7 @@
 				36007463263AB73400C53715 /* TideAppTests */,
 				3600746E263AB73400C53715 /* TideAppUITests */,
 				36007450263AB73100C53715 /* Products */,
+				908AD3DC2645A32300D45801 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,6 +252,13 @@
 			path = TideTimesView;
 			sourceTree = "<group>";
 		};
+		908AD3DC2645A32300D45801 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		909BA5C12641715B000FFBD5 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +317,9 @@
 			dependencies = (
 			);
 			name = TideApp;
+			packageProductDependencies = (
+				908AD3DD2645A32300D45801 /* MockServer */,
+			);
 			productName = TideApp;
 			productReference = 3600744F263AB73100C53715 /* TideApp.app */;
 			productType = "com.apple.product-type.application";
@@ -927,6 +940,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		908AD3DD2645A32300D45801 /* MockServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MockServer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36007447263AB73100C53715 /* Project object */;
 }

@@ -15,7 +15,7 @@ protocol RoutesProvider {
 struct Routes {
   static func allRoutes() -> [String: Route] {
     return [
-      "/premium/v1/marine.ashx": .jsonFile("marineBrighton")
+      "/premium/v1/marine.ashx": .jsonFile("marineResp1")
     ]
   }
 }
