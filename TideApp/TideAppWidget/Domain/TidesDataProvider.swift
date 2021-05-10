@@ -8,5 +8,5 @@
 import Foundation
 
 struct TidesDataProvider {
-
+  // TODO: Provide data for the widget
 }
