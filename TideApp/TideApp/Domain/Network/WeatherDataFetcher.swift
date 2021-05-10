@@ -40,7 +40,6 @@ extension WeatherDataFetcher: WeatherDataFetchable {
       .mapError { error in
         WeatherError.network(description: error.localizedDescription)
       }
-      
       .flatMap(maxPublishers: .max(1)) { pair in
         WeatherDecoder().decode(pair.data)
       }
@@ -54,6 +53,7 @@ extension WeatherDataFetcher {
     var components = URLComponents()
     components.scheme = WeatherDataAPI.scheme
     components.host = WeatherDataAPI.host
+    components.port = WeatherDataAPI.port
     components.path = WeatherDataAPI.path
     components.queryItems = WeatherDataAPI.makeQueryItems(lat: lat, lon: lon, numOfDays: numOfDays, includeLocation: includeLocation, tp: tp)
 
@@ -62,8 +62,9 @@ extension WeatherDataFetcher {
 
   // MARK: - WeatherDataAPI
   struct WeatherDataAPI {
-    static let scheme = "https"
+    static let scheme = AppConfig.baseURL.scheme
     static let host = AppConfig.baseURL.host
+    static let port = AppConfig.baseURL.port
     static let path = "/premium/v1/marine.ashx"
     
     /// Returns an array of composed `URLQueryItem` for the given parameters.

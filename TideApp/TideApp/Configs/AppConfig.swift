@@ -13,7 +13,7 @@ class AppConfig {
   static let isProdEnv = ConfigLoader.parsedConfig.config == "Prod"
 }
 
-struct Configuration: Decodable {
+struct AppConfiguration: Decodable {
   let config: String
   let baseURL: URL
 
@@ -30,9 +30,9 @@ struct Configuration: Decodable {
 
 private class ConfigLoader {
   static let ConfigName = "Config.plist"
-  static var parsedConfig: Configuration = parseFile()
+  static var parsedConfig: AppConfiguration = parseFile()
 
-  static func parseFile(named fileName: String = ConfigName) -> Configuration {
+  static func parseFile(named fileName: String = ConfigName) -> AppConfiguration {
     guard let filePath = Bundle.main.path(forResource: fileName, ofType: nil),
           let fileData = FileManager.default.contents(atPath: filePath)
     else {
@@ -40,7 +40,7 @@ private class ConfigLoader {
     }
 
     do {
-      return try PropertyListDecoder().decode(Configuration.self,
+      return try PropertyListDecoder().decode(AppConfiguration.self,
                                               from: fileData)
     } catch {
       fatalError("Configuration not decodable from '\(fileName)': \(error)")
