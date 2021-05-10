@@ -78,3 +78,81 @@ struct WeatherData: Decodable {
     }
   }
 }
+
+extension WeatherData {
+  func calculateCurrentTideHeight(with date: Date) -> Double? {
+    guard let tideData = weather.first?.tides.first?.tideData else {
+      return nil
+    }
+    let tideDates = tideData.compactMap { data in
+      data.tideDateTime.date(with: .dateTime)
+    }
+    let closestDates = date.closestDates(in: tideDates)
+    
+    let lastTideData = tideData.first(where: { data in
+      data.tideDateTime.date(with: .dateTime) == closestDates.first
+    })
+    let nextTideData = tideData.first(where: { data in
+      data.tideDateTime.date(with: .dateTime) == closestDates.last
+    })
+    
+    guard let lastTideHeightString = lastTideData?.tideHeightM,
+          let nextTideHeightString = nextTideData?.tideHeightM,
+          let lastTideTime = closestDates.first,
+          let nextTideTime = closestDates.last,
+          let lastTideHeight = Double(lastTideHeightString),
+          let nextTideHeight = Double(nextTideHeightString) else {
+      return 0
+    }
+    
+    return Date.getWeightedValue(from: lastTideTime, middleDate: date, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
+  }
+  
+  func calculateTideStatus(with date: Date) -> String? {
+    guard let tideData = weather.first?.tides.first?.tideData else {
+      return nil
+    }
+    let closestTides = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
+    
+    let lastTideData = tideData.first(where: { data in
+      data.tideDateTime.date(with: .dateTime) == closestTides.first
+    })
+    
+    switch lastTideData?.tideType {
+    case .high:
+      return "Currently, the tide is going out"
+    case .low:
+      return "Currently, the tide is coming in"
+    default:
+      return nil
+    }
+  }
+  
+  func currentWaterTemperature(with date: Date) -> Double? {
+    guard let hourlyData = weather.first?.hourly else {
+      return nil
+    }
+    let timeNowDate = date.string(with: .timeNoColon).date(with: .timeNoColon)
+    let closestTwoDates = timeNowDate?.closestDates(in: hourlyData.compactMap { $0.time.date(with: .timeNoColon) })
+    guard let closestDates = closestTwoDates else {
+      return nil
+    }
+    
+    guard let lastTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
+      return nil
+    }
+    guard let nextTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
+      return Double(lastTempData.waterTempC)
+    }
+    
+    guard let timeNow = timeNowDate,
+          let lastTempTime = closestDates.first,
+          let nextTempTime = closestDates.last,
+          let lastTemp = Double(lastTempData.waterTempC),
+          let nextTemp = Double(nextTempData.waterTempC) else {
+      return nil
+    }
+    
+    return Date.getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
+  }
+}

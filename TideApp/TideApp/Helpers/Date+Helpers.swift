@@ -27,4 +27,19 @@ extension Date {
   func difference(from date: Date) -> Double {
     return self.timeIntervalSince1970 - date.timeIntervalSince1970
   }
+  
+  static func getWeightedValue(from beginDate: Date, middleDate: Date, endDate: Date, startValue: Double, endValue: Double) -> Double {
+    let beginningAndEndDifference = endDate.difference(from: beginDate)
+    let middleAndBeginningDifference = middleDate.difference(from: beginDate)
+    
+    let safeMiddleAndBeginningDifference = middleAndBeginningDifference == 0 ? 1 : middleAndBeginningDifference
+    let safeTimeDifferenceBetweenTides = beginningAndEndDifference == 0 ? 1 : beginningAndEndDifference
+    
+    let timeFraction = safeMiddleAndBeginningDifference / safeTimeDifferenceBetweenTides
+    let deltaLowHigh = startValue - endValue
+    let heightFraction = timeFraction * deltaLowHigh
+    let currentHeight = heightFraction + endValue
+    
+    return currentHeight
+  }
 }
