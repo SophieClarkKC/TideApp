@@ -138,8 +138,15 @@ extension TideTimesViewModel: CLLocationManagerDelegate {
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.last else { return }
-    userLatitude = location.coordinate.latitude
-    userLongitude = location.coordinate.longitude
-    getTideTimes()
-  }
+
+    let newLatitude = location.coordinate.latitude
+    let newLongitude = location.coordinate.longitude
+
+    guard (newLatitude != userLatitude) && (newLongitude != userLongitude) else {
+      return
+    }
+
+    userLatitude = newLatitude
+    userLongitude = newLongitude
+    getTideTimes()}
 }
