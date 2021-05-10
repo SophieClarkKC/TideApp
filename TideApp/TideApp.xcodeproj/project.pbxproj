@@ -369,7 +369,6 @@
 				90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */,
 				90F7121B2649313D002642DE /* TideAppWidget.swift */,
 				90F7123A26493865002642DE /* Configs */,
-				90F712322649360A002642DE /* Models */,
 				90F7123B2649460D002642DE /* Domain */,
 				90F7122B264931EF002642DE /* Views */,
 			);
@@ -405,6 +404,7 @@
 		90F7123B2649460D002642DE /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				90F712322649360A002642DE /* Models */,
 				90F7123C26494622002642DE /* TidesDataProvider.swift */,
 			);
 			path = Domain;

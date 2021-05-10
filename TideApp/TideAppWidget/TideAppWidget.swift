@@ -48,5 +48,6 @@ struct TideAppWidget: Widget {
     }
     .configurationDisplayName("Tide App Widget")
     .description("Widget to retrieve informations about tides")
+    .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
   }
 }
