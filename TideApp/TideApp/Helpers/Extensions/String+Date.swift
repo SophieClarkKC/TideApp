@@ -16,12 +16,10 @@ extension String {
     func dateFormatter() -> DateFormatter {
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = self.rawValue
-//      dateFormatter.timeZone = .current
-//      dateFormatter.locale = .current
       return dateFormatter
     }
   }
-//  need to allow for daylight savings
+
   func date(with format: DateFormat) -> Date? {
     return format.dateFormatter().date(from: self)
   }
