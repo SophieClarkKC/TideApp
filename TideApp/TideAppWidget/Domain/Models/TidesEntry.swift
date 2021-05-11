@@ -8,7 +8,32 @@
 import WidgetKit
 
 struct TidesEntry: TimelineEntry {
-  let data: Bool // TODO: Placeholder for data that will fulfill the widget, false means error, replace when data fetching will be implemented
+  let widgetData: WidgetData
   let date: Date
   let configuration: ConfigurationIntent
+
+  enum WidgetData {
+    case success(place: String, weatherData: WeatherData)
+    case failure(error: String)
+  }
+}
+
+extension TidesEntry {
+  static func snapshotObject(onError: Bool = false) -> TidesEntry {
+    let widgetData: WidgetData
+    
+    if onError {
+      widgetData = .failure(error: "Generic Error")
+    } else {
+      widgetData = .success(place: "Brighton",
+                            weatherData: WeatherData(request: [],
+                                                     nearestArea: [],
+                                                     weather: [])
+      )
+    }
+
+    return TidesEntry(widgetData: widgetData,
+                      date: Date(),
+                      configuration: ConfigurationIntent())
+  }
 }

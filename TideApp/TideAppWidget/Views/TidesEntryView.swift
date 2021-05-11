@@ -16,14 +16,15 @@ struct TidesEntryView: View {
   var entry: Provider.Entry
 
   var body: some View {
-    switch widgetFamily {
-    case .systemSmall, .systemMedium, .systemLarge:
-      if entry.data { // TODO: Placeholder, change when data fetch will be implemented
+    switch entry.widgetData {
+    case .success:
+      switch widgetFamily {
+      case .systemSmall, .systemMedium, .systemLarge:
         TidesContentView(entry: entry)
-      } else {
+      default:
         TidesErrorView()
       }
-    @unknown default:
+    case .failure:
       TidesErrorView()
     }
   }
@@ -33,34 +34,22 @@ struct TidesEntryView: View {
 
 private struct TideEntryView_Previews: PreviewProvider {
   static var previews: some View {
-    TidesEntryView(entry: TidesEntry(data: true,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: false))
       .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-    TidesEntryView(entry: TidesEntry(data: true,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: false))
       .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-    TidesEntryView(entry: TidesEntry(data: true,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: false))
       .previewContext(WidgetPreviewContext(family: .systemLarge))
 
-    TidesEntryView(entry: TidesEntry(data: false,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: true))
       .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-    TidesEntryView(entry: TidesEntry(data: false,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: true))
       .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-    TidesEntryView(entry: TidesEntry(data: false,
-                                     date: Date(),
-                                     configuration: ConfigurationIntent()))
+    TidesEntryView(entry: TidesEntry.snapshotObject(onError: true))
       .previewContext(WidgetPreviewContext(family: .systemLarge))
   }
 }

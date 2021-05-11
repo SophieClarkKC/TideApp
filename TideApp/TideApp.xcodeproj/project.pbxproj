@@ -48,11 +48,21 @@
 		90F71231264934A0002642DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007456263AB73300C53715 /* Assets.xcassets */; };
 		90F71236264937C8002642DE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA626453128006EB2DC /* String+Date.swift */; };
 		90F71237264937FC002642DE /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAC264567EB006EB2DC /* Date+String.swift */; };
-		90F7123E26494625002642DE /* TidesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123C26494622002642DE /* TidesDataProvider.swift */; };
+		90F7123E26494625002642DE /* TidesWidgetDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123C26494622002642DE /* TidesWidgetDataProvider.swift */; };
 		90F71243264948B7002642DE /* TidesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123F2649489D002642DE /* TidesContentView.swift */; };
 		90F71244264948D3002642DE /* TidesErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F71241264948A5002642DE /* TidesErrorView.swift */; };
 		90F7124626494A36002642DE /* TidesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7123326493617002642DE /* TidesEntry.swift */; };
 		90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */; };
+		90F71254264A9ACD002642DE /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
+		90F71255264A9ACD002642DE /* WeatherDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E852642B605000F7476 /* WeatherDataFetcher.swift */; };
+		90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
+		90F71257264A9AF8002642DE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
+		90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */; };
+		90F71259264A9B05002642DE /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF61A72643F41F002C94B4 /* Keys.swift */; };
+		90F7125A264A9B0E002642DE /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA826453521006EB2DC /* Date+Helpers.swift */; };
+		90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
+		90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */; };
+		90F7125E264AA436002642DE /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +152,7 @@
 		90F712202649313F002642DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90F7122C26493203002642DE /* TidesEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesEntryView.swift; sourceTree = "<group>"; };
 		90F7123326493617002642DE /* TidesEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesEntry.swift; sourceTree = "<group>"; };
-		90F7123C26494622002642DE /* TidesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesDataProvider.swift; sourceTree = "<group>"; };
+		90F7123C26494622002642DE /* TidesWidgetDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesWidgetDataProvider.swift; sourceTree = "<group>"; };
 		90F7123F2649489D002642DE /* TidesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesContentView.swift; sourceTree = "<group>"; };
 		90F71241264948A5002642DE /* TidesErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -442,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				90F712322649360A002642DE /* Models */,
-				90F7123C26494622002642DE /* TidesDataProvider.swift */,
+				90F7123C26494622002642DE /* TidesWidgetDataProvider.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -514,6 +524,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90F7122A2649313F002642DE /* Build configuration list for PBXNativeTarget "TideAppWidgetExtension" */;
 			buildPhases = (
+				90F7125D264AA407002642DE /* Copy Config Script */,
 				90F712112649313D002642DE /* Sources */,
 				90F712122649313D002642DE /* Frameworks */,
 				90F712132649313D002642DE /* Resources */,
@@ -603,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90F71231264934A0002642DE /* Assets.xcassets in Resources */,
+				90F7125E264AA436002642DE /* Config.plist in Resources */,
 				90F7121F2649313F002642DE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,6 +657,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}/../\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+		};
+		90F7125D264AA407002642DE /* Copy Config Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Config Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -fp \"${SRCROOT}/TideApp/Configs/${XCC_CONFIG_PATH}\" \"${SRCROOT}/TideApp/Configs/Config.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -701,14 +731,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				90F71236264937C8002642DE /* String+Date.swift in Sources */,
+				90F7125A264A9B0E002642DE /* Date+Helpers.swift in Sources */,
+				90F71259264A9B05002642DE /* Keys.swift in Sources */,
 				90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */,
+				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
+				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,
 				90F7122F26493300002642DE /* Stylesheet.swift in Sources */,
+				90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */,
 				90F71243264948B7002642DE /* TidesContentView.swift in Sources */,
+				90F71257264A9AF8002642DE /* AppConfig.swift in Sources */,
+				90F71255264A9ACD002642DE /* WeatherDataFetcher.swift in Sources */,
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
+				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
-				90F7123E26494625002642DE /* TidesDataProvider.swift in Sources */,
+				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,
+				90F7123E26494625002642DE /* TidesWidgetDataProvider.swift in Sources */,
 				90F71244264948D3002642DE /* TidesErrorView.swift in Sources */,
 				90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */,
 			);
