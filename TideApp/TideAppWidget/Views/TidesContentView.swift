@@ -10,61 +10,40 @@ import SwiftUI
 struct TidesContentView: View {
   @Environment(\.widgetFamily) private var widgetFamily
 
-  var place: String
-  var weatherData: WeatherData
+  var viewModel: TidesContentViewModel
 
   var body: some View {
     ZStack {
       Color.backgroundColor.ignoresSafeArea()
       switch widgetFamily {
       case .systemSmall:
-        SmallSizeView(place: place,
-                      tideStatus: getTideStatus(),
-                      waterTemperature: getWaterTemperature())
+        SmallSizeView(viewModel: viewModel)
+
       case .systemMedium:
-        MediumSizeView(place: place,
-                       tideStatus: getTideStatus(),
-                       waterTemperature: getWaterTemperature(),
-                       tidesTimes: getTideTimes())
+        MediumSizeView(viewModel: viewModel)
+
       case .systemLarge:
-        LargeSizeView(place: place,
-                      tideStatus: getTideStatus(),
-                      waterTemperature: getWaterTemperature(),
-                      tidesTimes: getTideTimes())
+        LargeSizeView(viewModel: viewModel)
+
       @unknown default:
         fatalError()
       }
     }
   }
-
-  func getWaterTemperature() -> String? {
-    guard let currentTemperature = weatherData.currentWaterTemperature(with: Date()) else { return nil }
-    return "Water at ~\(String(format: "%.0f", currentTemperature))c"
-  }
-
-  func getTideStatus() -> String? {
-    return weatherData.tideStatusText(with: Date(), abbreviated: true) ?? nil
-  }
-
-  func getTideTimes() -> [WeatherData.Weather.Tide.TideData]? {
-    return weatherData.weather.first?.tides.first?.tideData
-  }
 }
 
 private struct SmallSizeView: View {
-  var place: String
-  var tideStatus: String?
-  var waterTemperature: String?
+  var viewModel: TidesContentViewModel
 
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
       Spacer()
-      SubtitleLabel(text: place)
-      if let tideStatus = tideStatus {
+      SubtitleLabel(text: viewModel.place)
+      if let tideStatus = viewModel.tideStatus {
         Spacer(minLength: 1)
         BodyLabel(text: tideStatus)
       }
-      if let waterTemperature = waterTemperature {
+      if let waterTemperature = viewModel.waterTemperature {
         Spacer(minLength: 1)
         BodyLabel(text: waterTemperature)
       }
@@ -74,21 +53,18 @@ private struct SmallSizeView: View {
 }
 
 private struct MediumSizeView: View {
-  var place: String
-  var tideStatus: String?
-  var waterTemperature: String?
-  var tidesTimes: [WeatherData.Weather.Tide.TideData]?
+  var viewModel: TidesContentViewModel
 
   var body: some View {
     VStack (alignment: .center, spacing: 8) {
       Spacer()
-      SubtitleLabel(text: place)
+      SubtitleLabel(text: viewModel.place)
       HStack(alignment: .center, spacing: 8) {
         VStack(alignment: .leading, spacing: 0) {
-          if let tideStatus = tideStatus {
+          if let tideStatus = viewModel.tideStatus {
             BodyLabel(text: tideStatus)
           }
-          if let waterTemperature = waterTemperature {
+          if let waterTemperature = viewModel.waterTemperature {
             BodyLabel(text: waterTemperature)
           }
         }
@@ -96,7 +72,7 @@ private struct MediumSizeView: View {
         Divider()
 
         VStack(alignment: .leading, spacing: 0) {
-          if let tidesTimes = tidesTimes {
+          if let tidesTimes = viewModel.tidesTimes {
             TidesTimesView(tidesTimes: tidesTimes)
           }
         }
@@ -107,27 +83,24 @@ private struct MediumSizeView: View {
 }
 
 private struct LargeSizeView: View {
-  var place: String
-  var tideStatus: String?
-  var waterTemperature: String?
-  var tidesTimes: [WeatherData.Weather.Tide.TideData]?
+  var viewModel: TidesContentViewModel
 
   var body: some View {
     VStack(alignment: .center, spacing: 2) {
       Spacer(minLength: 2)
-      SubtitleLabel(text: place)
-      if tideStatus != nil || waterTemperature != nil {
+      SubtitleLabel(text: viewModel.place)
+      if viewModel.hasPrincipalInfos() {
         Spacer(minLength: 2)
       }
 
-      if let tideStatus = tideStatus {
+      if let tideStatus = viewModel.tideStatus {
         BodyLabel(text: tideStatus)
       }
-      if let waterTemperature = waterTemperature {
+      if let waterTemperature = viewModel.waterTemperature {
         BodyLabel(text: waterTemperature)
       }
 
-      if let tidesTimes = tidesTimes {
+      if let tidesTimes = viewModel.tidesTimes {
         Spacer(minLength: 2)
         Divider()
         Spacer(minLength: 2)

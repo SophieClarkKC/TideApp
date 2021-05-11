@@ -63,6 +63,7 @@
 		90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
 		90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */; };
 		90F7125E264AA436002642DE /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
+		90F71263264AD771002642DE /* TidesContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F71262264AD771002642DE /* TidesContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,7 @@
 		90F7123C26494622002642DE /* TidesWidgetDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesWidgetDataProvider.swift; sourceTree = "<group>"; };
 		90F7123F2649489D002642DE /* TidesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesContentView.swift; sourceTree = "<group>"; };
 		90F71241264948A5002642DE /* TidesErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesErrorView.swift; sourceTree = "<group>"; };
+		90F71262264AD771002642DE /* TidesContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,6 +427,7 @@
 		90F7122B264931EF002642DE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				90F71262264AD771002642DE /* TidesContentViewModel.swift */,
 				90F7122C26493203002642DE /* TidesEntryView.swift */,
 				90F7123F2649489D002642DE /* TidesContentView.swift */,
 				90F71241264948A5002642DE /* TidesErrorView.swift */,
@@ -734,6 +737,7 @@
 				90F7125A264A9B0E002642DE /* Date+Helpers.swift in Sources */,
 				90F71259264A9B05002642DE /* Keys.swift in Sources */,
 				90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */,
+				90F71263264AD771002642DE /* TidesContentViewModel.swift in Sources */,
 				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
 				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,

@@ -16,8 +16,8 @@ struct TidesEntryView: View {
   var body: some View {
     switch entry.widgetData {
     case let .success(place, weatherData):
-      TidesContentView(place: place,
-                       weatherData: weatherData)
+      let viewModel = TidesContentViewModel(place: place, weatherData: weatherData)
+      TidesContentView(viewModel: viewModel)
 
     case let .failure(error):
       TidesErrorView(error: error)
