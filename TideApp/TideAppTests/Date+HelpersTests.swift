@@ -104,7 +104,7 @@ class Date_HelpersTests: XCTestCase {
                                               hour: 4,
                                               minute: 30)
     let middleDate2 = calendar.date(from: middleDateComponents2)!
-    let value2 = Date.getWeightedValue(from: startDate, middleDate: middleDate2, endDate: endDate, startValue: 1, endValue: 0)
+    let value2 = Date.getWeightedValue(from: startDate, middleDate: middleDate2, endDate: endDate, startValue: 0, endValue: 1)
     
     XCTAssertEqual(value2, 0.25)
     
