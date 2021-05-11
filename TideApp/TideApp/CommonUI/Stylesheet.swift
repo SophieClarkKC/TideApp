@@ -45,7 +45,7 @@ enum TextSize {
 
 extension Font.Weight {
   static let titleWeight: Font.Weight = .bold
-  static let subTitleWeight: Font.Weight = .medium
+  static let subTitleWeight: Font.Weight = .bold
   static let bodyWeight: Font.Weight = .medium
   static let primaryButtonWeight: Font.Weight = .bold
   static let secondaryButtonWeight: Font.Weight = .regular
@@ -69,6 +69,17 @@ struct PaddingValues {
   static let tiny: CGFloat = 4
 }
 
+struct ScaledFont: ViewModifier {
+  @Environment(\.sizeCategory) var sizeCategory
+  var size: TextSize
+  var weight: Font.Weight
+  
+  func body(content: Content) -> some View {
+    let scaledSize = UIFontMetrics.default.scaledValue(for: size.size())
+    return content.font(.system(size: scaledSize, weight: weight, design: .default))
+  }
+}
+
 // MARK: Components - Labels
 
 struct TitleLabel: View {
@@ -76,7 +87,7 @@ struct TitleLabel: View {
   var body: some View {
     Text(text)
       .foregroundColor(.titleColor)
-      .font(.system(size: TextSize.title.size(), weight: .bold, design: .default))
+      .modifier(ScaledFont(size: TextSize.title, weight: .titleWeight))
   }
 }
 
@@ -85,7 +96,7 @@ struct SubtitleLabel: View {
   var body: some View {
     Text(text)
       .foregroundColor(.subtitleColor)
-      .font(.system(size: TextSize.subTitle.size(), weight: .bold, design: .default))
+      .modifier(ScaledFont(size: TextSize.subTitle, weight: .subTitleWeight))
   }
 }
 
@@ -94,7 +105,7 @@ struct BodyLabel: View {
   var body: some View {
     Text(text)
       .foregroundColor(.bodyTextColor)
-      .font(.system(size: TextSize.body.size(), weight: .medium, design: .default))
+      .modifier(ScaledFont(size: TextSize.body, weight: .bodyWeight))
       .multilineTextAlignment(.leading)
   }
 }
@@ -107,7 +118,7 @@ struct PrimaryActionStyle: ButtonStyle {
       .padding(ComponentValues.buttonPadding)
       .frame(maxWidth: .infinity, minHeight: ComponentValues.buttonMinimumHeight)
       .foregroundColor(.primaryButtonTextColor)
-      .font(.system(size: TextSize.button.size(), weight: .primaryButtonWeight, design: .default))
+      .modifier(ScaledFont(size: TextSize.button, weight: .primaryButtonWeight))
       .background(Color.primaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
       .cornerRadius(ComponentValues.buttonCornerRadius)
   }
@@ -119,7 +130,7 @@ struct SecondaryActionStyle: ButtonStyle {
       .padding(ComponentValues.buttonPadding)
       .frame(maxWidth: .infinity, minHeight: ComponentValues.buttonMinimumHeight)
       .foregroundColor(.secondaryButtonTextColor)
-      .font(.system(size: TextSize.button.size(), weight: .secondaryButtonWeight, design: .default))
+      .modifier(ScaledFont(size: TextSize.button, weight: .secondaryButtonWeight))
       .background(Color.secondaryActionColor.opacity(configuration.isPressed ? ComponentValues.buttonPressedStateAlpha : ComponentValues.buttonNormalStateAlpha))
       .cornerRadius(ComponentValues.buttonCornerRadius)
   }
