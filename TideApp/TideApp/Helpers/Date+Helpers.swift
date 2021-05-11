@@ -24,20 +24,34 @@ extension Date {
     return [Date(timeInterval: closestPastDate ?? 0, since: self), Date(timeInterval: closestFutureDate ?? 0, since: self)].compactMap { $0 }
   }
   
-  func difference(from date: Date) -> Double {
+  /// This function returns the difference in two dates as a `TimeInterval`
+  ///
+  /// - Parameter date: The date to find the difference from
+  /// - Returns: A `TimeInterval` indicating the difference between self and the given date
+  func difference(from date: Date) -> TimeInterval {
     return self.timeIntervalSince1970 - date.timeIntervalSince1970
   }
   
+  /// This finds the weighted value given a start value and end value by calculating the time difference and
+  /// how much of the time between two times has passed and using this to calculate the weighted value
+  ///
+  /// - Parameters:
+  ///               - beginDate: The date at the start
+  ///               - middleDate: The date which should be used to work out the percentage of time passed
+  ///               - endDate: When the time for the period we are calculating the progress for ends
+  ///               - startValue: The value associated with the beginDate
+  ///               - endValue: The value associated with the end date
+  /// - Returns: An array of 2 dates which are the closest
   static func getWeightedValue(from beginDate: Date, middleDate: Date, endDate: Date, startValue: Double, endValue: Double) -> Double {
-    let beginningAndEndDifference = endDate.difference(from: beginDate)
-    let middleAndBeginningDifference = middleDate.difference(from: beginDate)
+    let timeBetweenBeginningAndEnd = endDate.difference(from: beginDate)
+    let timeBetweenMiddleAndBeginning = middleDate.difference(from: beginDate)
     
-    let safeMiddleAndBeginningDifference = middleAndBeginningDifference == 0 ? 1 : middleAndBeginningDifference
-    let safeTimeDifferenceBetweenTides = beginningAndEndDifference == 0 ? 1 : beginningAndEndDifference
+    let safeMiddleAndBeginningDifference = timeBetweenMiddleAndBeginning == 0 ? 1 : timeBetweenMiddleAndBeginning
+    let safeTimeDifferenceBetweenTides = timeBetweenBeginningAndEnd == 0 ? 1 : timeBetweenBeginningAndEnd
     
     let timeFraction = safeMiddleAndBeginningDifference / safeTimeDifferenceBetweenTides
-    let deltaLowHigh = startValue - endValue
-    let heightFraction = timeFraction * deltaLowHigh
+    var deltaEndStart = startValue - endValue
+    let heightFraction = timeFraction * deltaEndStart
     let currentHeight = heightFraction + endValue
     
     return currentHeight

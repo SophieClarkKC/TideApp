@@ -9,15 +9,6 @@ import XCTest
 @testable import TideApp
 
 class Date_HelpersTests: XCTestCase {
-  
-  override func setUpWithError() throws {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
-  
-  override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-  }
-  
   func testClosestDatesReturnsCorrectDates() throws {
     let calendar = Calendar.current
     
@@ -52,5 +43,70 @@ class Date_HelpersTests: XCTestCase {
     XCTAssertEqual(closestDates.count, 2)
     XCTAssertEqual(closestDates.first, earlyDate)
     XCTAssertEqual(closestDates.last, lateDate)
+  }
+  
+  func testDifferenceFromReturnsCorrectDifference() {
+    let calendar = Calendar.current
+    let earlyDateComponents = DateComponents(calendar: calendar,
+                                             year: 2021,
+                                             month: 02,
+                                             day: 28,
+                                             hour: 10,
+                                             minute: 30)
+    let lateDateComponents = DateComponents(calendar: calendar,
+                                            year: 2021,
+                                            month: 02,
+                                            day: 28,
+                                            hour: 10,
+                                            minute: 31)
+    let earlyDate = calendar.date(from: earlyDateComponents)!
+    let lateDate = calendar.date(from: lateDateComponents)!
+    
+    let differenceBetweenEarlyAndLate = earlyDate.difference(from: lateDate)
+    XCTAssertEqual(differenceBetweenEarlyAndLate, -60)
+    
+    let differenceBetweenLateAndEarly = lateDate.difference(from: earlyDate)
+    XCTAssertEqual(differenceBetweenLateAndEarly, 60)
+    
+    let differenceBetweenLateAndLate = lateDate.difference(from: lateDate)
+    XCTAssertEqual(differenceBetweenLateAndLate, 0)
+  }
+  
+  func testGetWeightedValueReturnsCorrectValue() {
+    let calendar = Calendar.current
+    let beginDateComponents = DateComponents(calendar: calendar,
+                                             year: 2021,
+                                             month: 02,
+                                             day: 28,
+                                             hour: 3)
+    let middleDateComponents = DateComponents(calendar: calendar,
+                                              year: 2021,
+                                              month: 02,
+                                              day: 28,
+                                              hour: 4)
+    let endDateComponents = DateComponents(calendar: calendar,
+                                           year: 2021,
+                                           month: 02,
+                                           day: 28,
+                                           hour: 5)
+    let startDate = calendar.date(from: beginDateComponents)!
+    let middleDate = calendar.date(from: middleDateComponents)!
+    let endDate = calendar.date(from: endDateComponents)!
+    
+    let value = Date.getWeightedValue(from: startDate, middleDate: middleDate, endDate: endDate, startValue: 0, endValue: 1)
+    
+    XCTAssertEqual(value, 0.5)
+    
+    let middleDateComponents2 = DateComponents(calendar: calendar,
+                                              year: 2021,
+                                              month: 02,
+                                              day: 28,
+                                              hour: 4,
+                                              minute: 30)
+    let middleDate2 = calendar.date(from: middleDateComponents2)!
+    let value2 = Date.getWeightedValue(from: startDate, middleDate: middleDate2, endDate: endDate, startValue: 1, endValue: 0)
+    
+    XCTAssertEqual(value2, 0.25)
+    
   }
 }

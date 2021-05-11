@@ -114,17 +114,17 @@ extension WeatherData {
     }
     let closestTides = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
     
-    let lastTideData = tideData.first(where: { data in
+    guard let lastTideData = tideData.first(where: { data in
       data.tideDateTime.date(with: .dateTime) == closestTides.first
-    })
+    }) else {
+      return nil
+    }
     
-    switch lastTideData?.tideType {
+    switch lastTideData.tideType {
     case .high:
       return "Currently, the tide is going out"
     case .low:
       return "Currently, the tide is coming in"
-    default:
-      return nil
     }
   }
   
