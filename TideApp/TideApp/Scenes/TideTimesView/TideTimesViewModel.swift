@@ -20,12 +20,9 @@ final class TideTimesViewModel: NSObject, ObservableObject {
   @Published var subTitle: String = ""
   @Published var tideHeight: String = ""
   @Published var tideTimes: [TideData] = []
-  @Published var userLatitude: Double = 0
-  @Published var userLongitude: Double = 0
   @Published var waterTemperature: String = ""
 
   // MARK: Private
-  private let locationManager = CLLocationManager()
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
 
@@ -33,14 +30,11 @@ final class TideTimesViewModel: NSObject, ObservableObject {
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
     super.init()
-    self.locationManager.delegate = self
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    self.locationManager.requestWhenInUseAuthorization()
-    self.locationManager.startUpdatingLocation()
   }
-  
-  func getTideTimes() {
-    weatherFetcher.getStandardWeatherData(lat: userLatitude, lon: userLongitude)
+
+  func getTideTimes(lat: Double, lon: Double) {
+
+    weatherFetcher.getStandardWeatherData(lat: lat, lon: lon)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .sink { completion in
@@ -64,21 +58,21 @@ final class TideTimesViewModel: NSObject, ObservableObject {
       }
       .store(in: &cancellables)
   }
-  
+
   private func calculateCurrentTideHeight(from tideData: [TideData]) -> Double {
     let now = Date()
     let tideDates = tideData.compactMap { data in
       data.tideDateTime.date(with: .dateTime)
     }
     let closestDates = now.closestDates(in: tideDates)
-    
+
     let lastTideData = tideData.first(where: { data in
       data.tideDateTime.date(with: .dateTime) == closestDates.first
     })
     let nextTideData = tideData.first(where: { data in
       data.tideDateTime.date(with: .dateTime) == closestDates.last
     })
-    
+
     guard let lastTideHeightString = lastTideData?.tideHeightM,
           let nextTideHeightString = nextTideData?.tideHeightM,
           let lastTideTime = closestDates.first,
@@ -87,24 +81,24 @@ final class TideTimesViewModel: NSObject, ObservableObject {
           let nextTideHeight = Double(nextTideHeightString) else {
       return 0
     }
-    
+
     return getWeightedValue(from: lastTideTime, middleDate: now, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
   }
-  
+
   private func currentWaterTemperature(from hourlyData: [Hourly]) -> Double {
     let timeNowDate = Date().string(with: .timeNoColon).date(with: .timeNoColon)
     let closestTwoDates = timeNowDate?.closestDates(in: hourlyData.compactMap { $0.time.date(with: .timeNoColon) })
     guard let closestDates = closestTwoDates else {
       return 0
     }
-    
+
     guard let lastTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
       return 0
     }
     guard let nextTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
       return Double(lastTempData.waterTempC) ?? 0
     }
-    
+
     guard let timeNow = timeNowDate,
           let lastTempTime = closestDates.first,
           let nextTempTime = closestDates.last,
@@ -112,41 +106,22 @@ final class TideTimesViewModel: NSObject, ObservableObject {
           let nextTemp = Double(nextTempData.waterTempC) else {
       return 0
     }
-    
+
     return getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
   }
-  
+
   private func getWeightedValue(from beginDate: Date, middleDate: Date, endDate: Date, startValue: Double, endValue: Double) -> Double {
     let beginningAndEndDifference = endDate.difference(from: beginDate)
     let middleAndBeginningDifference = middleDate.difference(from: beginDate)
-    
+
     let safeMiddleAndBeginningDifference = middleAndBeginningDifference == 0 ? 1 : middleAndBeginningDifference
     let safeTimeDifferenceBetweenTides = beginningAndEndDifference == 0 ? 1 : beginningAndEndDifference
-    
+
     let timeFraction = safeMiddleAndBeginningDifference / safeTimeDifferenceBetweenTides
     let deltaLowHigh = startValue - endValue
     let heightFraction = timeFraction * deltaLowHigh
     let currentHeight = heightFraction + endValue
-    
+
     return currentHeight
   }
-}
-
-// MARK: - Extensions -
-// MARK: CLLocationManagerDelegate
-extension TideTimesViewModel: CLLocationManagerDelegate {
-
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let location = locations.last else { return }
-
-    let newLatitude = location.coordinate.latitude
-    let newLongitude = location.coordinate.longitude
-
-    guard (newLatitude != userLatitude) && (newLongitude != userLongitude) else {
-      return
-    }
-
-    userLatitude = newLatitude
-    userLongitude = newLongitude
-    getTideTimes()}
 }
