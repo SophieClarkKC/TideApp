@@ -71,42 +71,4 @@ class Date_HelpersTests: XCTestCase {
     let differenceBetweenLateAndLate = lateDate.difference(from: lateDate)
     XCTAssertEqual(differenceBetweenLateAndLate, 0)
   }
-  
-  func testGetWeightedValueReturnsCorrectValue() {
-    let calendar = Calendar.current
-    let beginDateComponents = DateComponents(calendar: calendar,
-                                             year: 2021,
-                                             month: 02,
-                                             day: 28,
-                                             hour: 3)
-    let middleDateComponents = DateComponents(calendar: calendar,
-                                              year: 2021,
-                                              month: 02,
-                                              day: 28,
-                                              hour: 4)
-    let endDateComponents = DateComponents(calendar: calendar,
-                                           year: 2021,
-                                           month: 02,
-                                           day: 28,
-                                           hour: 5)
-    let startDate = calendar.date(from: beginDateComponents)!
-    let middleDate = calendar.date(from: middleDateComponents)!
-    let endDate = calendar.date(from: endDateComponents)!
-    
-    let value = Date.getWeightedValue(from: startDate, middleDate: middleDate, endDate: endDate, startValue: 0, endValue: 1)
-    
-    XCTAssertEqual(value, 0.5)
-    
-    let middleDateComponents2 = DateComponents(calendar: calendar,
-                                              year: 2021,
-                                              month: 02,
-                                              day: 28,
-                                              hour: 4,
-                                              minute: 30)
-    let middleDate2 = calendar.date(from: middleDateComponents2)!
-    let value2 = Date.getWeightedValue(from: startDate, middleDate: middleDate2, endDate: endDate, startValue: 0, endValue: 1)
-    
-    XCTAssertEqual(value2, 0.25)
-    
-  }
 }

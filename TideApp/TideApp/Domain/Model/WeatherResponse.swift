@@ -105,7 +105,7 @@ extension WeatherData {
       return 0
     }
     
-    return Date.getWeightedValue(from: lastTideTime, middleDate: date, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
+    return GeneralHelpers.getWeightedValue(from: lastTideTime, middleDate: date, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
   }
   
   func calculateTideStatus(with date: Date) -> String? {
@@ -153,6 +153,6 @@ extension WeatherData {
       return nil
     }
     
-    return Date.getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
+    return GeneralHelpers.getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
   }
 }
