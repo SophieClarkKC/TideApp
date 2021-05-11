@@ -10,27 +10,27 @@ import Combine
 import CoreLocation
 
 protocol TidesWidgetDataProviderType {
-  typealias TidesWidgetData = TidesEntry.WidgetData
-  func retrieveData(completion: @escaping (TidesWidgetData) -> ())
+  func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ())
 }
 
-class TidesWidgetDataProvider: TidesWidgetDataProviderType {
+class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
   private let weatherFetcher: WeatherDataFetchable
-  private var cancellable = [AnyCancellable]()
+  private var cancellable : Set<AnyCancellable> = Set()
 
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
   }
 
-  func retrieveData(completion: @escaping (TidesWidgetData) -> ()) {
+  func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ()) {
     weatherFetcher
       .getStandardWeatherData(lat: 41.902782, lon: 12.496366)
-      .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .sink { result in
+      .eraseToAnyPublisher()
+      .receive(on: DispatchQueue.main)
+      .sink(receiveCompletion: { result in
         guard case .failure(let error) = result else { return }
         completion(.failure(error: error.localizedDescription))
-      } receiveValue: { (place, widgetData) in
+      }) { (place, widgetData) in
         completion(.success(place: place,
                             weatherData: widgetData))
       }

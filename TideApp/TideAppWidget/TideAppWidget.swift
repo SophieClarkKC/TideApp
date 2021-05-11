@@ -24,7 +24,7 @@ struct Provider: IntentTimelineProvider {
     completion(TidesEntry.snapshotObject())
   }
 
-  func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {  
+  func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
     dataProvider.retrieveData { widgetData in
       let entry = TidesEntry(widgetData: widgetData,
                              date: Date(),

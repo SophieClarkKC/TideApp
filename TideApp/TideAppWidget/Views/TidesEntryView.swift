@@ -11,21 +11,16 @@ import SwiftUI
 /// MARK: - Views
 
 struct TidesEntryView: View {
-  @Environment(\.widgetFamily) private var widgetFamily
-
   var entry: Provider.Entry
 
   var body: some View {
     switch entry.widgetData {
-    case .success:
-      switch widgetFamily {
-      case .systemSmall, .systemMedium, .systemLarge:
-        TidesContentView(entry: entry)
-      default:
-        TidesErrorView()
-      }
-    case .failure:
-      TidesErrorView()
+    case let .success(place, weatherData):
+      TidesContentView(place: place,
+                       weatherData: weatherData)
+
+    case let .failure(error):
+      TidesErrorView(error: error)
     }
   }
 }

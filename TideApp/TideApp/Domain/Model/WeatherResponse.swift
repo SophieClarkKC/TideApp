@@ -108,26 +108,6 @@ extension WeatherData {
     return GeneralHelpers.getWeightedValue(from: lastTideTime, middleDate: date, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
   }
   
-  func calculateTideStatus(with date: Date) -> String? {
-    guard let tideData = weather.first?.tides.first?.tideData else {
-      return nil
-    }
-    let closestTides = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
-    
-    guard let lastTideData = tideData.first(where: { data in
-      data.tideDateTime.date(with: .dateTime) == closestTides.first
-    }) else {
-      return nil
-    }
-    
-    switch lastTideData.tideType {
-    case .high:
-      return "Currently, the tide is going out"
-    case .low:
-      return "Currently, the tide is coming in"
-    }
-  }
-  
   func currentWaterTemperature(with date: Date) -> Double? {
     guard let hourlyData = weather.first?.hourly else {
       return nil
@@ -154,5 +134,29 @@ extension WeatherData {
     }
     
     return GeneralHelpers.getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
+  }
+
+  func tideStatusText(with date: Date, abbreviated: Bool) -> String? {
+    guard let status = calculateTideStatus(with: date) else { return nil }
+    switch status {
+    case .high:
+      return abbreviated ? "High Tide": "Currently, the tide is going out"
+    case .low:
+      return abbreviated ? "Low Tide": "Currently, the tide is coming in"
+    }
+  }
+
+  private func calculateTideStatus(with date: Date) -> Weather.Tide.TideType? {
+    guard let tideData = weather.first?.tides.first?.tideData else {
+      return nil
+    }
+    let closestTides = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
+
+    guard let lastTideData = tideData.first(where: { data in
+      data.tideDateTime.date(with: .dateTime) == closestTides.first
+    }) else {
+      return nil
+    }
+    return lastTideData.tideType
   }
 }
