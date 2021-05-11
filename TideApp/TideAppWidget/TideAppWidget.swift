@@ -11,29 +11,26 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
   private let dataProvider: TidesWidgetDataProviderType
-  
+
   init(dataProvider: TidesWidgetDataProviderType) {
     self.dataProvider = dataProvider
   }
-  
+
   func placeholder(in context: Context) -> TidesEntry {
     return TidesEntry.snapshotObject()
   }
-  
+
   func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (TidesEntry) -> ()) {
     completion(TidesEntry.snapshotObject())
   }
-  
-  func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
-    var entries: [TidesEntry] = []
-    
+
+  func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {  
     dataProvider.retrieveData { widgetData in
       let entry = TidesEntry(widgetData: widgetData,
                              date: Date(),
                              configuration: configuration)
-      entries.append(entry)
       let fiveMinutesDate = Date().addingTimeInterval(360)
-      let timeline = Timeline(entries: entries,
+      let timeline = Timeline(entries: [entry],
                               policy: .after(fiveMinutesDate))
       completion(timeline)
     }
@@ -44,7 +41,7 @@ struct Provider: IntentTimelineProvider {
 struct TideAppWidget: Widget {
   let kind: String = "TideAppWidget"
   let dataProvider = TidesWidgetDataProvider(weatherFetcher: WeatherDataFetcher())
-  
+
   var body: some WidgetConfiguration {
     IntentConfiguration(kind: kind,
                         intent: ConfigurationIntent.self,
