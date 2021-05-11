@@ -21,6 +21,9 @@
 		36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA826453521006EB2DC /* Date+Helpers.swift */; };
 		36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAA2645499C006EB2DC /* TideAppApp.swift */; };
 		36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EAC264567EB006EB2DC /* Date+String.swift */; };
+		36D04EBA264961F5006EB2DC /* Date+HelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EB9264961F5006EB2DC /* Date+HelpersTests.swift */; };
+		36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
+		36D04EC2264A965C006EB2DC /* GeneralHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
@@ -107,6 +110,9 @@
 		36D04EA826453521006EB2DC /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 		36D04EAA2645499C006EB2DC /* TideAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideAppApp.swift; sourceTree = "<group>"; };
 		36D04EAC264567EB006EB2DC /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		36D04EB9264961F5006EB2DC /* Date+HelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+HelpersTests.swift"; sourceTree = "<group>"; };
+		36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
+		36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpersTests.swift; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7526443336005CA64F /* TideTimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
@@ -245,6 +251,8 @@
 			children = (
 				36007464263AB73400C53715 /* TideAppTests.swift */,
 				36007466263AB73400C53715 /* Info.plist */,
+				36D04EB9264961F5006EB2DC /* Date+HelpersTests.swift */,
+				36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */,
 			);
 			path = TideAppTests;
 			sourceTree = "<group>";
@@ -265,6 +273,7 @@
 				36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */,
 				36D04EB726458CFA006EB2DC /* Extensions */,
 				36D04EA826453521006EB2DC /* Date+Helpers.swift */,
+				36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -628,6 +637,7 @@
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
 				36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */,
 				36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */,
+				36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */,
 				36D04EA726453128006EB2DC /* String+Date.swift in Sources */,
 				36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */,
 				36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */,
@@ -640,7 +650,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D04EC2264A965C006EB2DC /* GeneralHelpersTests.swift in Sources */,
 				36007465263AB73400C53715 /* TideAppTests.swift in Sources */,
+				36D04EBA264961F5006EB2DC /* Date+HelpersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

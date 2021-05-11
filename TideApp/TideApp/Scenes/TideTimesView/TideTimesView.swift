@@ -19,13 +19,20 @@ struct TideTimesView: View {
           .padding([.bottom, .top], PaddingValues.medium)
         SubtitleLabel(text: viewModel.subTitle)
           .padding(.bottom, PaddingValues.tiny)
-        ForEach(viewModel.tideTimes) { tideTime in
-          BodyLabel(text: "\(tideTime.tideType): \(tideTime.tideTime)")
+        if let tideStatus = viewModel.tideStatus {
+          BodyLabel(text: tideStatus).padding(.bottom, PaddingValues.tiny)
         }
-        SubtitleLabel(text: viewModel.tideHeight)
-          .padding([.bottom, .top], PaddingValues.small)
-        SubtitleLabel(text: viewModel.waterTemperature)
-          .padding([.bottom, .top], PaddingValues.small)
+        ForEach(viewModel.tideTimes) { tideTime in
+          BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
+        }
+        if let tideHeight = viewModel.tideHeight {
+          SubtitleLabel(text: tideHeight)
+            .padding([.bottom, .top], PaddingValues.small)
+        }
+        if let waterTemperature = viewModel.waterTemperature {
+          SubtitleLabel(text: waterTemperature)
+            .padding([.bottom, .top], PaddingValues.small)
+        }
       })
       .padding([.leading, .trailing], PaddingValues.medium)
     })
