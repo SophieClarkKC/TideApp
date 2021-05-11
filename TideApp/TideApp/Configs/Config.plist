@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>baseURL</key>
-	<string>http://127.0.0.1:8123</string>
+	<string>https://api.worldweatheronline.com</string>
 	<key>config</key>
-	<string>Mock</string>
+	<string>Prod</string>
 </dict>
 </plist>
