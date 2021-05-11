@@ -23,7 +23,7 @@ class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
 
   func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ()) {
     weatherFetcher
-      .getStandardWeatherData(lat: 41.902782, lon: 12.496366)
+      .getStandardWeatherData(lat: 50.805832, lon: -1.087222)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)

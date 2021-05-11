@@ -419,12 +419,12 @@
 				90F7121B2649313D002642DE /* TideAppWidget.swift */,
 				90F7123A26493865002642DE /* Configs */,
 				90F7123B2649460D002642DE /* Domain */,
-				90F7122B264931EF002642DE /* Views */,
+				90F7122B264931EF002642DE /* Scenes */,
 			);
 			path = TideAppWidget;
 			sourceTree = "<group>";
 		};
-		90F7122B264931EF002642DE /* Views */ = {
+		90F7122B264931EF002642DE /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				90F71262264AD771002642DE /* TidesContentViewModel.swift */,
@@ -432,7 +432,7 @@
 				90F7123F2649489D002642DE /* TidesContentView.swift */,
 				90F71241264948A5002642DE /* TidesErrorView.swift */,
 			);
-			path = Views;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		90F712322649360A002642DE /* Models */ = {
