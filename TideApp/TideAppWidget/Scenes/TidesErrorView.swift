@@ -14,8 +14,7 @@ struct TidesErrorView: View {
     ZStack {
       Spacer(minLength: 4)
       Color.red.ignoresSafeArea()
-      TitleLabel(text: "Error")
-      SubtitleLabel(text: error)
+      BodyLabel(text: error)
       Spacer(minLength: 4)
     }
   }
