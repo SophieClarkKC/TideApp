@@ -9,27 +9,31 @@ import Foundation
 import Combine
 import CoreLocation
 
-final class TideTimesViewModel: ObservableObject {
+final class TideTimesViewModel: NSObject, ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
   typealias Hourly = WeatherData.Weather.Hourly
-  
+
+  // MARK: - Properties -
+  // MARK: Published
+  @Published var error: WeatherError?
   @Published var locationName: String = ""
   @Published var subTitle: String = ""
   @Published var tideTimes: [TideData] = []
   @Published var tideHeight: String?
-  @Published var waterTemperature: String?
-  @Published var error: WeatherError?
   @Published var tideStatus: String?
+  @Published var waterTemperature: String?
   
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
 
+  // MARK: - Initialisation -
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
+    super.init()
   }
   
-  func getTideTimes(for date: Date = Date()) {
-    weatherFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
+  func getTideTimes(for date: Date = Date(), lat: Double, lon: Double) {
+    weatherFetcher.getStandardWeatherData(lat: lat, lon: lon)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .sink { completion in
