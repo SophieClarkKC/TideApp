@@ -49,7 +49,6 @@ struct TideTimesView: View {
     })
     .onChange(of: userLocator.location, perform: {
       updateTides(for: $0)
-
     })
     .onAppear {
       userLocator.start()
