@@ -59,6 +59,7 @@ struct ComponentValues {
   static let buttonNormalStateAlpha: Double = 1.0
   static let buttonPadding: CGFloat = 5.0
   static let buttonMinimumHeight: CGFloat = 50.0
+  static let errorCornerRadius: CGFloat = 10.0
 }
 
 struct PaddingValues {
