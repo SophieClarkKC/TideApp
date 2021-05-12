@@ -10,6 +10,7 @@ import SwiftUI
 struct ErrorView: View {
   @State var error: WeatherError
   var buttonAction: () -> Void
+
   var body: some View {
     VStack {
       TitleLabel(text: "Oops, something went wrong")
