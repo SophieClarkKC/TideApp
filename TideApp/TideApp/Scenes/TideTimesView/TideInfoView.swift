@@ -37,7 +37,6 @@ struct TideInfoView: View {
       .padding([.leading, .trailing], PaddingValues.medium)
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-    .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
   }
 }
 
