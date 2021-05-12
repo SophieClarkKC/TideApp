@@ -20,7 +20,8 @@ struct TideInfoView: View {
         SubtitleLabel(text: weatherInfo.subTitle)
           .padding(.bottom, PaddingValues.tiny)
         if let tideStatus = weatherInfo.tideStatus {
-          BodyLabel(text: tideStatus).padding(.bottom, PaddingValues.tiny)
+          BodyLabel(text: tideStatus)
+            .padding(.bottom, PaddingValues.tiny)
         }
         ForEach(weatherInfo.tideTimes) { tideTime in
           BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
