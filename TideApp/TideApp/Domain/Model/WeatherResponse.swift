@@ -147,14 +147,11 @@ extension WeatherData {
   }
 
   private func calculateTideStatus(with date: Date) -> Weather.Tide.TideType? {
-    guard let tideData = weather.first?.tides.first?.tideData else {
-      return nil
-    }
-    let closestTides = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)}))
-
-    guard let lastTideData = tideData.first(where: { data in
-      data.tideDateTime.date(with: .dateTime) == closestTides.first
-    }) else {
+    guard
+      let tideData = weather.first?.tides.first?.tideData,
+      let dateOfTheClosestTide = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)})).first,
+      let lastTideData = tideData.first(where: { $0.tideDateTime.date(with: .dateTime) == dateOfTheClosestTide })
+    else {
       return nil
     }
     return lastTideData.tideType

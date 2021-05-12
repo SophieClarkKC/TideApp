@@ -8,10 +8,10 @@
 import Foundation
 
 struct TidesContentViewModel {
-  var place: String
-  var tideStatus: String?
-  var waterTemperature: String?
-  var tidesTimes: [WeatherData.Weather.Tide.TideData]?
+  let place: String
+  let tideStatus: String?
+  let waterTemperature: String?
+  let tidesTimes: [WeatherData.Weather.Tide.TideData]?
 
   init(place: String, weatherData: WeatherData) {
     self.place = place

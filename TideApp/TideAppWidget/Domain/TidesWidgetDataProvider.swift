@@ -13,7 +13,7 @@ protocol TidesWidgetDataProviderType {
   func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ())
 }
 
-class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
+final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
   private let weatherFetcher: WeatherDataFetchable
   private var cancellable : Set<AnyCancellable> = Set()
 
