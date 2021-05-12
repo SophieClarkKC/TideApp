@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		129055FC264A99BF00E1A560 /* LocationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129055FB264A99BF00E1A560 /* LocationObject.swift */; };
-		12905601264A9A6300E1A560 /* LocationManagerPublicist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12905600264A9A6300E1A560 /* LocationManagerPublicist.swift */; };
+		12266B86264BE04A00DE7FCA /* CLLocationManager+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */; };
+		12266B8C264BE59A00DE7FCA /* UserLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B8B264BE59A00DE7FCA /* UserLocator.swift */; };
 		12EF61A82643F41F002C94B4 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF61A72643F41F002C94B4 /* Keys.swift */; };
 		12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E852642B605000F7476 /* WeatherDataFetcher.swift */; };
 		12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
@@ -92,8 +92,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		129055FB264A99BF00E1A560 /* LocationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationObject.swift; sourceTree = "<group>"; };
-		12905600264A9A6300E1A560 /* LocationManagerPublicist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerPublicist.swift; sourceTree = "<group>"; };
+		12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Publisher.swift"; sourceTree = "<group>"; };
+		12266B8B264BE59A00DE7FCA /* UserLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocator.swift; sourceTree = "<group>"; };
 		12EF61A72643F41F002C94B4 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		12FE3E852642B605000F7476 /* WeatherDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataFetcher.swift; sourceTree = "<group>"; };
 		12FE3E8C2642B719000F7476 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
@@ -181,8 +181,7 @@
 		129055FA264A997E00E1A560 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				129055FB264A99BF00E1A560 /* LocationObject.swift */,
-				12905600264A9A6300E1A560 /* LocationManagerPublicist.swift */,
+				12266B8B264BE59A00DE7FCA /* UserLocator.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -287,6 +286,7 @@
 				36D04EB726458CFA006EB2DC /* Extensions */,
 				36D04EA826453521006EB2DC /* Date+Helpers.swift */,
 				36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */,
+				12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -641,6 +641,7 @@
 			files = (
 				36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */,
 				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
+				12266B8C264BE59A00DE7FCA /* UserLocator.swift in Sources */,
 				12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
 				90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */,
@@ -648,8 +649,8 @@
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
-				12905601264A9A6300E1A560 /* LocationManagerPublicist.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
+				12266B86264BE04A00DE7FCA /* CLLocationManager+Publisher.swift in Sources */,
 				36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */,
 				36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */,
 				36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */,
@@ -658,7 +659,6 @@
 				36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */,
 				12FE3E952642B778000F7476 /* WeatherError.swift in Sources */,
 				12EF61A82643F41F002C94B4 /* Keys.swift in Sources */,
-				129055FC264A99BF00E1A560 /* LocationObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
