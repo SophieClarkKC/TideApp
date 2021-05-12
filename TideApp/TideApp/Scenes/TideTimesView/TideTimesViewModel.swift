@@ -62,10 +62,7 @@ final class TideTimesViewModel: NSObject, ObservableObject {
     let tideData = weatherData.weather.first?.tides.first?.tideData ?? []
     let subTitle = "Tide times"
     let tideHeight: String? = weatherData.calculateCurrentTideHeight(with: date).flatMap({ "Current tide height: ~\(String(format: "%.2f", $0))m" })
-    var waterTemperature: String?
-    if let currentTemperature = weatherData.currentWaterTemperature(with: date) {
-      waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
-    }
+    let waterTemperature: String? = weatherData.currentWaterTemperature(with: date).flatMap({ "Current water temperature: ~\(String(format: "%.0f", $0))c" })
     let tideStatus = weatherData.calculateTideStatus(with: date)
     return WeatherInfo(locationName: placeName, subTitle: subTitle, tideTimes: tideData, tideHeight: tideHeight, waterTemperature: waterTemperature, tideStatus: tideStatus)
   }
