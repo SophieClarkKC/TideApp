@@ -9,11 +9,12 @@ import Foundation
 import Combine
 import CoreLocation
 
-final class TideTimesViewModel: ObservableObject {
+final class TideTimesViewModel: NSObject, ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
   typealias Hourly = WeatherData.Weather.Hourly
   
   enum State {
+    case idle
     case loading
     case error(WeatherError)
     case success(WeatherInfo)
@@ -27,19 +28,23 @@ final class TideTimesViewModel: ObservableObject {
     var waterTemperature: String?
     var tideStatus: String?
   }
-  
-  @Published var state: State = .loading
+
+  // MARK: - Properties -
+  // MARK: Published
+  @Published var state: State = .idle
 
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
 
+  // MARK: - Initialisation -
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
+    super.init()
   }
-  
-  func getTideTimes(for date: Date = Date()) {
+
+  func getTideTimes(for date: Date = Date(), lat: Double, lon: Double) {
     state = .loading
-    weatherFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
+    weatherFetcher.getStandardWeatherData(lat: lat, lon: lon)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .sink(receiveCompletion: { completion in

@@ -7,22 +7,45 @@
 
 import SwiftUI
 import Combine
+import CoreLocation
 
 struct TideTimesView: View {
   @ObservedObject var viewModel: TideTimesViewModel
-  
+  @StateObject var userLocator = UserLocator()
+  var lastLatitude = Double()
+  var lastLongitude = Double()
+
   var body: some View {
+    makeView(for: viewModel.state)
+      .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
+      .onAppear(perform: {
+        userLocator.start()
+      })
+      .onChange(of: userLocator.location, perform: {
+        updateTides(for: $0)
+      })
+  }
+  
+  private func makeView(for state: TideTimesViewModel.State) -> AnyView {
     switch viewModel.state {
+    case .idle:
+      return AnyView(Color.backgroundColor)
     case .loading:
-      TitleLabel(text: "Loading...")
-        .onAppear(perform: {
-          viewModel.getTideTimes()
-        })
+      return AnyView(TitleLabel(text: "Loading..."))
     case .error(let error):
-      ErrorView(error: error, buttonAction: { viewModel.getTideTimes() })
+      return AnyView(ErrorView(error: error, buttonAction: { updateTides(for: userLocator.location) }))
     case .success(let info):
-      TideInfoView(weatherInfo: info)
+      return AnyView(TideInfoView(weatherInfo: info))
     }
+  }
+
+  private func updateTides(for newLocation: CLLocation) {
+    let newLatitude = Double(newLocation.coordinate.latitude)
+    let newLongitude = Double(newLocation.coordinate.longitude)
+
+    if newLatitude == lastLatitude && newLongitude == lastLongitude { return }
+
+    viewModel.getTideTimes(lat: newLatitude, lon: newLongitude)
   }
 }
 
