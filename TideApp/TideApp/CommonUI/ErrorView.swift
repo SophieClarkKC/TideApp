@@ -15,7 +15,8 @@ struct ErrorView: View {
     VStack {
       TitleLabel(text: "Oops, something went wrong")
         .padding(PaddingValues.medium)
-      BodyLabel(text: error.description).padding(PaddingValues.small)
+      BodyLabel(text: error.description)
+        .padding(PaddingValues.small)
       Button("Retry", action: buttonAction)
         .buttonStyle(PrimaryActionStyle())
         .padding(PaddingValues.large)
