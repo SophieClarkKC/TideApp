@@ -25,12 +25,24 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+#if DEBUG
 extension AppDelegate {
-  #if DEBUG
   private func startMockServerIfNeeded() {
     if AppConfig.isTestEnv {
       MockServer().start()
     }
   }
-  #endif
 }
+
+extension UIDevice {
+  static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+}
+
+extension UIWindow {
+  open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    if motion == .motionShake {
+      NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
+    }
+  }
+}
+#endif

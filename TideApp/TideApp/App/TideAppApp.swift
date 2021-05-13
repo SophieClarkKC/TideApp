@@ -5,16 +5,30 @@
 //  Created by Sophie Clark on 29/04/2021.
 //
 
-import UIKit
+import MockServer
 import SwiftUI
+
 
 @main
 struct TideAppApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+  #if DEBUG
+  @State private var showingMockConfig = false
+  #endif
   
   var body: some Scene {
     WindowGroup {
       TideTimesView(viewModel: TideTimesViewModel(weatherFetcher: WeatherDataFetcher()))
+        .popover(isPresented: $showingMockConfig, content: {
+          #if DEBUG
+          if AppConfig.isTestEnv { MockServer.getMockConfigurationView() }
+          #endif
+        })
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
+          #if DEBUG
+          if AppConfig.isTestEnv { showingMockConfig.toggle() }
+          #endif
+        }
     }
   }
 }
