@@ -12,9 +12,7 @@ import SwiftUI
 @main
 struct TideAppApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-  #if DEBUG
   @State private var showingMockConfig = false
-  #endif
   
   var body: some Scene {
     WindowGroup {

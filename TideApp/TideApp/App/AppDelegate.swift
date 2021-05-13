@@ -34,10 +34,6 @@ extension AppDelegate {
   }
 }
 
-extension UIDevice {
-  static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
-}
-
 extension UIWindow {
   open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if motion == .motionShake {
@@ -46,3 +42,7 @@ extension UIWindow {
   }
 }
 #endif
+
+extension UIDevice {
+  static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+}
