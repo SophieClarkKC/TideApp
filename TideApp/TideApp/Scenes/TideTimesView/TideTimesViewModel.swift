@@ -12,17 +12,27 @@ import CoreLocation
 final class TideTimesViewModel: NSObject, ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
   typealias Hourly = WeatherData.Weather.Hourly
+  
+  enum State {
+    case idle
+    case loading
+    case error(WeatherError)
+    case success(WeatherInfo)
+  }
+  
+  struct WeatherInfo {
+    var locationName: String
+    var subTitle: String
+    var tideTimes: [TideData]
+    var tideHeight: String?
+    var waterTemperature: String?
+    var tideStatus: String?
+  }
 
   // MARK: - Properties -
   // MARK: Published
-  @Published var error: WeatherError?
-  @Published var locationName: String = ""
-  @Published var subTitle: String = ""
-  @Published var tideTimes: [TideData] = []
-  @Published var tideHeight: String?
-  @Published var tideStatus: String?
-  @Published var waterTemperature: String?
-  
+  @Published var state: State = .idle
+
   private var weatherFetcher: WeatherDataFetchable
   private var cancellables = [AnyCancellable]()
 
@@ -31,35 +41,29 @@ final class TideTimesViewModel: NSObject, ObservableObject {
     self.weatherFetcher = weatherFetcher
     super.init()
   }
-  
+
   func getTideTimes(for date: Date = Date(), lat: Double, lon: Double) {
+    state = .loading
     weatherFetcher.getStandardWeatherData(lat: lat, lon: lon)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .sink { completion in
-        switch completion {
-        case .failure(let error):
-          self.error = error
-        case .finished:
-          break
+      .sink(receiveCompletion: { completion in
+        guard case let .failure(error) = completion else {
+          return
         }
-      } receiveValue: { (placeName, weatherData) in
-        let tideData = weatherData.weather.first?.tides.first?.tideData ?? []
-        self.subTitle = "Tide times"
-        self.tideTimes = tideData
-        self.locationName = placeName
-        if let currentTideHeight = weatherData.calculateCurrentTideHeight(with: date) {
-          self.tideHeight = "Current tide height: ~\(String(format: "%.2f", currentTideHeight))m"
-        } else {
-          self.tideHeight = nil
-        }
-        if let currentTemperature = weatherData.currentWaterTemperature(with: date) {
-          self.waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
-        } else {
-          self.waterTemperature = nil
-        }
-        self.tideStatus = weatherData.calculateTideStatus(with: date)
-      }
+        self.state = .error(error)
+      }, receiveValue: { placeName, weatherData in
+        self.state = .success(self.map(placeName: placeName, weatherData: weatherData, date: date))
+      })
       .store(in: &cancellables)
+  }
+  
+  private func map(placeName: String, weatherData: WeatherData, date: Date) -> WeatherInfo {
+    let tideData = weatherData.weather.first?.tides.first?.tideData ?? []
+    let subTitle = "Tide times"
+    let tideHeight: String? = weatherData.calculateCurrentTideHeight(with: date).flatMap({ "Current tide height: ~\(String(format: "%.2f", $0))m" })
+    let waterTemperature: String? = weatherData.currentWaterTemperature(with: date).flatMap({ "Current water temperature: ~\(String(format: "%.0f", $0))c" })
+    let tideStatus = weatherData.calculateTideStatus(with: date)
+    return WeatherInfo(locationName: placeName, subTitle: subTitle, tideTimes: tideData, tideHeight: tideHeight, waterTemperature: waterTemperature, tideStatus: tideStatus)
   }
 }

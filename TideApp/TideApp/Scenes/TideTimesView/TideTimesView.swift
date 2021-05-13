@@ -16,48 +16,30 @@ struct TideTimesView: View {
   var lastLongitude = Double()
 
   var body: some View {
-    ScrollView(.vertical, showsIndicators: false, content: {
-
-      VStack(alignment: .leading, spacing: nil, content: {
-
-        TitleLabel(text: viewModel.locationName)
-          .accessibility(label: Text("You are looking at tide times for \(viewModel.locationName)"))
-          .padding([.bottom, .top], PaddingValues.medium)
-
-        SubtitleLabel(text: viewModel.subTitle)
-          .padding(.bottom, PaddingValues.tiny)
-
-        if let tideStatus = viewModel.tideStatus {
-          BodyLabel(text: tideStatus).padding(.bottom, PaddingValues.tiny)
-        }
-
-        ForEach(viewModel.tideTimes) { tideTime in
-          BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
-        }
-
-        if let tideHeight = viewModel.tideHeight {
-          SubtitleLabel(text: tideHeight)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
-        
-        if let waterTemperature = viewModel.waterTemperature {
-          SubtitleLabel(text: waterTemperature)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
+    makeView(for: viewModel.state)
+      .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
+      .onAppear(perform: {
+        userLocator.start()
       })
-      .padding([.leading, .trailing], PaddingValues.medium)
-    })
-    .onChange(of: userLocator.location, perform: {
-      updateTides(for: $0)
-    })
-    .onAppear {
-      userLocator.start()
+      .onChange(of: userLocator.location, perform: {
+        updateTides(for: $0)
+      })
+  }
+  
+  private func makeView(for state: TideTimesViewModel.State) -> AnyView {
+    switch viewModel.state {
+    case .idle:
+      return AnyView(Color.backgroundColor)
+    case .loading:
+      return AnyView(TitleLabel(text: "Loading..."))
+    case .error(let error):
+      return AnyView(ErrorView(error: error, buttonAction: { updateTides(for: userLocator.location) }))
+    case .success(let info):
+      return AnyView(TideInfoView(weatherInfo: info))
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-    .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
   }
 
-  func updateTides(for newLocation: CLLocation) {
+  private func updateTides(for newLocation: CLLocation) {
     let newLatitude = Double(newLocation.coordinate.latitude)
     let newLongitude = Double(newLocation.coordinate.longitude)
 
