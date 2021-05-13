@@ -16,7 +16,6 @@ final class UserLocator : ObservableObject {
 
   func start() {
     cancellable = CLLocationManager.publishLocation()
-      .filter { $0 != self.location}
       .assign(to: \.location, on: self)
   }
 }
