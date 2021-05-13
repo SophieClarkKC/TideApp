@@ -37,7 +37,6 @@ final class TideTimesViewModel: NSObject, ObservableObject {
   private var cancellables = [AnyCancellable]()
 
   // MARK: - Initialisation -
-  
   init(weatherFetcher: WeatherDataFetchable) {
     self.weatherFetcher = weatherFetcher
     super.init()
@@ -52,13 +51,10 @@ final class TideTimesViewModel: NSObject, ObservableObject {
         guard case let .failure(error) = completion else {
           return
         }
-        if let currentTemperature = weatherData.currentWaterTemperature(with: date) {
-          self.waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
-        } else {
-          self.waterTemperature = nil
-        }
-        self.tideStatus = weatherData.tideStatusText(with: date, abbreviated: false)
-      }
+        self.state = .error(error)
+      }, receiveValue: { placeName, weatherData in
+        self.state = .success(self.map(placeName: placeName, weatherData: weatherData, date: date))
+      })
       .store(in: &cancellables)
   }
   
