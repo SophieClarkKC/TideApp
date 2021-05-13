@@ -14,16 +14,11 @@ struct RouteConfigEntry: Hashable, Identifiable {
 }
 
 struct MockServerConfigurationView: View {
+  @State var entries: [RouteConfigEntry]
+  @State var selectableStatus: [MockServerConfig.BasicResponse]
   @State private var showStatusPicker = false
-  @State private var entries: [RouteConfigEntry] = []
   @State private var selectedRouteCurrentStatus = 0
   @State private var selectedRouteName = ""
-  private let selectableStatus: [MockServerConfig.BasicResponse]
-
-  init(entries: [RouteConfigEntry], selectableStatus: [MockServerConfig.BasicResponse]) {
-    self.entries = entries
-    self.selectableStatus = selectableStatus
-  }
 
   var body: some View {
     GeometryReader { geometry in
