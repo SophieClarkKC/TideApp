@@ -11,7 +11,6 @@ import CoreLocation
 
 final class TideTimesViewModel: NSObject, ObservableObject {
   typealias TideData = WeatherData.Weather.Tide.TideData
-  typealias Hourly = WeatherData.Weather.Hourly
   
   enum State {
     case idle
