@@ -18,8 +18,7 @@ struct MockServerConfigurationView: View {
   @State private var entries: [RouteConfigEntry] = []
   @State private var selectedRouteCurrentStatus = 0
   @State private var selectedRouteName = ""
-
-  private var selectableStatus: [MockServerConfig.BasicResponse] = []
+  private let selectableStatus: [MockServerConfig.BasicResponse]
 
   init(entries: [RouteConfigEntry], selectableStatus: [MockServerConfig.BasicResponse]) {
     self.entries = entries
