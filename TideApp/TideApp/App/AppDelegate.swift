@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 #if DEBUG
 import MockServer
 #endif
@@ -17,6 +18,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     #if DEBUG
     startMockServerIfNeeded()
     #endif
+
+    WidgetCenter.shared.reloadAllTimelines()
 
     return true
   }

@@ -20,6 +20,34 @@
                ReferencedContainer = "container:TideApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3600745F263AB73400C53715"
+               BuildableName = "TideAppTests.xctest"
+               BlueprintName = "TideAppTests"
+               ReferencedContainer = "container:TideApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3600746A263AB73400C53715"
+               BuildableName = "TideAppUITests.xctest"
+               BlueprintName = "TideAppUITests"
+               ReferencedContainer = "container:TideApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +56,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3600745F263AB73400C53715"
+               BuildableName = "TideAppTests.xctest"
+               BlueprintName = "TideAppTests"
+               ReferencedContainer = "container:TideApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3600746A263AB73400C53715"
+               BuildableName = "TideAppUITests.xctest"
+               BlueprintName = "TideAppUITests"
+               ReferencedContainer = "container:TideApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

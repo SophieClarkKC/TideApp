@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct TidesErrorView: View {
+  var error: String
+
   var body: some View {
     ZStack {
       Spacer(minLength: 4)
       Color.red.ignoresSafeArea()
-      TitleLabel(text: "Error")
+      BodyLabel(text: error)
       Spacer(minLength: 4)
     }
   }

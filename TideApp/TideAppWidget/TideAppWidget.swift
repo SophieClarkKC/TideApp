@@ -10,40 +10,42 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+  private let dataProvider: TidesWidgetDataProviderType
+
+  init(dataProvider: TidesWidgetDataProviderType) {
+    self.dataProvider = dataProvider
+  }
+
   func placeholder(in context: Context) -> TidesEntry {
-    TidesEntry(data: true,
-               date: Date(),
-               configuration: ConfigurationIntent())
+    return TidesEntry.snapshotObject()
   }
 
   func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (TidesEntry) -> ()) {
-    let entry = TidesEntry(
-      data: true,
-      date: Date(),
-      configuration: configuration)
-    completion(entry)
+    completion(TidesEntry.snapshotObject())
   }
 
   func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
-    var entries: [TidesEntry] = []
-
-    let entry = TidesEntry(
-      data: true,
-      date: Date(),
-      configuration: configuration)
-    entries.append(entry)
-
-    let timeline = Timeline(entries: entries, policy: .atEnd)
-    completion(timeline)
+    dataProvider.retrieveData { widgetData in
+      let entry = TidesEntry(widgetData: widgetData,
+                             date: Date(),
+                             configuration: configuration)
+      let fiveMinutesDate = Date().addingTimeInterval(360)
+      let timeline = Timeline(entries: [entry],
+                              policy: .after(fiveMinutesDate))
+      completion(timeline)
+    }
   }
 }
 
 @main
 struct TideAppWidget: Widget {
   let kind: String = "TideAppWidget"
+  let dataProvider = TidesWidgetDataProvider(weatherFetcher: WeatherDataFetcher())
 
   var body: some WidgetConfiguration {
-    IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+    IntentConfiguration(kind: kind,
+                        intent: ConfigurationIntent.self,
+                        provider: Provider(dataProvider: dataProvider)) { entry in
       TidesEntryView(entry: entry)
     }
     .configurationDisplayName("Tide App Widget")
