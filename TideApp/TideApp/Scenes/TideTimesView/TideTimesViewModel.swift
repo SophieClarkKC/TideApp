@@ -42,9 +42,11 @@ final class TideTimesViewModel: NSObject, ObservableObject {
     super.init()
   }
 
-  func getTideTimes(for date: Date = Date(), lat: Double, lon: Double) {
+  func getTideTimes(for date: Date = Date(), at newLocation: CLLocation) {
+    let newLatitude = Double(newLocation.coordinate.latitude)
+    let newLongitude = Double(newLocation.coordinate.longitude)
     state = .loading
-    weatherFetcher.getStandardWeatherData(lat: lat, lon: lon)
+    weatherFetcher.getStandardWeatherData(lat: newLatitude, lon: newLongitude)
       .receive(on: DispatchQueue.main)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .sink(receiveCompletion: { completion in

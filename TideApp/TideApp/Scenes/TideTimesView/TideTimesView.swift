@@ -12,8 +12,6 @@ import CoreLocation
 struct TideTimesView: View {
   @ObservedObject var viewModel: TideTimesViewModel
   @StateObject var userLocator = UserLocator()
-  var lastLatitude = Double()
-  var lastLongitude = Double()
 
   var body: some View {
     makeView(for: viewModel.state)
@@ -22,7 +20,7 @@ struct TideTimesView: View {
         userLocator.start()
       })
       .onChange(of: userLocator.location, perform: {
-        updateTides(for: $0)
+        viewModel.getTideTimes(at: $0)
       })
   }
   
@@ -33,19 +31,10 @@ struct TideTimesView: View {
     case .loading:
       return AnyView(TitleLabel(text: "Loading..."))
     case .error(let error):
-      return AnyView(ErrorView(error: error, buttonAction: { updateTides(for: userLocator.location) }))
+      return AnyView(ErrorView(error: error, buttonAction: { viewModel.getTideTimes(at: userLocator.location) }))
     case .success(let info):
       return AnyView(TideInfoView(weatherInfo: info))
     }
-  }
-
-  private func updateTides(for newLocation: CLLocation) {
-    let newLatitude = Double(newLocation.coordinate.latitude)
-    let newLongitude = Double(newLocation.coordinate.longitude)
-
-    if newLatitude == lastLatitude && newLongitude == lastLongitude { return }
-
-    viewModel.getTideTimes(lat: newLatitude, lon: newLongitude)
   }
 }
 
