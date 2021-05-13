@@ -32,4 +32,3 @@ extension Date {
     return self.timeIntervalSince1970 - date.timeIntervalSince1970
   }
 }
-
