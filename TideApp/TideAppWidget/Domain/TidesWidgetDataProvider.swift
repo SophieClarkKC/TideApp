@@ -28,7 +28,7 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
     switch config.locationConfig {
     case .favourite where config.favourite?.latitude != nil && config.favourite?.longitude != nil:
       latitude = config.favourite?.latitude?.doubleValue
-      longitude = config.favourite?.latitude?.doubleValue
+      longitude = config.favourite?.longitude?.doubleValue
 
     case .search where config.search?.location?.coordinate != nil:
       latitude = config.search?.location?.coordinate.latitude
@@ -54,7 +54,6 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
     weatherFetcher
       .getStandardWeatherData(lat: latitude, lon: longitude)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
       .sink(receiveCompletion: { result in
         guard case .failure(let error) = result else { return }
