@@ -20,11 +20,11 @@ struct Provider: IntentTimelineProvider {
     return TidesEntry.snapshotObject()
   }
 
-  func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (TidesEntry) -> ()) {
+  func getSnapshot(for configuration: WidgetConfigurationIntent, in context: Context, completion: @escaping (TidesEntry) -> ()) {
     completion(TidesEntry.snapshotObject())
   }
 
-  func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
+  func getTimeline(for configuration: WidgetConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
     dataProvider.retrieveData { widgetData in
       let entry = TidesEntry(widgetData: widgetData,
                              date: Date(),
@@ -44,7 +44,7 @@ struct TideAppWidget: Widget {
 
   var body: some WidgetConfiguration {
     IntentConfiguration(kind: kind,
-                        intent: ConfigurationIntent.self,
+                        intent: WidgetConfigurationIntent.self,
                         provider: Provider(dataProvider: dataProvider)) { entry in
       TidesEntryView(entry: entry)
     }
