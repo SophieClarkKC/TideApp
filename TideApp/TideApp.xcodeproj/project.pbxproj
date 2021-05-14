@@ -38,6 +38,9 @@
 		90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */; };
 		90E2EA7C264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 90E2EA73264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */; };
+		90E2EA83264EC54500EE93D3 /* UserLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B8B264BE59A00DE7FCA /* UserLocator.swift */; };
+		90E2EA84264EC55100EE93D3 /* CLLocationManager+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */; };
+		90E2EA88264ED05400EE93D3 /* TidesWidgetLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2EA86264ED01300EE93D3 /* TidesWidgetLocationManager.swift */; };
 		90F712172649313D002642DE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712162649313D002642DE /* WidgetKit.framework */; };
 		90F712192649313D002642DE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712182649313D002642DE /* SwiftUI.framework */; };
 		90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121B2649313D002642DE /* TideAppWidget.swift */; };
@@ -166,6 +169,7 @@
 		90E2EA74264EADDA00EE93D3 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		90E2EA79264EADDA00EE93D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90E2EA86264ED01300EE93D3 /* TidesWidgetLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidesWidgetLocationManager.swift; sourceTree = "<group>"; };
 		90F712152649313D002642DE /* TideAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TideAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F712162649313D002642DE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		90F712182649313D002642DE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -467,6 +471,14 @@
 			path = TideAppWidgetIntentHandler;
 			sourceTree = "<group>";
 		};
+		90E2EA85264ECFFD00EE93D3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				90E2EA86264ED01300EE93D3 /* TidesWidgetLocationManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		90F7121A2649313D002642DE /* TideAppWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +487,7 @@
 				90F7121B2649313D002642DE /* TideAppWidget.swift */,
 				90F7123A26493865002642DE /* Configs */,
 				90F7123B2649460D002642DE /* Domain */,
+				90E2EA85264ECFFD00EE93D3 /* Helpers */,
 				90F7122B264931EF002642DE /* Scenes */,
 			);
 			path = TideAppWidget;
@@ -860,6 +873,7 @@
 				90F71259264A9B05002642DE /* Keys.swift in Sources */,
 				90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */,
 				90F71263264AD771002642DE /* TidesContentViewModel.swift in Sources */,
+				90E2EA83264EC54500EE93D3 /* UserLocator.swift in Sources */,
 				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
 				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,
@@ -871,6 +885,8 @@
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
 				911E7B6F264ECBCE0000BC15 /* WeatherInfo.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
+				90E2EA88264ED05400EE93D3 /* TidesWidgetLocationManager.swift in Sources */,
+				90E2EA84264EC55100EE93D3 /* CLLocationManager+Publisher.swift in Sources */,
 				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
 				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,

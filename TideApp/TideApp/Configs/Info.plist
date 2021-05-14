@@ -26,6 +26,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to get the local tide information for you.</string>
+	<key>NSWidgetWantsLocation</key>
+	<true/>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>WidgetConfigurationIntent</string>

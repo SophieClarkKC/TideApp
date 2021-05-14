@@ -25,5 +25,9 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to get the local tide information for you.</string>
+	<key>NSWidgetWantsLocation</key>
+	<true/>
 </dict>
 </plist>

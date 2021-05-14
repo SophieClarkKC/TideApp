@@ -7,18 +7,21 @@
 
 import Foundation
 import Combine
+import SwiftUI
 import CoreLocation
 
 protocol TidesWidgetDataProviderType {
   func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ())
 }
 
-final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
+class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, ObservableObject {
   private let weatherFetcher: WeatherDataFetchable
+  private let widgetLocationManager: TidesWidgetLocationManager
   private var cancellable : Set<AnyCancellable> = Set()
 
-  init(weatherFetcher: WeatherDataFetchable) {
+  init(weatherFetcher: WeatherDataFetchable, widgetLocationManager: TidesWidgetLocationManager) {
     self.weatherFetcher = weatherFetcher
+    self.widgetLocationManager = widgetLocationManager
   }
 
   func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -35,22 +38,34 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
       longitude = config.search?.location?.coordinate.longitude
 
     case .current:
-      // TODO: Set up CoreLocation location search
-      latitude = 50.805832
-      longitude = -1.087222
+      return getDataUsingCurrentUserLocation(completion: completion)
 
     default:
-      latitude = nil
-      longitude = nil
+      return completion(.failure(error: "Seems that the current widget configuration is wrong. Please check it."))
     }
+
     guard let lat = latitude, let long = longitude else {
-      completion(.failure(error: "Location to show not found. Please check the widget configuration."))
-      return
+      return completion(.failure(error: "Location to show not found. Please check the widget configuration."))
     }
+
     getDataFor(latitude: lat, longitude: long, completion: completion)
   }
 
-  private func getDataFor(latitude: Double, longitude: Double, completion: @escaping (TidesEntry.WidgetData) -> () ) {
+  private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
+    guard widgetLocationManager.isAuthorized() else {
+      return completion(.failure(error: "The widget is not authorized to use your location. Please check the TideApp authorization for the location services in the device settings."))
+    }
+    widgetLocationManager.retrieveLocation { location in
+      guard let coordinate = location?.coordinate else {
+        return completion(.failure(error: "Current location not found"))
+      }
+      self.getDataFor(latitude: coordinate.latitude,
+                      longitude: coordinate.longitude,
+                      completion: completion)
+    }
+  }
+
+  private func getDataFor(latitude: Double, longitude: Double, completion: @escaping (TidesEntry.WidgetData) -> ()) {
     weatherFetcher
       .getStandardWeatherData(lat: latitude, lon: longitude)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
@@ -66,3 +81,4 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
   }
 
 }
+
