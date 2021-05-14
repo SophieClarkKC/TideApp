@@ -30,11 +30,11 @@ final class TidesWidgetLocationManager: NSObject, CLLocationManagerDelegate {
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.first {
-      cancel()
       completion?(location)
     } else {
       completion?(nil)
     }
+    cancel()
     completion = nil
   }
 
