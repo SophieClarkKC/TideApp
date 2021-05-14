@@ -34,7 +34,10 @@ struct TideInfoView: View {
           SubtitleLabel(text: waterTemperature)
             .padding([.bottom, .top], PaddingValues.small)
         }
-        TideChartView(tideData: weatherInfo.tideTimes)
+        GeometryReader { reader in
+          TideChartView(tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 50, alignment: .topLeading)
+        }
+        
       })
       .padding([.leading, .trailing], PaddingValues.medium)
     })
