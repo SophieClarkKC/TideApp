@@ -14,7 +14,7 @@ struct TideAppApp: App {
   
   var body: some Scene {
     WindowGroup {
-      TideTimesView(viewModel: TideTimesViewModel(weatherFetcher: WeatherDataFetcher()))
+      LocationsView(viewModel: .init())
     }
   }
 }

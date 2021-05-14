@@ -45,17 +45,18 @@ struct WeatherData: Decodable {
       enum CodingKeys: String, CodingKey {
         case tideData = "tide_data"
       }
-      
-      enum TideType: String, Codable {
-        case high = "HIGH"
-        case low = "LOW"
-      }
 
       // MARK: - TideData
       struct TideData: Identifiable, Decodable {
+
+        enum `Type`: String, Codable {
+          case high = "HIGH"
+          case low = "LOW"
+        }
+
         let id = UUID()
         let tideTime, tideHeightM, tideDateTime: String
-        let tideType: TideType
+        let tideType: Type
 
         enum CodingKeys: String, CodingKey {
           case tideTime
@@ -134,26 +135,5 @@ extension WeatherData {
     }
     
     return GeneralHelpers.getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
-  }
-
-  func tideStatusText(with date: Date, abbreviated: Bool) -> String? {
-    guard let status = calculateTideStatus(with: date) else { return nil }
-    switch status {
-    case .high:
-      return abbreviated ? "High Tide": "Currently, the tide is going out"
-    case .low:
-      return abbreviated ? "Low Tide": "Currently, the tide is coming in"
-    }
-  }
-
-  private func calculateTideStatus(with date: Date) -> Weather.Tide.TideType? {
-    guard
-      let tideData = weather.first?.tides.first?.tideData,
-      let dateOfTheClosestTide = date.closestDates(in: tideData.compactMap({ $0.tideDateTime.date(with: .dateTime)})).first,
-      let lastTideData = tideData.first(where: { $0.tideDateTime.date(with: .dateTime) == dateOfTheClosestTide })
-    else {
-      return nil
-    }
-    return lastTideData.tideType
   }
 }
