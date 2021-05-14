@@ -10,7 +10,7 @@ import Combine
 import CoreLocation
 
 protocol TidesWidgetDataProviderType {
-  func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ())
+  func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ())
 }
 
 final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObject {
@@ -21,9 +21,38 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
     self.weatherFetcher = weatherFetcher
   }
 
-  func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ()) {
+  func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ()) {
+    let latitude: Double?
+    let longitude: Double?
+
+    switch config.locationConfig {
+    case .favourite where config.favourite?.latitude != nil && config.favourite?.longitude != nil:
+      latitude = config.favourite?.latitude?.doubleValue
+      longitude = config.favourite?.latitude?.doubleValue
+
+    case .search where config.search?.location?.coordinate != nil:
+      latitude = config.search?.location?.coordinate.latitude
+      longitude = config.search?.location?.coordinate.longitude
+
+    case .current:
+      // TODO: Set up CoreLocation location search
+      latitude = 50.805832
+      longitude = -1.087222
+
+    default:
+      latitude = nil
+      longitude = nil
+    }
+    guard let lat = latitude, let long = longitude else {
+      completion(.failure(error: "Location to show not found. Please check the widget configuration."))
+      return
+    }
+    getDataFor(latitude: lat, longitude: long, completion: completion)
+  }
+
+  private func getDataFor(latitude: Double, longitude: Double, completion: @escaping (TidesEntry.WidgetData) -> () ) {
     weatherFetcher
-      .getStandardWeatherData(lat: 50.805832, lon: -1.087222)
+      .getStandardWeatherData(lat: latitude, lon: longitude)
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)

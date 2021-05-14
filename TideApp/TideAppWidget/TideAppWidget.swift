@@ -25,7 +25,7 @@ struct Provider: IntentTimelineProvider {
   }
 
   func getTimeline(for configuration: WidgetConfigurationIntent, in context: Context, completion: @escaping (Timeline<TidesEntry>) -> ()) {
-    dataProvider.retrieveData { widgetData in
+    dataProvider.retrieveData(for: configuration) { widgetData in
       let entry = TidesEntry(widgetData: widgetData,
                              date: Date(),
                              configuration: configuration)
