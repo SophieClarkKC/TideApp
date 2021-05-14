@@ -11,14 +11,14 @@ import SwiftUI
 // MARK: Colors
 
 extension Color {
-  static let titleColor = Color("titleColor")
-  static let bodyTextColor = Color("bodyTextColor")
-  static let subtitleColor = Color("subtitleColor")
-  static let primaryActionColor = Color("primaryActionColor")
-  static let secondaryActionColor = Color("secondaryActionColor")
-  static let backgroundColor = Color("backgroundColor")
-  static let primaryButtonTextColor = Color("primaryButtonTextColor")
-  static let secondaryButtonTextColor = Color("secondaryButtonTextColor")
+  static let titleColor = Color("Colors/titleColor")
+  static let bodyTextColor = Color("Colors/bodyTextColor")
+  static let subtitleColor = Color("Colors/subtitleColor")
+  static let primaryActionColor = Color("Colors/primaryActionColor")
+  static let secondaryActionColor = Color("Colors/secondaryActionColor")
+  static let backgroundColor = Color("Colors/backgroundColor")
+  static let primaryButtonTextColor = Color("Colors/primaryButtonTextColor")
+  static let secondaryButtonTextColor = Color("Colors/secondaryButtonTextColor")
 }
 
 // MARK: Font size and weights
