@@ -14,7 +14,7 @@ struct TideAppApp: App {
   
   var body: some Scene {
     WindowGroup {
-      LocationsView(viewModel: .init())
+      LocationsView(viewModel: LocationsViewModel())
     }
   }
 }

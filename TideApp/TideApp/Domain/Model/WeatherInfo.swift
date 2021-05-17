@@ -43,7 +43,7 @@ extension WeatherInfo.TideData {
   }
 }
 
-extension WeatherInfo.TideData.`Type` {
+extension WeatherInfo.TideData.TideType {
 
   typealias Description = (abbreviated: String, full: String)
 

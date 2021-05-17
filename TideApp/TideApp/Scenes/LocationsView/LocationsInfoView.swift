@@ -22,7 +22,6 @@ struct LocationInfoView: View {
         .padding([.top, .bottom])
       }
       .navigationTitle("My Locations")
-      .navigationBarItems(trailing: Image(systemName: "magnifyingglass"))
     }
   }
 }
