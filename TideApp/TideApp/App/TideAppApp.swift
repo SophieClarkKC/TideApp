@@ -16,7 +16,7 @@ struct TideAppApp: App {
   
   var body: some Scene {
     WindowGroup {
-      TideTimesView(viewModel: TideTimesViewModel(weatherFetcher: WeatherDataFetcher()))
+      LocationsView(viewModel: LocationsViewModel())
         .popover(isPresented: $showingMockConfig, content: {
           #if DEBUG
           if AppConfig.isTestEnv { MockServer.getMockConfigurationView() }
