@@ -44,7 +44,7 @@ extension CLLocationManager {
       }
 
       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for location  in locations {
+        for location in locations {
           _ = subscriber.receive(location)
         }
       }

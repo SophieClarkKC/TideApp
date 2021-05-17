@@ -16,12 +16,14 @@ protocol TidesWidgetDataProviderType {
 
 class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, ObservableObject {
   private let weatherFetcher: WeatherDataFetchable
-  private let widgetLocationManager: TidesWidgetLocationManager
   private var cancellable : Set<AnyCancellable> = Set()
+  private let userLocator: UserLocator
 
-  init(weatherFetcher: WeatherDataFetchable, widgetLocationManager: TidesWidgetLocationManager) {
+  init(weatherFetcher: WeatherDataFetchable, userLocator: UserLocator) {
     self.weatherFetcher = weatherFetcher
-    self.widgetLocationManager = widgetLocationManager
+    self.userLocator = userLocator
+    super.init()
+    self.userLocator.start()
   }
 
   func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -52,17 +54,20 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
   }
 
   private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
-    guard widgetLocationManager.isAuthorized() else {
-      return completion(.failure(error: "The widget is not authorized to use your location. Please check the TideApp authorization for the location services in the device settings."))
+    guard userLocator.isAuthorizedForWidgetUpdates() else {
+      return completion(.failure(error: "Location to show not found. Please check the widget configuration."))
     }
-    widgetLocationManager.retrieveLocation { location in
-      guard let coordinate = location?.coordinate else {
-        return completion(.failure(error: "Current location not found"))
-      }
-      self.getDataFor(latitude: coordinate.latitude,
-                      longitude: coordinate.longitude,
-                      completion: completion)
-    }
+    userLocator.$location
+      .filter { $0.coordinate.latitude != 0 || $0.coordinate.longitude != 0  }
+      .receive(on: DispatchQueue.main)
+      .sink(receiveCompletion: { result in
+        guard case .failure = result else { return }
+        completion(.failure(error: "Error on retrieving your current location"))
+      }, receiveValue: { location in
+        self.getDataFor(latitude: location.coordinate.latitude,
+                        longitude: location.coordinate.longitude,
+                        completion: completion)
+      }).store(in: &cancellable)
   }
 
   private func getDataFor(latitude: Double, longitude: Double, completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -71,8 +76,8 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
       .flatMap { CLGeocoder().getLocationName(for: $0) }
       .receive(on: DispatchQueue.main)
       .sink(receiveCompletion: { result in
-        guard case .failure(let error) = result else { return }
-        completion(.failure(error: error.localizedDescription))
+        guard case .failure = result else { return }
+        completion(.failure(error: "Error on retrieving tide data"))
       }) { (place, widgetData) in
         completion(.success(place: place,
                             weatherData: widgetData))
