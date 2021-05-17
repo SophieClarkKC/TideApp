@@ -23,7 +23,7 @@ extension CLGeocoder {
         if let error = error {
           promise(.failure(WeatherError.parsing(description: error.localizedDescription)))
         } else {
-          if let locationName = placemarks?.compactMap({ $0.getLocationNameIfPresent() }).first {
+          if let locationName = placemarks?.compactMap({ $0.getLocationNameIfPresent }).first {
             promise(.success((locationName, weatherData)))
           } else {
             promise(.success(("Lat: \(latitude), Lon: \(longitude)", weatherData)))
@@ -35,7 +35,7 @@ extension CLGeocoder {
 }
 
 fileprivate extension CLPlacemark {
-  func getLocationNameIfPresent() -> String? {
+  var getLocationNameIfPresent: String? {
     return subLocality ?? subAdministrativeArea ?? locality ?? name ?? inlandWater ?? ocean
   }
 }
