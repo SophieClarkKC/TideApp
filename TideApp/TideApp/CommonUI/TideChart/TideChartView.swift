@@ -17,7 +17,7 @@ struct TideChartView: View {
   var body: some View {
     VStack {
       GeometryReader { reader in
-        LineGraph(points: makePoints(in: reader.size))
+        LineGraph(dataPoints: makePoints(in: reader.size), pointSize: 5)
           .trim(to: on ? 1 : 0)
           .stroke(Color.primaryActionColor, lineWidth: 2)
           .padding()
@@ -58,24 +58,35 @@ struct TideChartView: View {
 }
 
 struct LineGraph: Shape {
-  var points: [CGPoint]
+  
+  let dataPoints: [CGPoint]
+  let pointSize: CGFloat
+  let maxValue: CGPoint
+  let controlPoints: [BezierSegmentControlPoints]
+  
+  init(dataPoints: [CGPoint], pointSize: CGFloat) {
+    self.dataPoints = dataPoints
+    self.pointSize = pointSize
+    
+    let highestPoint = dataPoints.max { $0.y < $1.y }
+    maxValue = highestPoint ?? .zero
+    let config = BezierConfiguration()
+    controlPoints = config.configureControlPoints(data: dataPoints)
+  }
+  
   func path(in rect: CGRect) -> Path {
-    func point(at index: Int) -> CGPoint {
-      let point = points[index]
-      return CGPoint(x: point.x, y: point.y)
-    }
-    return Path { p in
-      guard points.count > 1 else { return }
-      var lastPoint = points[0]
-      p.move(to: lastPoint)
-      for index in points.indices {
-        let nextPoint = point(at: index)
-        let controlPoint1 = CGPoint(x: nextPoint.x, y: lastPoint.y)
-        let controlPoint2 = CGPoint(x: lastPoint.x, y: nextPoint.y)
-        p.addCurve(to: nextPoint, control1: controlPoint1, control2: controlPoint2)
-        lastPoint = nextPoint
+    var path = Path()
+
+    for (index, dataPoint) in dataPoints.enumerated() {
+      if index == 0 {
+        path.move(to: dataPoint)
+      } else {
+        let segment = controlPoints[index - 1]
+        path.addCurve(to: dataPoint, control1: segment.firstControlPoint, control2: segment.secondControlPoint)
       }
     }
+    
+    return path
   }
 }
 

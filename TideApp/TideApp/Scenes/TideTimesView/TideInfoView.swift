@@ -35,7 +35,7 @@ struct TideInfoView: View {
             .padding([.bottom, .top], PaddingValues.small)
         }
         GeometryReader { reader in
-          TideChartView(tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 50, alignment: .topLeading)
+          TideChartView(tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
         }
         
       })
