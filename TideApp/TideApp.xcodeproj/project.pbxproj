@@ -29,7 +29,8 @@
 		36D04EC6264BFE0A006EB2DC /* TideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC5264BFE0A006EB2DC /* TideInfoView.swift */; };
 		36D04EC8264BFF65006EB2DC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC7264BFF65006EB2DC /* ErrorView.swift */; };
 		36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
-		36D04ECE2652BE48006EB2DC /* BezierCodk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierCodk.swift */; };
+		36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
+		36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECF2653BD40006EB2DC /* LineGraph.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
@@ -135,7 +136,8 @@
 		36D04EC5264BFE0A006EB2DC /* TideInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideInfoView.swift; sourceTree = "<group>"; };
 		36D04EC7264BFF65006EB2DC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		36D04ECA264D389A006EB2DC /* TideChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideChartView.swift; sourceTree = "<group>"; };
-		36D04ECD2652BE48006EB2DC /* BezierCodk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCodk.swift; sourceTree = "<group>"; };
+		36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierConfiguration.swift; sourceTree = "<group>"; };
+		36D04ECF2653BD40006EB2DC /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7526443336005CA64F /* TideTimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
@@ -351,7 +353,8 @@
 			isa = PBXGroup;
 			children = (
 				36D04ECA264D389A006EB2DC /* TideChartView.swift */,
-				36D04ECD2652BE48006EB2DC /* BezierCodk.swift */,
+				36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */,
+				36D04ECF2653BD40006EB2DC /* LineGraph.swift */,
 			);
 			path = TideChart;
 			sourceTree = "<group>";
@@ -713,7 +716,7 @@
 				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
 				12FE3E862642B605000F7476 /* WeatherDataFetcher.swift in Sources */,
 				12266B86264BE04A00DE7FCA /* CLLocationManager+Publisher.swift in Sources */,
-				36D04ECE2652BE48006EB2DC /* BezierCodk.swift in Sources */,
+				36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */,
 				36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */,
 				36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */,
 				36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */,
@@ -721,6 +724,7 @@
 				36D04EC8264BFF65006EB2DC /* ErrorView.swift in Sources */,
 				36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */,
 				36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */,
+				36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */,
 				12FE3E952642B778000F7476 /* WeatherError.swift in Sources */,
 				36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */,
 				12EF61A82643F41F002C94B4 /* Keys.swift in Sources */,

@@ -17,17 +17,34 @@ struct TideChartView: View {
   var body: some View {
     VStack {
       GeometryReader { reader in
-        LineGraph(dataPoints: makePoints(in: reader.size), pointSize: 5)
+        let points = makePoints(in: reader.size)
+        LineGraph(dataPoints: points)
           .trim(to: on ? 1 : 0)
-          .stroke(Color.primaryActionColor, lineWidth: 2)
-          .padding()
-        Button("Animate") {
-          withAnimation(.easeInOut(duration: 2)) {
-            self.on.toggle()
-          }
+          .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round))
+          .foregroundColor(.titleColor)
+        LineGraph(dataPoints: points)
+          .trim(to: on ? getTimePercentage() : 0)
+          .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+          .foregroundColor(.bodyTextColor)
+        }
+      Button("Animate") {
+        withAnimation(.easeInOut(duration: 2)) {
+          self.on.toggle()
         }
       }
     }
+  }
+  
+  private func getTimePercentage() -> CGFloat {
+    guard let latestTime = tideData.sorted(by: { $0.tideDateTime > $1.tideDateTime }).first?.tideDateTime else {
+      return 0
+    }
+    guard let earliestTime = tideData.sorted(by: { $0.tideDateTime < $1.tideDateTime }).first?.tideDateTime else {
+      return 0
+    }
+    let timeDifference = latestTime.difference(from: earliestTime)
+    let differenceFromNow = date.difference(from: earliestTime)
+    return CGFloat(differenceFromNow / timeDifference)
   }
   
   private func makePoints(in size: CGSize) -> [CGPoint] {
@@ -54,39 +71,6 @@ struct TideChartView: View {
       return CGPoint(x: timePoint, y: tidePoint)
     })
     return points
-  }
-}
-
-struct LineGraph: Shape {
-  
-  let dataPoints: [CGPoint]
-  let pointSize: CGFloat
-  let maxValue: CGPoint
-  let controlPoints: [BezierSegmentControlPoints]
-  
-  init(dataPoints: [CGPoint], pointSize: CGFloat) {
-    self.dataPoints = dataPoints
-    self.pointSize = pointSize
-    
-    let highestPoint = dataPoints.max { $0.y < $1.y }
-    maxValue = highestPoint ?? .zero
-    let config = BezierConfiguration()
-    controlPoints = config.configureControlPoints(data: dataPoints)
-  }
-  
-  func path(in rect: CGRect) -> Path {
-    var path = Path()
-
-    for (index, dataPoint) in dataPoints.enumerated() {
-      if index == 0 {
-        path.move(to: dataPoint)
-      } else {
-        let segment = controlPoints[index - 1]
-        path.addCurve(to: dataPoint, control1: segment.firstControlPoint, control2: segment.secondControlPoint)
-      }
-    }
-    
-    return path
   }
 }
 

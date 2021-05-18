@@ -19,14 +19,13 @@ class BezierConfiguration {
   func configureControlPoints(data: [CGPoint]) -> [BezierSegmentControlPoints] {
     let segments = data.count - 1
     
-    if segments == 1 {
-      
+    if data.count == 2 {
       // straight line calculation here
       let p0 = data[0]
       let p3 = data[1]
       
       return [BezierSegmentControlPoints(firstControlPoint: p0, secondControlPoint: p3)]
-    } else if segments > 1 {
+    } else if data.count > 2 {
       
       //left hand side coefficients
       var aboveDiagonal = [CGFloat]()
@@ -48,9 +47,8 @@ class BezierConfiguration {
           diagonal.append(2.0)
           aboveDiagonal.append(1.0)
           
-          rhsXValue = p0.x + 2*p3.x
-          rhsYValue = p0.y + 2*p3.y
-          
+          rhsXValue = p0.x + 2 * p3.x
+          rhsYValue = p0.y + 2 * p3.y
         } else if i == segments - 1 {
           belowDiagonal.append(2.0)
           diagonal.append(7.0)
@@ -76,10 +74,8 @@ class BezierConfiguration {
   }
   
   func thomasAlgorithm(belowDiagonal: [CGFloat], diagonal: [CGFloat], aboveDiagonal: [CGFloat], rhsArray: [CGPoint], segments: Int, data: [CGPoint]) -> [BezierSegmentControlPoints] {
-    
     var controlPoints : [BezierSegmentControlPoints] = []
     var rhsArray = rhsArray
-    let segments = segments
     
     var solutionSet1 = [CGPoint?]()
     solutionSet1 = Array(repeating: nil, count: segments)
@@ -131,13 +127,12 @@ class BezierConfiguration {
     
     for i in (0..<segments) {
       if i == (segments - 1) {
-        
         let lastDataPoint = data[i + 1]
         let p1 = firstControlPoints[i]
         guard let controlPoint1 = p1 else { continue }
         
-        let controlPoint2X = (0.5)*(lastDataPoint.x + controlPoint1.x)
-        let controlPoint2y = (0.5)*(lastDataPoint.y + controlPoint1.y)
+        let controlPoint2X = (0.5) * (lastDataPoint.x + controlPoint1.x)
+        let controlPoint2y = (0.5) * (lastDataPoint.y + controlPoint1.y)
         
         let controlPoint2 = CGPoint(x: controlPoint2X, y: controlPoint2y)
         secondControlPoints.append(controlPoint2)
@@ -147,8 +142,8 @@ class BezierConfiguration {
         let p1 = firstControlPoints[i+1]
         guard let controlPoint1 = p1 else { continue }
         
-        let controlPoint2X = 2*dataPoint.x - controlPoint1.x
-        let controlPoint2Y = 2*dataPoint.y - controlPoint1.y
+        let controlPoint2X = 2 * dataPoint.x - controlPoint1.x
+        let controlPoint2Y = 2 * dataPoint.y - controlPoint1.y
         
         secondControlPoints.append(CGPoint(x: controlPoint2X, y: controlPoint2Y))
       }
@@ -164,5 +159,4 @@ class BezierConfiguration {
     
     return controlPoints
   }
-  
 }
