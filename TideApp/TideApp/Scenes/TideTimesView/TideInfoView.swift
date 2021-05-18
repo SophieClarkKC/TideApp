@@ -10,8 +10,10 @@ import Combine
 
 struct TideInfoView: View {
   @State var weatherInfo: TideTimesViewModel.WeatherInfo
-  
+  @State var animate: Bool = false
+
   var body: some View {
+    let chartView = TideChartView(animate: animate, tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
     ScrollView(.vertical, showsIndicators: false, content: {
       VStack(alignment: .leading, spacing: nil, content: {
         TitleLabel(text: weatherInfo.locationName)
@@ -35,13 +37,18 @@ struct TideInfoView: View {
             .padding([.bottom, .top], PaddingValues.small)
         }
         GeometryReader { reader in
-          TideChartView(tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
+          chartView
         }
         
       })
       .padding([.leading, .trailing], PaddingValues.medium)
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    .onAppear(perform: {
+      withAnimation(.easeInOut(duration: 2)) {
+        self.animate.toggle()
+      }
+    })
   }
 }
 

@@ -10,27 +10,23 @@ import SwiftUI
 struct TideChartView: View {
   typealias TideData = WeatherData.Weather.Tide.TideData
   
-  @State var on = true
+  var animate = false
   
   var tideData: [TideData]
   var date = Date()
+  
   var body: some View {
     VStack {
       GeometryReader { reader in
         let points = makePoints(in: reader.size)
         LineGraph(dataPoints: points)
-          .trim(to: on ? 1 : 0)
+          .trim(to: animate ? 1 : 0)
           .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round))
           .foregroundColor(.titleColor)
         LineGraph(dataPoints: points)
-          .trim(to: on ? getTimePercentage() : 0)
+          .trim(to: animate ? getTimePercentage() : 0)
           .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
           .foregroundColor(.bodyTextColor)
-        }
-      Button("Animate") {
-        withAnimation(.easeInOut(duration: 2)) {
-          self.on.toggle()
-        }
       }
     }
   }
