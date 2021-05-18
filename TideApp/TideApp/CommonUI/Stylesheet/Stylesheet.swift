@@ -100,30 +100,38 @@ struct ScaledFont: ViewModifier {
 // MARK: Components - Labels
 
 struct TitleLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.titleColor)
       .modifier(ScaledFont(size: TextSize.title, weight: .titleWeight))
+      .multilineTextAlignment(alignment)
   }
 }
 
 struct SubtitleLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.subtitleColor)
       .modifier(ScaledFont(size: TextSize.subTitle, weight: .subTitleWeight))
+      .multilineTextAlignment(alignment)
   }
 }
 
 struct BodyLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.bodyTextColor)
       .modifier(ScaledFont(size: TextSize.body, weight: .bodyWeight))
-      .multilineTextAlignment(.leading)
+      .multilineTextAlignment(alignment)
   }
 }
 
