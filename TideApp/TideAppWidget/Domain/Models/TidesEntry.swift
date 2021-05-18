@@ -10,7 +10,7 @@ import WidgetKit
 struct TidesEntry: TimelineEntry {
   let widgetData: WidgetData
   let date: Date
-  let configuration: ConfigurationIntent
+  let configuration: WidgetConfigurationIntent
 
   enum WidgetData {
     case success(place: String, weatherData: WeatherData)
@@ -32,7 +32,7 @@ extension TidesEntry {
 
     return TidesEntry(widgetData: widgetData,
                       date: Date(),
-                      configuration: ConfigurationIntent())
+                      configuration: WidgetConfigurationIntent())
   }
 
   private static func createMockWeatherData() -> WeatherData {

@@ -30,10 +30,16 @@
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7626443336005CA64F /* TideTimesView.swift */; };
+		9000EC6E26527F8200546099 /* UserLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B8B264BE59A00DE7FCA /* UserLocator.swift */; };
+		9000EC6F26527FA900546099 /* CLLocationManager+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */; };
 		908AD3DE2645A32300D45801 /* MockServer in Frameworks */ = {isa = PBXBuildFile; productRef = 908AD3DD2645A32300D45801 /* MockServer */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
 		909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5DC26417C48000FFBD5 /* AppDelegate.swift */; };
+		90E2EA75264EADDA00EE93D3 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E2EA74264EADDA00EE93D3 /* Intents.framework */; };
+		90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */; };
+		90E2EA7C264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 90E2EA73264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121D2649313D002642DE /* TideAppWidget.intentdefinition */; };
 		90F712172649313D002642DE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712162649313D002642DE /* WidgetKit.framework */; };
 		90F712192649313D002642DE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F712182649313D002642DE /* SwiftUI.framework */; };
 		90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F7121B2649313D002642DE /* TideAppWidget.swift */; };
@@ -89,6 +95,13 @@
 			remoteGlobalIDString = 3600744E263AB73100C53715;
 			remoteInfo = TideApp;
 		};
+		90E2EA7A264EADDA00EE93D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36007447263AB73100C53715 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90E2EA72264EADDA00EE93D3;
+			remoteInfo = TideAppWidgetIntentHandler;
+		};
 		90F712232649313F002642DE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 36007447263AB73100C53715 /* Project object */;
@@ -105,6 +118,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				90E2EA7C264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex in Embed App Extensions */,
 				90F712252649313F002642DE /* TideAppWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -150,6 +164,10 @@
 		909BA5CB264171E1000FFBD5 /* Prod.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Prod.xcconfig; sourceTree = "<group>"; };
 		909BA5CC264171E1000FFBD5 /* CommonConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonConfig.xcconfig; sourceTree = "<group>"; };
 		909BA5DC26417C48000FFBD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		90E2EA73264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TideAppWidgetIntentHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		90E2EA74264EADDA00EE93D3 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		90E2EA79264EADDA00EE93D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90F712152649313D002642DE /* TideAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TideAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F712162649313D002642DE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		90F712182649313D002642DE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -194,6 +212,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90E2EA70264EADDA00EE93D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90E2EA75264EADDA00EE93D3 /* Intents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +274,7 @@
 			children = (
 				36007451263AB73100C53715 /* TideApp */,
 				90F7121A2649313D002642DE /* TideAppWidget */,
+				90E2EA76264EADDA00EE93D3 /* TideAppWidgetIntentHandler */,
 				36007463263AB73400C53715 /* TideAppTests */,
 				3600746E263AB73400C53715 /* TideAppUITests */,
 				36007450263AB73100C53715 /* Products */,
@@ -265,6 +292,7 @@
 				36007460263AB73400C53715 /* TideAppTests.xctest */,
 				3600746B263AB73400C53715 /* TideAppUITests.xctest */,
 				90F712152649313D002642DE /* TideAppWidgetExtension.appex */,
+				90E2EA73264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -387,6 +415,7 @@
 			children = (
 				90F712162649313D002642DE /* WidgetKit.framework */,
 				90F712182649313D002642DE /* SwiftUI.framework */,
+				90E2EA74264EADDA00EE93D3 /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -429,6 +458,15 @@
 				909BA5DC26417C48000FFBD5 /* AppDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		90E2EA76264EADDA00EE93D3 /* TideAppWidgetIntentHandler */ = {
+			isa = PBXGroup;
+			children = (
+				90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */,
+				90E2EA79264EADDA00EE93D3 /* Info.plist */,
+			);
+			path = TideAppWidgetIntentHandler;
 			sourceTree = "<group>";
 		};
 		90F7121A2649313D002642DE /* TideAppWidget */ = {
@@ -519,6 +557,7 @@
 			);
 			dependencies = (
 				90F712242649313F002642DE /* PBXTargetDependency */,
+				90E2EA7B264EADDA00EE93D3 /* PBXTargetDependency */,
 			);
 			name = TideApp;
 			packageProductDependencies = (
@@ -564,6 +603,23 @@
 			productReference = 3600746B263AB73400C53715 /* TideAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		90E2EA72264EADDA00EE93D3 /* TideAppWidgetIntentHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90E2EA7D264EADDA00EE93D3 /* Build configuration list for PBXNativeTarget "TideAppWidgetIntentHandler" */;
+			buildPhases = (
+				90E2EA6F264EADDA00EE93D3 /* Sources */,
+				90E2EA70264EADDA00EE93D3 /* Frameworks */,
+				90E2EA71264EADDA00EE93D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TideAppWidgetIntentHandler;
+			productName = TideAppWidgetIntentHandler;
+			productReference = 90E2EA73264EADDA00EE93D3 /* TideAppWidgetIntentHandler.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		90F712142649313D002642DE /* TideAppWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90F7122A2649313F002642DE /* Build configuration list for PBXNativeTarget "TideAppWidgetExtension" */;
@@ -602,6 +658,9 @@
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 3600744E263AB73100C53715;
 					};
+					90E2EA72264EADDA00EE93D3 = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					90F712142649313D002642DE = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -624,6 +683,7 @@
 				3600745F263AB73400C53715 /* TideAppTests */,
 				3600746A263AB73400C53715 /* TideAppUITests */,
 				90F712142649313D002642DE /* TideAppWidgetExtension */,
+				90E2EA72264EADDA00EE93D3 /* TideAppWidgetIntentHandler */,
 			);
 		};
 /* End PBXProject section */
@@ -647,6 +707,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		36007469263AB73400C53715 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90E2EA71264EADDA00EE93D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -777,6 +844,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90E2EA6F264EADDA00EE93D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */,
+				90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90F712112649313D002642DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -789,6 +865,7 @@
 				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
 				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,
+				9000EC6F26527FA900546099 /* CLLocationManager+Publisher.swift in Sources */,
 				90F7122F26493300002642DE /* Stylesheet.swift in Sources */,
 				90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */,
 				90F71243264948B7002642DE /* TidesContentView.swift in Sources */,
@@ -797,6 +874,7 @@
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
 				911E7B6F264ECBCE0000BC15 /* WeatherInfo.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
+				9000EC6E26527F8200546099 /* UserLocator.swift in Sources */,
 				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
 				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,
@@ -818,6 +896,11 @@
 			isa = PBXTargetDependency;
 			target = 3600744E263AB73100C53715 /* TideApp */;
 			targetProxy = 3600746C263AB73400C53715 /* PBXContainerItemProxy */;
+		};
+		90E2EA7B264EADDA00EE93D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90E2EA72264EADDA00EE93D3 /* TideAppWidgetIntentHandler */;
+			targetProxy = 90E2EA7A264EADDA00EE93D3 /* PBXContainerItemProxy */;
 		};
 		90F712242649313F002642DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1202,6 +1285,66 @@
 			};
 			name = Mock;
 		};
+		90E2EA7E264EADDA00EE93D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		90E2EA7F264EADDA00EE93D3 /* Mock */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Mock;
+		};
+		90E2EA80264EADDA00EE93D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		90F712272649313F002642DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1307,6 +1450,16 @@
 				3600747B263AB73400C53715 /* Debug */,
 				909BA5D7264173CA000FFBD5 /* Mock */,
 				3600747C263AB73400C53715 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90E2EA7D264EADDA00EE93D3 /* Build configuration list for PBXNativeTarget "TideAppWidgetIntentHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90E2EA7E264EADDA00EE93D3 /* Debug */,
+				90E2EA7F264EADDA00EE93D3 /* Mock */,
+				90E2EA80264EADDA00EE93D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
