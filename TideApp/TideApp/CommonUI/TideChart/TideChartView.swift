@@ -62,7 +62,7 @@ struct TideChartView: View {
     let highestTideNormalised = highestTide.tideHeightM - lowestTide.tideHeightM
     let latestTimeNormalised = latestTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)
     let points: [CGPoint] = tideData.map({ data in
-      let tidePoint = CGFloat((data.tideHeightM - lowestTide.tideHeightM) / highestTideNormalised) * size.height
+      let tidePoint = size.height - (CGFloat((data.tideHeightM - lowestTide.tideHeightM) / highestTideNormalised) * size.height)
       let timePoint = CGFloat((data.tideDateTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)) / latestTimeNormalised) * size.width
       return CGPoint(x: timePoint, y: tidePoint)
     })
