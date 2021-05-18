@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LocationInfoView: View {
 
+  @State private var showSearch: Bool = false
   let weatherInfo: [WeatherInfo]
 
   var body: some View {
@@ -22,6 +23,13 @@ struct LocationInfoView: View {
         .padding([.top, .bottom])
       }
       .navigationTitle("My Locations")
+      .navigationBarItems(trailing: Button(action: {
+        showSearch.toggle()
+      }) { Image(.search) }
+      .accentColor(.titleColor)
+      .sheet(isPresented: $showSearch) {
+        SearchView(viewModel: SearchViewModel())
+      })
     }
   }
 }

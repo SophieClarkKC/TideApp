@@ -28,7 +28,7 @@ struct LocationButton: View {
       showSheet.toggle()
     }, label: {
       HStack(spacing: PaddingValues.small) {
-        Image(systemName: type.systemImageName)
+        Image(type.systemAsset)
         SubtitleLabel(text: weatherInfo.locationName)
         Spacer()
         VStack(alignment: .leading, spacing: PaddingValues.tiny) {
@@ -49,10 +49,10 @@ struct LocationButton: View {
 
 private extension LocationButton.`Type` {
 
-  var systemImageName: String {
+  var systemAsset: SystemAsset {
     switch self {
-    case .current: return "location.fill"
-    case .favourite: return "star.fill"
+    case .current: return .location
+    case .favourite: return .favouriteFilled
     }
   }
 }

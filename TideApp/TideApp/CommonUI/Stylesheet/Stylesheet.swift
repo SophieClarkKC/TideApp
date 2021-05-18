@@ -21,6 +21,22 @@ extension Color {
   static let secondaryButtonTextColor = Color("Colors/secondaryButtonTextColor")
 }
 
+// MARK: Assets
+
+enum SystemAsset: String {
+  case location = "location.fill"
+  case favouriteEmpty = "star"
+  case favouriteFilled = "star.fill"
+  case search = "magnifyingglass"
+}
+
+extension Image {
+
+  init(_ systemAsset: SystemAsset) {
+    self.init(systemName: systemAsset.rawValue)
+  }
+}
+
 // MARK: Font size and weights
 
 enum TextSize {
