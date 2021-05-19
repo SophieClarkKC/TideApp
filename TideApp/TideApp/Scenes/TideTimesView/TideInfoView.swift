@@ -33,7 +33,7 @@ struct TideInfoView: View {
         }
         SubtitleLabel(text: "Tide heights")
         GeometryReader { reader in
-          TideChartView(animate: animate, tideData: weatherInfo.tideTimes, tideHeight: weatherInfo.tideHeight).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
+          TideChartView(animate: animate, tideData: weatherInfo.tideTimes, tideHeight: weatherInfo.tideHeight).frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
         }
         
       })

@@ -31,6 +31,7 @@
 		36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
 		36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
 		36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECF2653BD40006EB2DC /* LineGraph.swift */; };
+		36D04ED22655206A006EB2DC /* TimeLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ED12655206A006EB2DC /* TimeLines.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7726443336005CA64F /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7526443336005CA64F /* TideTimesViewModel.swift */; };
@@ -138,6 +139,7 @@
 		36D04ECA264D389A006EB2DC /* TideChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideChartView.swift; sourceTree = "<group>"; };
 		36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierConfiguration.swift; sourceTree = "<group>"; };
 		36D04ECF2653BD40006EB2DC /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
+		36D04ED12655206A006EB2DC /* TimeLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLines.swift; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7526443336005CA64F /* TideTimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				36D04ECA264D389A006EB2DC /* TideChartView.swift */,
 				36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */,
 				36D04ECF2653BD40006EB2DC /* LineGraph.swift */,
+				36D04ED12655206A006EB2DC /* TimeLines.swift */,
 			);
 			path = TideChart;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */,
 				36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */,
 				36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */,
+				36D04ED22655206A006EB2DC /* TimeLines.swift in Sources */,
 				12FE3E952642B778000F7476 /* WeatherError.swift in Sources */,
 				36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */,
 				12EF61A82643F41F002C94B4 /* Keys.swift in Sources */,

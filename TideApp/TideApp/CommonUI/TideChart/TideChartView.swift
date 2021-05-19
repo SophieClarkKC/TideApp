@@ -17,26 +17,61 @@ struct TideChartView: View {
   var date = Date()
   
   var body: some View {
-    VStack(alignment: .leading) {
-      BodyLabel(text: "high tide").frame(alignment: .topLeading)
-      GeometryReader { reader in
-        let points = makePoints(in: reader.size)
-        LineGraph(dataPoints: points)
-          .trim(to: animate ? 1 : 0)
-          .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round))
-          .foregroundColor(.titleColor)
-        let timePercentage = getTimePercentage(for: date)
-        LineGraph(dataPoints: points)
-          .trim(to: animate ? timePercentage : 0)
-          .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
-          .foregroundColor(.bodyTextColor)
-        let timePoint = getTimePoint(for: points, percentageTimePassed: timePercentage, in: reader.size)
-        if let tideHeight = tideHeight {
-          BodyLabel(text: tideHeight).offset(x: timePoint.x, y: timePoint.y).opacity(animate ? 1 : 0)
+    ZStack {
+      makeTimeLines().padding(PaddingValues.tiny)
+      VStack(alignment: .leading) {
+        BodyLabel(text: "high tide").frame(alignment: .topLeading).padding(PaddingValues.small)
+        GeometryReader { reader in
+          let points = makePoints(in: reader.size)
+          
+          LineGraph(dataPoints: points)
+            .trim(to: animate ? 1 : 0)
+            .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round))
+            .foregroundColor(.titleColor)
+          let timePercentage = getTimePercentage(for: date)
+          LineGraph(dataPoints: points)
+            .trim(to: animate ? timePercentage : 0)
+            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
+            .foregroundColor(.bodyTextColor)
+          let timePoint = getTimePoint(for: points, percentageTimePassed: timePercentage, in: reader.size)
+          if let tideHeight = tideHeight {
+            BodyLabel(text: tideHeight).offset(x: timePoint.x, y: timePoint.y).opacity(animate ? 1 : 0)
+          }
         }
+        BodyLabel(text: "low tide").frame(alignment: .bottomLeading).padding(PaddingValues.small)
       }
-      BodyLabel(text: "low tide").frame(alignment: .bottomLeading)
     }
+    
+  }
+  
+  private func makeTimeLines() -> AnyView {
+    AnyView(
+      VStack {
+        TimeLines().stroke(style: StrokeStyle(lineWidth: 1, lineCap: .round)).foregroundColor(.gray)
+        if let quarterTimes = getQuarterTimes() {
+          HStack {
+            ForEach(quarterTimes, id: \.self) { timeString in
+              BodyLabel(text: timeString)
+            }
+          }
+        }
+        
+      }
+    )
+  }
+  
+  private func getQuarterTimes() -> [String]? {
+    guard let latestTime = tideData.sorted(by: { $0.tideDateTime > $1.tideDateTime }).first?.tideDateTime else {
+      return nil
+    }
+    guard let earliestTime = tideData.sorted(by: { $0.tideDateTime < $1.tideDateTime }).first?.tideDateTime else {
+      return nil
+    }
+    let timeDifference = latestTime.difference(from: earliestTime)
+    let quarter = earliestTime.addingTimeInterval(timeDifference * 0.25).string(with: .time)
+    let half = earliestTime.addingTimeInterval(timeDifference * 0.5).string(with: .time)
+    let threeQuarters = earliestTime.addingTimeInterval(timeDifference * 0.75).string(with: .time)
+    return [quarter, half, threeQuarters]
   }
   
   private func getTimePercentage(for date: Date) -> CGFloat {
@@ -99,7 +134,7 @@ struct TideChartView: View {
           } else {
             x = tidePoint.1.x + CGFloat(xOffset)
           }
-          return CGPoint(x: x, y: y)
+          return CGPoint(x: x, y: size.height - y)
         }
       } else if index == tidesWithPoints.count - 1, date > tidePoint.0.tideDateTime {
         return CGPoint(x: size.width * 0.9, y: tidePoint.1.y)
