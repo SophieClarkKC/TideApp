@@ -18,46 +18,50 @@ struct TideChartView: View {
   
   var body: some View {
     ZStack {
-      makeTimeLines().padding(PaddingValues.tiny)
+      TimeLines()
+        .stroke(style: StrokeStyle(lineWidth: 1, lineCap: .round))
+        .foregroundColor(.gray)
+        .padding(PaddingValues.small)
+      
       VStack(alignment: .leading) {
         BodyLabel(text: "high tide").frame(alignment: .topLeading).padding(PaddingValues.small)
-        GeometryReader { reader in
-          let points = makePoints(in: reader.size)
-          
+        
+        GeometryReader { proxy in
+          let points = makePoints(in: proxy.size)
           LineGraph(dataPoints: points)
             .trim(to: animate ? 1 : 0)
             .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round))
             .foregroundColor(.titleColor)
+          
           let timePercentage = getTimePercentage(for: date)
           LineGraph(dataPoints: points)
             .trim(to: animate ? timePercentage : 0)
             .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
             .foregroundColor(.bodyTextColor)
-          let timePoint = getTimePoint(for: points, percentageTimePassed: timePercentage, in: reader.size)
+          
+          let timePoint = getTimePoint(for: points, percentageTimePassed: timePercentage, in: proxy.size)
           if let tideHeight = tideHeight {
-            BodyLabel(text: tideHeight).offset(x: timePoint.x, y: timePoint.y).opacity(animate ? 1 : 0)
-          }
-        }
-        BodyLabel(text: "low tide").frame(alignment: .bottomLeading).padding(PaddingValues.small)
-      }
-    }
-    
-  }
-  
-  private func makeTimeLines() -> AnyView {
-    AnyView(
-      VStack {
-        TimeLines().stroke(style: StrokeStyle(lineWidth: 1, lineCap: .round)).foregroundColor(.gray)
-        if let quarterTimes = getQuarterTimes() {
-          HStack {
-            ForEach(quarterTimes, id: \.self) { timeString in
-              BodyLabel(text: timeString)
-            }
+            BodyLabel(text: tideHeight)
+              .padding(PaddingValues.tiny)
+              .background(Capsule()
+                            .foregroundColor(.backgroundColor.opacity(0.5)))
+              .offset(x: timePoint.x, y: timePoint.y)
+              .opacity(animate ? 1 : 0)
           }
         }
         
+        BodyLabel(text: "low tide").frame(alignment: .bottomLeading).padding(PaddingValues.small)
       }
-    )
+      HStack(alignment: .center, content: {
+        GeometryReader { proxy in
+          if let quarterTimes = getQuarterTimes() {
+            ForEach(0..<quarterTimes.count) { index in
+              BodyLabel(text: quarterTimes[index], alignment: .center).offset(x: proxy.size.width * (CGFloat((index + 1)) / 4), y: proxy.size.height)
+            }
+          }
+        }
+      })
+    }
   }
   
   private func getQuarterTimes() -> [String]? {
@@ -87,10 +91,7 @@ struct TideChartView: View {
   }
   
   private func makePoints(in size: CGSize) -> [CGPoint] {
-    guard let highestTide = tideData.sorted(by: { $0.tideHeightM > $1.tideHeightM }).first else {
-      return []
-    }
-    guard let lowestTide = tideData.sorted(by: { $0.tideHeightM < $1.tideHeightM }).first else {
+    guard let peakTides = getHighestAndLowestTides() else {
       return []
     }
     guard let latestTime = tideData.sorted(by: { $0.tideDateTime > $1.tideDateTime }).first?.tideDateTime else {
@@ -102,14 +103,22 @@ struct TideChartView: View {
     guard let dayBefore = Calendar.current.date(byAdding: .day, value: -1, to: date) else {
       return []
     }
-    let highestTideNormalised = highestTide.tideHeightM - lowestTide.tideHeightM
+    let highestTideNormalised = peakTides.highest.tideHeightM - peakTides.lowest.tideHeightM
     let latestTimeNormalised = latestTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)
     let points: [CGPoint] = tideData.map({ data in
-      let tidePoint = size.height - (CGFloat((data.tideHeightM - lowestTide.tideHeightM) / highestTideNormalised) * size.height)
+      let tidePoint = size.height - (CGFloat((data.tideHeightM - peakTides.lowest.tideHeightM) / highestTideNormalised) * size.height)
       let timePoint = CGFloat((data.tideDateTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)) / latestTimeNormalised) * size.width
       return CGPoint(x: timePoint, y: tidePoint)
     })
     return points
+  }
+  
+  func getHighestAndLowestTides() -> (highest: TideData, lowest: TideData)? {
+    guard let highestTide = tideData.sorted(by: { $0.tideHeightM > $1.tideHeightM }).first,
+          let lowestTide = tideData.sorted(by: { $0.tideHeightM < $1.tideHeightM }).first else {
+      return nil
+    }
+    return (highestTide, lowestTide)
   }
   
   private func getTimePoint(for points: [CGPoint], percentageTimePassed: CGFloat, in size: CGSize) -> CGPoint {
@@ -127,14 +136,20 @@ struct TideChartView: View {
         if tidePoint.0.tideDateTime < date, nextTide.0.tideDateTime > date {
           let percentageTimePassedAtLastTidePoint = getTimePercentage(for: tidePoint.0.tideDateTime)
           let xOffset = (percentageTimePassed - percentageTimePassedAtLastTidePoint) * size.width
-          let y = tidePoint.1.y
+          let yOffset = ((CGFloat(nextTide.0.tideHeightM - tidePoint.0.tideHeightM) * (percentageTimePassed - percentageTimePassedAtLastTidePoint)) * size.height) + PaddingValues.small
+          var y: CGFloat
+          if tidePoint.1.y + yOffset > size.height * 0.9 {
+            y = tidePoint.1.y + (CGFloat(yOffset) * 0.8)
+          } else {
+            y = tidePoint.1.y + CGFloat(yOffset)
+          }
           var x: CGFloat
           if tidePoint.1.x + xOffset > size.width * 0.9 {
             x = tidePoint.1.x + (CGFloat(xOffset) * 0.8)
           } else {
             x = tidePoint.1.x + CGFloat(xOffset)
           }
-          return CGPoint(x: x, y: size.height - y)
+          return CGPoint(x: x, y: y)
         }
       } else if index == tidesWithPoints.count - 1, date > tidePoint.0.tideDateTime {
         return CGPoint(x: size.width * 0.9, y: tidePoint.1.y)

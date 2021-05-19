@@ -12,7 +12,8 @@ import CoreLocation
 struct TideTimesView: View {
 
   let weatherInfo: WeatherInfo
-
+  @State var animate: Bool = false
+  
   var body: some View {
     ScrollView(.vertical, showsIndicators: false, content: {
       VStack(alignment: .leading, spacing: nil, content: {
@@ -28,18 +29,24 @@ struct TideTimesView: View {
         ForEach(weatherInfo.tideTimes) { tideTime in
           BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
         }
-        if let tideHeight = weatherInfo.tideHeight {
-          SubtitleLabel(text: tideHeight)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
         if let waterTemperature = weatherInfo.waterTemperature {
           SubtitleLabel(text: waterTemperature)
             .padding([.bottom, .top], PaddingValues.small)
         }
+        SubtitleLabel(text: "Tide heights")
+        GeometryReader { reader in
+          TideChartView(animate: animate, tideData: weatherInfo.tideTimes, tideHeight: weatherInfo.tideHeight).frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
+        }
+        
       })
       .padding([.leading, .trailing], PaddingValues.medium)
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    .onAppear(perform: {
+      withAnimation(.easeInOut(duration: 2)) {
+        self.animate.toggle()
+      }
+    })
   }
 }
 

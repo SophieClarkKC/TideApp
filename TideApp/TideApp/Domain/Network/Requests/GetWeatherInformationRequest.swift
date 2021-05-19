@@ -43,7 +43,7 @@ struct GetWeatherInformationRequest: RequestType {
   private func mapInfo(_ tuple: (placeName: String, weatherData: WeatherData)) -> WeatherInfo {
     let tideData = tuple.weatherData.weather.first?.tides.first?.tideData ?? []
     let subTitle = "Tide times"
-    let tideHeight: String? = tuple.weatherData.calculateCurrentTideHeight(with: date).flatMap({ "Current tide height: ~\(String(format: "%.2f", $0))m" })
+    let tideHeight: String? = tuple.weatherData.calculateCurrentTideHeight(with: date).flatMap({ "~\(String(format: "%.2f", $0))m" })
     let waterTemperature: String? = tuple.weatherData.currentWaterTemperature(with: date).flatMap({ "Current water temperature: ~\(String(format: "%.0f", $0))c" })
     return WeatherInfo(locationName: tuple.placeName, subTitle: subTitle, tideTimes: tideData, tideHeight: tideHeight, waterTemperature: waterTemperature)
   }

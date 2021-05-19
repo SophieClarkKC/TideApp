@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// followed tutorial here https://exploringswift.com/blog/Drawing-Smooth-Cubic-Bezier-Curve-through-prescribed-points-using-Swift
+// hoping code can be improved, but need to understand the maths better first
+
 struct BezierSegmentControlPoints {
   var firstControlPoint: CGPoint
   var secondControlPoint: CGPoint

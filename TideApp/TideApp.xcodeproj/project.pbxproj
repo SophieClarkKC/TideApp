@@ -24,7 +24,6 @@
 		36D04EBA264961F5006EB2DC /* Date+HelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EB9264961F5006EB2DC /* Date+HelpersTests.swift */; };
 		36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
 		36D04EC2264A965C006EB2DC /* GeneralHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */; };
-		36D04EC6264BFE0A006EB2DC /* TideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC5264BFE0A006EB2DC /* TideInfoView.swift */; };
 		36D04EC8264BFF65006EB2DC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC7264BFF65006EB2DC /* ErrorView.swift */; };
 		36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
 		36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
@@ -163,7 +162,6 @@
 		36D04EB9264961F5006EB2DC /* Date+HelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+HelpersTests.swift"; sourceTree = "<group>"; };
 		36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 		36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpersTests.swift; sourceTree = "<group>"; };
-		36D04EC5264BFE0A006EB2DC /* TideInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideInfoView.swift; sourceTree = "<group>"; };
 		36D04EC7264BFF65006EB2DC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		36D04ECA264D389A006EB2DC /* TideChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideChartView.swift; sourceTree = "<group>"; };
 		36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierConfiguration.swift; sourceTree = "<group>"; };
@@ -434,7 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				36D4BE7626443336005CA64F /* TideTimesView.swift */,
-				36D04EC5264BFE0A006EB2DC /* TideInfoView.swift */,
 			);
 			path = TideTimesView;
 			sourceTree = "<group>";
@@ -844,7 +841,6 @@
 				91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */,
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
-				36D04EC6264BFE0A006EB2DC /* TideInfoView.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
 				91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */,
