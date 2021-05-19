@@ -37,7 +37,7 @@ final class NetworkManager: NetworkManagerType {
     return session.dataTaskPublisher(for: urlRequest)
       .mapError(NetworkError.urlError)
       .map(\.data)
-      .decode(type: R.Output.self, decoder: JSONDecoder())
+      .decode(type: R.Output.self, decoder: resource.jsonDecoder)
       .eraseToAnyPublisher()
   }
 }
