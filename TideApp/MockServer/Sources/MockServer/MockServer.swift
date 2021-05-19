@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 import Swifter
 
-public class MockServer {
+public final class MockServer {
   private var server: HttpServer?
   private var isStarted = false
 
@@ -61,6 +62,10 @@ public class MockServer {
     sleep(1) // just to give a fake loading time
 
     return route.handle(request: request)
+  }
+
+  public static func getMockConfigurationView() -> some View {
+    return MockServerConfig.getConfigView()
   }
 }
 

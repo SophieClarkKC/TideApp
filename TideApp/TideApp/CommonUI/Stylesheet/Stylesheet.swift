@@ -11,14 +11,30 @@ import SwiftUI
 // MARK: Colors
 
 extension Color {
-  static let titleColor = Color("titleColor")
-  static let bodyTextColor = Color("bodyTextColor")
-  static let subtitleColor = Color("subtitleColor")
-  static let primaryActionColor = Color("primaryActionColor")
-  static let secondaryActionColor = Color("secondaryActionColor")
-  static let backgroundColor = Color("backgroundColor")
-  static let primaryButtonTextColor = Color("primaryButtonTextColor")
-  static let secondaryButtonTextColor = Color("secondaryButtonTextColor")
+  static let titleColor = Color("Colors/titleColor")
+  static let bodyTextColor = Color("Colors/bodyTextColor")
+  static let subtitleColor = Color("Colors/subtitleColor")
+  static let primaryActionColor = Color("Colors/primaryActionColor")
+  static let secondaryActionColor = Color("Colors/secondaryActionColor")
+  static let backgroundColor = Color("Colors/backgroundColor")
+  static let primaryButtonTextColor = Color("Colors/primaryButtonTextColor")
+  static let secondaryButtonTextColor = Color("Colors/secondaryButtonTextColor")
+}
+
+// MARK: Assets
+
+enum SystemAsset: String {
+  case location = "location.fill"
+  case favouriteEmpty = "star"
+  case favouriteFilled = "star.fill"
+  case search = "magnifyingglass"
+}
+
+extension Image {
+
+  init(_ systemAsset: SystemAsset) {
+    self.init(systemName: systemAsset.rawValue)
+  }
 }
 
 // MARK: Font size and weights
@@ -84,30 +100,38 @@ struct ScaledFont: ViewModifier {
 // MARK: Components - Labels
 
 struct TitleLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.titleColor)
       .modifier(ScaledFont(size: TextSize.title, weight: .titleWeight))
+      .multilineTextAlignment(alignment)
   }
 }
 
 struct SubtitleLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.subtitleColor)
       .modifier(ScaledFont(size: TextSize.subTitle, weight: .subTitleWeight))
+      .multilineTextAlignment(alignment)
   }
 }
 
 struct BodyLabel: View {
-  var text: String
+  let text: String
+  var alignment: TextAlignment = .leading
+
   var body: some View {
     Text(text)
       .foregroundColor(.bodyTextColor)
       .modifier(ScaledFont(size: TextSize.body, weight: .bodyWeight))
-      .multilineTextAlignment(.leading)
+      .multilineTextAlignment(alignment)
   }
 }
 

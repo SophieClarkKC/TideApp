@@ -31,6 +31,7 @@ extension CLLocationManager {
         self.subscriber = subscriber
         super.init()
         locationManager.delegate = self
+        locationManager.distanceFilter = .init(500)
       }
 
       func request(_ demand: Subscribers.Demand) {
@@ -43,7 +44,7 @@ extension CLLocationManager {
       }
 
       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for location  in locations {
+        for location in locations {
           _ = subscriber.receive(location)
         }
       }
