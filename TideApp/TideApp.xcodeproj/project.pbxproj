@@ -12,7 +12,6 @@
 		12EF61A82643F41F002C94B4 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF61A72643F41F002C94B4 /* Keys.swift */; };
 		12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
 		12FE3E952642B778000F7476 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
-		12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */; };
 		36007457263AB73300C53715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007456263AB73300C53715 /* Assets.xcassets */; };
 		3600745A263AB73300C53715 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36007459263AB73300C53715 /* Preview Assets.xcassets */; };
 		36007465263AB73400C53715 /* TideAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36007464263AB73400C53715 /* TideAppTests.swift */; };
@@ -59,7 +58,6 @@
 		90F71254264A9ACD002642DE /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
 		90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
 		90F71257264A9AF8002642DE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
-		90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */; };
 		90F71259264A9B05002642DE /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF61A72643F41F002C94B4 /* Keys.swift */; };
 		90F7125A264A9B0E002642DE /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EA826453521006EB2DC /* Date+Helpers.swift */; };
 		90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
@@ -142,7 +140,6 @@
 		12EF61A72643F41F002C94B4 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		12FE3E8C2642B719000F7476 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		12FE3E942642B778000F7476 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
-		12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDecoder.swift; sourceTree = "<group>"; };
 		3600744F263AB73100C53715 /* TideApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TideApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36007456263AB73300C53715 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36007459263AB73300C53715 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -279,14 +276,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		12FE3E992642C142000F7476 /* Decoder */ = {
-			isa = PBXGroup;
-			children = (
-				12FE3E9A2642C161000F7476 /* WeatherDecoder.swift */,
-			);
-			path = Decoder;
-			sourceTree = "<group>";
-		};
 		36007446263AB73100C53715 = {
 			isa = PBXGroup;
 			children = (
@@ -362,7 +351,6 @@
 		36D04EA326444184006EB2DC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				12FE3E992642C142000F7476 /* Decoder */,
 				36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */,
 				36D04EB726458CFA006EB2DC /* Extensions */,
 				36D04EA826453521006EB2DC /* Date+Helpers.swift */,
@@ -833,7 +821,6 @@
 				91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */,
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
-				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
 				91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */,
@@ -903,7 +890,6 @@
 				91F7D00B265513580013DFCC /* ResourceType.swift in Sources */,
 				90F7122F26493300002642DE /* Stylesheet.swift in Sources */,
 				91F7CFF9265512500013DFCC /* HTTPMethod.swift in Sources */,
-				90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */,
 				90F71243264948B7002642DE /* TidesContentView.swift in Sources */,
 				91F7CFED2655124B0013DFCC /* NetworkManager.swift in Sources */,
 				90F71257264A9AF8002642DE /* AppConfig.swift in Sources */,
