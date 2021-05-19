@@ -18,4 +18,8 @@ final class UserLocator : ObservableObject {
     cancellable = CLLocationManager.publishLocation()
       .assign(to: \.location, on: self)
   }
+
+  func isAuthorizedForWidgetUpdates() -> Bool {
+    return CLLocationManager().isAuthorizedForWidgetUpdates
+  }
 }

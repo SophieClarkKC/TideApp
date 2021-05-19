@@ -23,9 +23,7 @@ extension CLGeocoder {
         if let error = error {
           promise(.failure(WeatherError.parsing(description: error.localizedDescription)))
         } else {
-          if let placemark = placemarks?.first(where: { $0.subLocality != nil }), let locationName = placemark.subLocality {
-            promise(.success((locationName, weatherData)))
-          } else if let placemark = placemarks?.first(where: { $0.subAdministrativeArea != nil }), let locationName = placemark.subAdministrativeArea {
+          if let locationName = placemarks?.compactMap({ $0.getLocationNameIfPresent }).first {
             promise(.success((locationName, weatherData)))
           } else {
             promise(.success(("Lat: \(latitude), Lon: \(longitude)", weatherData)))
@@ -34,5 +32,11 @@ extension CLGeocoder {
       }
     }
     .eraseToAnyPublisher()
+  }
+}
+
+fileprivate extension CLPlacemark {
+  var getLocationNameIfPresent: String? {
+    return subLocality ?? subAdministrativeArea ?? locality ?? name ?? inlandWater ?? ocean
   }
 }
