@@ -22,19 +22,19 @@ final class TidesWidgetDataProvider: TidesWidgetDataProviderType, ObservableObje
   }
 
   func retrieveData(completion: @escaping (TidesEntry.WidgetData) -> ()) {
-    weatherFetcher
-      .getStandardWeatherData(lat: 50.805832, lon: -1.087222)
-      .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .eraseToAnyPublisher()
-      .receive(on: DispatchQueue.main)
-      .sink(receiveCompletion: { result in
-        guard case .failure(let error) = result else { return }
-        completion(.failure(error: error.localizedDescription))
-      }) { (place, widgetData) in
-        completion(.success(place: place,
-                            weatherData: widgetData))
-      }
-      .store(in: &cancellable)
+//    weatherFetcher
+//      .getStandardWeatherData(lat: 50.805832, lon: -1.087222)
+//      .flatMap { CLGeocoder().getLocationName(for: $0) }
+//      .eraseToAnyPublisher()
+//      .receive(on: DispatchQueue.main)
+//      .sink(receiveCompletion: { result in
+//        guard case .failure(let error) = result else { return }
+//        completion(.failure(error: error.localizedDescription))
+//      }) { (place, widgetData) in
+//        completion(.success(place: place,
+//                            weatherData: widgetData))
+//      }
+//      .store(in: &cancellable)
   }
 
 }
