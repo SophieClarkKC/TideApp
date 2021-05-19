@@ -13,7 +13,7 @@ final class LocationsViewModel: ObservableObject {
   enum State {
     case idle
     case loading
-    case error(WeatherError)
+    case error(Error)
     case success([WeatherInfo])
   }
 
@@ -25,14 +25,15 @@ final class LocationsViewModel: ObservableObject {
   // MARK: Private
 
   private let userLocator: UserLocator
-  private let weatherFetcher: WeatherDataFetchable
+  private let networkManager: NetworkManagerType
   private var cancellables: [AnyCancellable] = []
+
 
   // MARK: - Initialiser -
 
-  init(userLocator: UserLocator = UserLocator(), weatherFetcher: WeatherDataFetchable = WeatherDataFetcher()) {
+  init(userLocator: UserLocator = UserLocator(), networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
-    self.weatherFetcher = weatherFetcher
+    self.networkManager = networkManager
   }
 
   // MARK: - Functions -
@@ -52,29 +53,15 @@ final class LocationsViewModel: ObservableObject {
   // MARK: Private
 
   private func getTideTimes(for date: Date = Date(), at newLocation: CLLocation) {
-    let newLatitude = Double(newLocation.coordinate.latitude)
-    let newLongitude = Double(newLocation.coordinate.longitude)
     state = .loading
-    weatherFetcher.getStandardWeatherData(lat: newLatitude, lon: newLongitude)
-      .receive(on: DispatchQueue.main)
-      .flatMap { CLGeocoder().getLocationName(for: $0) }
+    let request = GetWeatherInformationRequest(location: newLocation, date: date, networkManager: networkManager)
+    request.perform()
       .sink(receiveCompletion: { completion in
         guard case let .failure(error) = completion else {
           return
         }
         self.state = .error(error)
-      }, receiveValue: { placeName, weatherData in
-        let info = self.map(placeName: placeName, weatherData: weatherData, date: date)
-        self.state = .success([info])
-      })
+      }, receiveValue: { self.state = .success([$0]) })
       .store(in: &cancellables)
-  }
-
-  private func map(placeName: String, weatherData: WeatherData, date: Date) -> WeatherInfo {
-    let tideData = weatherData.weather.first?.tides.first?.tideData ?? []
-    let subTitle = "Tide times"
-    let tideHeight: String? = weatherData.calculateCurrentTideHeight(with: date).flatMap({ "Current tide height: ~\(String(format: "%.2f", $0))m" })
-    let waterTemperature: String? = weatherData.currentWaterTemperature(with: date).flatMap({ "Current water temperature: ~\(String(format: "%.0f", $0))c" })
-    return WeatherInfo(locationName: placeName, subTitle: subTitle, tideTimes: tideData, tideHeight: tideHeight, waterTemperature: waterTemperature)
   }
 }

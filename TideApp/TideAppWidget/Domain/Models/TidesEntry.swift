@@ -13,7 +13,7 @@ struct TidesEntry: TimelineEntry {
   let configuration: WidgetConfigurationIntent
 
   enum WidgetData {
-    case success(place: String, weatherData: WeatherData)
+    case success(weatherInfo: WeatherInfo)
     case failure(error: String)
   }
 }
@@ -26,8 +26,7 @@ extension TidesEntry {
       widgetData = .failure(error: "Generic Error")
     } else {
       let weatherData = createMockWeatherData()
-      widgetData = .success(place: "Brighton",
-                            weatherData: weatherData)
+      widgetData = .success(weatherInfo: .init(locationName: "Brighton", subTitle: "", tideTimes: weatherData.weather.first?.tides.first?.tideData ?? [], tideHeight: nil, waterTemperature: nil))
     }
 
     return TidesEntry(widgetData: widgetData,

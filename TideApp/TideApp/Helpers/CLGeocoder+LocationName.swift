@@ -10,8 +10,8 @@ import CoreLocation
 import Combine
 
 extension CLGeocoder {
-  func getLocationName(for weatherData: WeatherData) -> AnyPublisher<(String, WeatherData), WeatherError> {
-    return Future<(String, WeatherData), WeatherError> { [weak self] promise in
+  func getLocationName(for weatherData: WeatherData) -> AnyPublisher<(String, WeatherData), Error> {
+    return Future<(String, WeatherData), Error> { [weak self] promise in
       guard let strongSelf = self else {
         return
       }
@@ -30,7 +30,8 @@ extension CLGeocoder {
           }
         }
       }
-    }.eraseToAnyPublisher()
+    }
+    .eraseToAnyPublisher()
   }
 }
 

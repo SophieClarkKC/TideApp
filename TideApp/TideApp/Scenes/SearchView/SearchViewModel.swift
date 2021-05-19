@@ -15,7 +15,7 @@ final class SearchViewModel: NSObject, ObservableObject {
     case idle
     case error
     case noResults
-    case success([String])
+    case success([MKPlacemark])
   }
 
   @Published private var searchQuery: String?
@@ -42,7 +42,7 @@ final class SearchViewModel: NSObject, ObservableObject {
       if error != nil {
         self.state = .error
       } else if let response = response {
-        let searchResults = response.mapItems.compactMap { $0.placemark.title }
+        let searchResults = response.mapItems.compactMap { $0.placemark }
         self.state = searchResults.isEmpty ? .noResults : .success(searchResults)
       }
     }

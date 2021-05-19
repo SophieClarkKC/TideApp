@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct SearchView: View {
 
@@ -63,20 +64,23 @@ private struct NoResultsView: View {
 
   var body: some View {
     SubtitleLabel(text: "Sorry, no results match this search!", alignment: .center)
-      .multilineTextAlignment(.center)
       .padding()
   }
 }
 
 private struct ResultsView: View {
 
-  let results: [String]
+  let results: [MKPlacemark]
 
   var body: some View {
     List {
-      ForEach(results, id: \.self) { result in
+      ForEach(results, id: \.self) { placemark in
         Button(action: {}) {
-          Text(result)
+          VStack(alignment: .leading, spacing: PaddingValues.tiny) {
+            SubtitleLabel(text: placemark.name ?? "")
+            BodyLabel(text: placemark.title ?? "")
+          }
+          .padding(PaddingValues.small)
         }
       }
     }
