@@ -114,7 +114,7 @@ struct TideChartView: View {
     return points
   }
   
-  func getHighestAndLowestTides() -> (highest: TideData, lowest: TideData)? {
+  private func getHighestAndLowestTides() -> (highest: TideData, lowest: TideData)? {
     guard let highestTide = tideData.sorted(by: { $0.tideHeightM > $1.tideHeightM }).first,
           let lowestTide = tideData.sorted(by: { $0.tideHeightM < $1.tideHeightM }).first else {
       return nil
