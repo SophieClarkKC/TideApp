@@ -13,6 +13,7 @@ struct TideChartView: View {
   var animate = false
   
   var tideData: [TideData]
+  var tideHeight: String?
   var date = Date()
   
   var body: some View {
@@ -30,7 +31,9 @@ struct TideChartView: View {
           .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round))
           .foregroundColor(.bodyTextColor)
         let timePoint = getTimePoint(for: points, percentageTimePassed: timePercentage, in: reader.size)
-        BodyLabel(text: "height: 3.4m").offset(x: timePoint.x, y: timePoint.y)
+        if let tideHeight = tideHeight {
+          BodyLabel(text: tideHeight).offset(x: timePoint.x, y: timePoint.y).opacity(animate ? 1 : 0)
+        }
       }
       BodyLabel(text: "low tide").frame(alignment: .bottomLeading)
     }
@@ -84,30 +87,26 @@ struct TideChartView: View {
         let x = size.width * 0.05
         let y = tidePoint.1.y > (size.height / 2) ? tidePoint.1.y * 0.65 : tidePoint.1.y * 0.45
         return CGPoint(x: x, y: y)
-      } else if index < tidesWithPoints.count - 2 {
+      } else if index < tidesWithPoints.count - 1 {
         let nextTide = tidesWithPoints[index + 1]
         if tidePoint.0.tideDateTime < date, nextTide.0.tideDateTime > date {
-//          x = ((1 - t) * (1 - t) * p[0].x) + (2 * (1 - t) * t * p[1].x + t * t * p[2].x);
-//          y = (1 - t) * (1 - t) * p[0].y + 2 * (1 - t) * t * p[1].y + t * t * p[2].y;
-          // convert percentage time passed to time passed since tidePoint
-          // get time passed since start and tidePoint
           let percentageTimePassedAtLastTidePoint = getTimePercentage(for: tidePoint.0.tideDateTime)
           let xOffset = (percentageTimePassed - percentageTimePassedAtLastTidePoint) * size.width
           var yOffset: CGFloat
           if tidePoint.1.y >= size.height * 0.9 {
-            yOffset = -(size.height * 0.1)
+            yOffset = -(size.height * 0.15)
           } else if tidePoint.1.y <= size.height * 0.1 {
-            yOffset = (size.height * 0.1)
+            yOffset = size.height * 0.15
           } else if tidePoint.1.y > size.height * 0.5 {
             yOffset = -(tidePoint.1.y * 0.1)
           } else {
-            yOffset = -(tidePoint.1.y * 0.1)
+            yOffset = tidePoint.1.y * 0.1
           }
           let y = tidePoint.1.y + yOffset
           let x = tidePoint.1.x + CGFloat(xOffset)
           return CGPoint(x: x, y: y)
         }
-      } else if date > tidePoint.0.tideDateTime {
+      } else if index == tidesWithPoints.count - 1, date > tidePoint.0.tideDateTime {
         return tidePoint.1
       }
     }

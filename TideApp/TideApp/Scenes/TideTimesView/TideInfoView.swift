@@ -13,7 +13,6 @@ struct TideInfoView: View {
   @State var animate: Bool = false
 
   var body: some View {
-    let chartView = TideChartView(animate: animate, tideData: weatherInfo.tideTimes).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
     ScrollView(.vertical, showsIndicators: false, content: {
       VStack(alignment: .leading, spacing: nil, content: {
         TitleLabel(text: weatherInfo.locationName)
@@ -28,16 +27,13 @@ struct TideInfoView: View {
         ForEach(weatherInfo.tideTimes) { tideTime in
           BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
         }
-        if let tideHeight = weatherInfo.tideHeight {
-          SubtitleLabel(text: tideHeight)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
         if let waterTemperature = weatherInfo.waterTemperature {
           SubtitleLabel(text: waterTemperature)
             .padding([.bottom, .top], PaddingValues.small)
         }
+        SubtitleLabel(text: "Tide heights")
         GeometryReader { reader in
-          chartView
+          TideChartView(animate: animate, tideData: weatherInfo.tideTimes, tideHeight: weatherInfo.tideHeight).frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
         }
         
       })
