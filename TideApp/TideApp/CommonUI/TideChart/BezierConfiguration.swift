@@ -136,10 +136,9 @@ class BezierConfiguration {
         
         let controlPoint2 = CGPoint(x: controlPoint2X, y: controlPoint2y)
         secondControlPoints.append(controlPoint2)
-      }else {
-        
-        let dataPoint = data[i+1]
-        let p1 = firstControlPoints[i+1]
+      } else {
+        let dataPoint = data[i + 1]
+        let p1 = firstControlPoints[i + 1]
         guard let controlPoint1 = p1 else { continue }
         
         let controlPoint2X = 2 * dataPoint.x - controlPoint1.x

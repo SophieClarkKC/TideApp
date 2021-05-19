@@ -84,30 +84,25 @@ struct TideChartView: View {
     }
     for (index, tidePoint) in tidesWithPoints.enumerated() {
       if index == 0, tidePoint.0.tideDateTime > date {
-        let x = size.width * 0.05
-        let y = tidePoint.1.y > (size.height / 2) ? tidePoint.1.y * 0.65 : tidePoint.1.y * 0.45
+        let x = size.width * 0.1
+        let y = tidePoint.1.y
         return CGPoint(x: x, y: y)
       } else if index < tidesWithPoints.count - 1 {
         let nextTide = tidesWithPoints[index + 1]
         if tidePoint.0.tideDateTime < date, nextTide.0.tideDateTime > date {
           let percentageTimePassedAtLastTidePoint = getTimePercentage(for: tidePoint.0.tideDateTime)
           let xOffset = (percentageTimePassed - percentageTimePassedAtLastTidePoint) * size.width
-          var yOffset: CGFloat
-          if tidePoint.1.y >= size.height * 0.9 {
-            yOffset = -(size.height * 0.15)
-          } else if tidePoint.1.y <= size.height * 0.1 {
-            yOffset = size.height * 0.15
-          } else if tidePoint.1.y > size.height * 0.5 {
-            yOffset = -(tidePoint.1.y * 0.1)
+          let y = tidePoint.1.y
+          var x: CGFloat
+          if tidePoint.1.x + xOffset > size.width * 0.9 {
+            x = tidePoint.1.x + (CGFloat(xOffset) * 0.8)
           } else {
-            yOffset = tidePoint.1.y * 0.1
+            x = tidePoint.1.x + CGFloat(xOffset)
           }
-          let y = tidePoint.1.y + yOffset
-          let x = tidePoint.1.x + CGFloat(xOffset)
           return CGPoint(x: x, y: y)
         }
       } else if index == tidesWithPoints.count - 1, date > tidePoint.0.tideDateTime {
-        return tidePoint.1
+        return CGPoint(x: size.width * 0.9, y: tidePoint.1.y)
       }
     }
     return .zero
