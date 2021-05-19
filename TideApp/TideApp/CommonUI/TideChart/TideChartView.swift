@@ -56,7 +56,8 @@ struct TideChartView: View {
         GeometryReader { proxy in
           if let quarterTimes = getQuarterTimes() {
             ForEach(0..<quarterTimes.count) { index in
-              BodyLabel(text: quarterTimes[index], alignment: .center).offset(x: proxy.size.width * (CGFloat((index + 1)) / 4), y: proxy.size.height)
+              BodyLabel(text: quarterTimes[index], alignment: .center)
+                .offset(x: proxy.size.width * (CGFloat((index + 1)) / 4), y: proxy.size.height)
             }
           }
         }
