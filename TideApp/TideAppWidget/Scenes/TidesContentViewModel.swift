@@ -13,11 +13,11 @@ struct TidesContentViewModel {
   let tidesTimes: [WeatherData.Weather.Tide.TideData]?
   var tideStatus: String? { tidesTimes?.current?.tideType.description.abbreviated }
 
-  init(place: String, weatherData: WeatherData) {
-    self.place = place
-    self.tidesTimes = weatherData.weather.first?.tides.first?.tideData
+  init(weatherInfo: WeatherInfo) {
+    self.place = weatherInfo.locationName
+    self.tidesTimes = weatherInfo.tideTimes
 
-    if let currentTemperature = weatherData.currentWaterTemperature(with: Date()) {
+    if let currentTemperature = weatherInfo.waterTemperature {
       self.waterTemperature = "Water at ~\(String(format: "%.0f", currentTemperature))c"
     } else {
       self.waterTemperature = nil

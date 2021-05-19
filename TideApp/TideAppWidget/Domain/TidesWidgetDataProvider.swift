@@ -15,12 +15,13 @@ protocol TidesWidgetDataProviderType {
 }
 
 class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, ObservableObject {
-  private let weatherFetcher: WeatherDataFetchable
+
+  private let networkManager: NetworkManagerType
   private var cancellable : Set<AnyCancellable> = Set()
   private let userLocator: UserLocator
 
-  init(weatherFetcher: WeatherDataFetchable, userLocator: UserLocator) {
-    self.weatherFetcher = weatherFetcher
+  init(networkManager: NetworkManagerType, userLocator: UserLocator) {
+    self.networkManager = networkManager
     self.userLocator = userLocator
     super.init()
     self.userLocator.start()
@@ -50,7 +51,7 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
       return completion(.failure(error: "Location to show not found. Please check the widget configuration."))
     }
 
-    getDataFor(latitude: lat, longitude: long, completion: completion)
+    getDataFor(location: .init(latitude: lat, longitude: long), completion: completion)
   }
 
   private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -64,24 +65,17 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
         guard case .failure = result else { return }
         completion(.failure(error: "Error on retrieving your current location"))
       }, receiveValue: { location in
-        self.getDataFor(latitude: location.coordinate.latitude,
-                        longitude: location.coordinate.longitude,
-                        completion: completion)
+        self.getDataFor(location: location, completion: completion)
       }).store(in: &cancellable)
   }
 
-  private func getDataFor(latitude: Double, longitude: Double, completion: @escaping (TidesEntry.WidgetData) -> ()) {
-    weatherFetcher
-      .getStandardWeatherData(lat: latitude, lon: longitude)
-      .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .receive(on: DispatchQueue.main)
+  private func getDataFor(location: CLLocation, completion: @escaping (TidesEntry.WidgetData) -> ()) {
+    let request = GetWeatherInformationRequest(location: location, date: Date(), networkManager: networkManager)
+    request.perform()
       .sink(receiveCompletion: { result in
         guard case .failure = result else { return }
         completion(.failure(error: "Error on retrieving tide data"))
-      }) { (place, widgetData) in
-        completion(.success(place: place,
-                            weatherData: widgetData))
-      }
+      }) { completion(.success(weatherInfo: $0)) }
       .store(in: &cancellable)
   }
 

@@ -82,6 +82,12 @@
 		91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFC42655102D0013DFCC /* RequestType.swift */; };
 		91F7CFCB2655104B0013DFCC /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFCA2655104B0013DFCC /* ResourceType.swift */; };
 		91F7CFD62655113A0013DFCC /* GetWeatherInformationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFD52655113A0013DFCC /* GetWeatherInformationRequest.swift */; };
+		91F7CFED2655124B0013DFCC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFB226550FAB0013DFCC /* NetworkManager.swift */; };
+		91F7CFF32655124D0013DFCC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFB826550FF40013DFCC /* NetworkError.swift */; };
+		91F7CFF9265512500013DFCC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFBE265510010013DFCC /* HTTPMethod.swift */; };
+		91F7CFFF265512DC0013DFCC /* GetWeatherInformationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFD52655113A0013DFCC /* GetWeatherInformationRequest.swift */; };
+		91F7D005265513560013DFCC /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFC42655102D0013DFCC /* RequestType.swift */; };
+		91F7D00B265513580013DFCC /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F7CFCA2655104B0013DFCC /* ResourceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -892,17 +898,23 @@
 				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
 				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,
+				91F7CFFF265512DC0013DFCC /* GetWeatherInformationRequest.swift in Sources */,
 				9000EC6F26527FA900546099 /* CLLocationManager+Publisher.swift in Sources */,
+				91F7D00B265513580013DFCC /* ResourceType.swift in Sources */,
 				90F7122F26493300002642DE /* Stylesheet.swift in Sources */,
+				91F7CFF9265512500013DFCC /* HTTPMethod.swift in Sources */,
 				90F71258264A9B00002642DE /* WeatherDecoder.swift in Sources */,
 				90F71243264948B7002642DE /* TidesContentView.swift in Sources */,
+				91F7CFED2655124B0013DFCC /* NetworkManager.swift in Sources */,
 				90F71257264A9AF8002642DE /* AppConfig.swift in Sources */,
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
 				911E7B6F264ECBCE0000BC15 /* WeatherInfo.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
 				9000EC6E26527F8200546099 /* UserLocator.swift in Sources */,
 				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
+				91F7CFF32655124D0013DFCC /* NetworkError.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
+				91F7D005265513560013DFCC /* RequestType.swift in Sources */,
 				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,
 				90F7123E26494625002642DE /* TidesWidgetDataProvider.swift in Sources */,
 				90F71244264948D3002642DE /* TidesErrorView.swift in Sources */,

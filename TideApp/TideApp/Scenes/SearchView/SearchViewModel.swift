@@ -37,7 +37,6 @@ final class SearchViewModel: NSObject, ObservableObject {
     }
     let searchRequest = MKLocalSearch.Request()
     searchRequest.naturalLanguageQuery = query
-    searchRequest.resultTypes = .address
     let search = MKLocalSearch(request: searchRequest)
     search.start { response, error in
       if error != nil {

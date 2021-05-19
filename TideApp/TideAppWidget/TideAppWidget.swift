@@ -40,7 +40,7 @@ struct Provider: IntentTimelineProvider {
 @main
 struct TideAppWidget: Widget {
   let kind: String = "TideAppWidget"
-  let dataProvider = TidesWidgetDataProvider(weatherFetcher: WeatherDataFetcher(),
+  let dataProvider = TidesWidgetDataProvider(networkManager: NetworkManager(),
                                              userLocator: UserLocator())
 
   var body: some WidgetConfiguration {
