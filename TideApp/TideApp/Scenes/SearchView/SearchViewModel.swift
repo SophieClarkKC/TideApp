@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import MapKit
 
 final class SearchViewModel: NSObject, ObservableObject {
 
@@ -35,14 +34,13 @@ final class SearchViewModel: NSObject, ObservableObject {
       state = .idle
       return
     }
-    let searchRequest = MKLocalSearch.Request()
-    searchRequest.naturalLanguageQuery = query
-    let search = MKLocalSearch(request: searchRequest)
-    search.start { response, error in
+
+    let locationSearcher = LocationSearcher()
+    locationSearcher.search(query: query) { items, error in
       if error != nil {
         self.state = .error
-      } else if let response = response {
-        let searchResults = response.mapItems.compactMap { $0.placemark }
+      } else if let items = items {
+        let searchResults = items.compactMap { $0.placemark }
         self.state = searchResults.isEmpty ? .noResults : .success(searchResults)
       }
     }

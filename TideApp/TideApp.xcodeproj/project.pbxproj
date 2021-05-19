@@ -31,7 +31,8 @@
 		9000EC6E26527F8200546099 /* UserLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B8B264BE59A00DE7FCA /* UserLocator.swift */; };
 		9000EC6F26527FA900546099 /* CLLocationManager+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */; };
 		9000EC7026553BD600546099 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
-		9000EC7226553FC300546099 /* LocationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearch.swift */; };
+		9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
+		9000EC742655412E00546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
 		908AD3DE2645A32300D45801 /* MockServer in Frameworks */ = {isa = PBXBuildFile; productRef = 908AD3DD2645A32300D45801 /* MockServer */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
@@ -164,7 +165,7 @@
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7626443336005CA64F /* TideTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesView.swift; sourceTree = "<group>"; };
-		9000EC7126553FC300546099 /* LocationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearch.swift; sourceTree = "<group>"; };
+		9000EC7126553FC300546099 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		909BA5C4264171E1000FFBD5 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		909BA5C6264171E1000FFBD5 /* Config-Mock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Mock.plist"; sourceTree = "<group>"; };
 		909BA5C7264171E1000FFBD5 /* Mock.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mock.xcconfig; sourceTree = "<group>"; };
@@ -254,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				12266B8B264BE59A00DE7FCA /* UserLocator.swift */,
-				9000EC7126553FC300546099 /* LocationSearch.swift */,
+				9000EC7126553FC300546099 /* LocationSearcher.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -827,7 +828,7 @@
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
 				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
-				9000EC7226553FC300546099 /* LocationSearch.swift in Sources */,
+				9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
 				91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */,
@@ -878,6 +879,7 @@
 				90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */,
 				90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */,
 				9000EC7026553BD600546099 /* Stylesheet.swift in Sources */,
+				9000EC742655412E00546099 /* LocationSearcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

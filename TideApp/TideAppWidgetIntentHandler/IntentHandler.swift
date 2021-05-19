@@ -6,10 +6,11 @@
 //
 
 import Intents
-import MapKit
-
+import UIKit
 
 final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
+  private let locationSearcher = LocationSearcher()
+  
   func defaultLocationConfig(for intent: WidgetConfigurationIntent) -> WidgetLocation? {
     return createCurrentPositionItem()
   }
@@ -18,6 +19,26 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
     guard let query = searchTerm, !query.isEmpty else {
       providePresetOptions(completion: completion)
       return
+    }
+
+    locationSearcher.search(query: query) { items, error in
+      guard error == nil else {
+        return completion(nil, NSError(domain: "LocationSearcherError",
+                                       code: 0,
+                                       userInfo: [NSLocalizedDescriptionKey: "No result found. Please try to be more specific."]))
+      }
+      guard let items = items else {
+        return completion(.init(items: []), nil)
+      }
+      
+      let searchResults = items.compactMap { location -> WidgetLocation? in
+        guard let name = location.name else { return nil }
+        return WidgetLocation(name: name,
+                              lat: NSNumber(value: location.placemark.coordinate.latitude),
+                              long: NSNumber(value: location.placemark.coordinate.longitude),
+                              type: .normal)
+      }
+      completion(.init(items: searchResults), nil)
     }
 
     performLocationsSearch(with: query, completion: completion)
@@ -40,27 +61,7 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
   }
 
   private func performLocationsSearch(with query: String, completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
-    let searchRequest = MKLocalSearch.Request()
-    searchRequest.naturalLanguageQuery = query
-    searchRequest.resultTypes = .address
-    let search = MKLocalSearch(request: searchRequest)
-    search.start { response, error in
-      guard error == nil else {
-        return completion(nil, error)
-      }
-      guard let response = response else {
-        return completion(.init(items: []), nil)
-      }
 
-      let searchResults = response.mapItems.compactMap { location -> WidgetLocation? in
-        guard let name = location.name else { return nil }
-        return WidgetLocation(name: name,
-                              lat: NSNumber(value: location.placemark.coordinate.latitude),
-                              long: NSNumber(value: location.placemark.coordinate.longitude),
-                              type: .normal)
-      }
-      completion(.init(items: searchResults), nil)
-    }
   }
 
   private func retrieveFavoruitesLocations() -> [WidgetLocation] {
