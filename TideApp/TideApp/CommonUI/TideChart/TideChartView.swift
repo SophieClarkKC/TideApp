@@ -24,7 +24,9 @@ struct TideChartView: View {
         .padding(PaddingValues.small)
       
       VStack(alignment: .leading) {
-        BodyLabel(text: "high tide").frame(alignment: .topLeading).padding(PaddingValues.small)
+        BodyLabel(text: "high tide")
+          .frame(alignment: .topLeading)
+          .padding(PaddingValues.small)
         
         GeometryReader { proxy in
           let points = makePoints(in: proxy.size)
@@ -50,13 +52,16 @@ struct TideChartView: View {
           }
         }
         
-        BodyLabel(text: "low tide").frame(alignment: .bottomLeading).padding(PaddingValues.small)
+        BodyLabel(text: "low tide")
+          .frame(alignment: .bottomLeading)
+          .padding(PaddingValues.small)
       }
       HStack(alignment: .center, content: {
         GeometryReader { proxy in
           if let quarterTimes = getQuarterTimes() {
             ForEach(0..<quarterTimes.count) { index in
-              BodyLabel(text: quarterTimes[index], alignment: .center).offset(x: proxy.size.width * (CGFloat((index + 1)) / 4), y: proxy.size.height)
+              BodyLabel(text: quarterTimes[index], alignment: .center)
+                .offset(x: proxy.size.width * (CGFloat((index + 1)) / 4), y: proxy.size.height)
             }
           }
         }
