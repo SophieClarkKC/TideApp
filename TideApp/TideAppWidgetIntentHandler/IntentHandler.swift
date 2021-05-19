@@ -21,26 +21,6 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
       return
     }
 
-    locationSearcher.search(query: query) { items, error in
-      guard error == nil else {
-        return completion(nil, NSError(domain: "LocationSearcherError",
-                                       code: 0,
-                                       userInfo: [NSLocalizedDescriptionKey: "No result found. Please try to be more specific."]))
-      }
-      guard let items = items else {
-        return completion(.init(items: []), nil)
-      }
-      
-      let searchResults = items.compactMap { location -> WidgetLocation? in
-        guard let name = location.name else { return nil }
-        return WidgetLocation(name: name,
-                              lat: NSNumber(value: location.placemark.coordinate.latitude),
-                              long: NSNumber(value: location.placemark.coordinate.longitude),
-                              type: .normal)
-      }
-      completion(.init(items: searchResults), nil)
-    }
-
     performLocationsSearch(with: query, completion: completion)
   }
 
@@ -61,7 +41,25 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
   }
 
   private func performLocationsSearch(with query: String, completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
+    locationSearcher.search(query: query) { items, error in
+      guard error == nil else {
+        return completion(nil, NSError(domain: "LocationSearcherError",
+                                       code: 0,
+                                       userInfo: [NSLocalizedDescriptionKey: "No result found. Please try to be more specific."]))
+      }
+      guard let items = items else {
+        return completion(.init(items: []), nil)
+      }
 
+      let searchResults = items.compactMap { location -> WidgetLocation? in
+        guard let name = location.name else { return nil }
+        return WidgetLocation(name: name,
+                              lat: NSNumber(value: location.placemark.coordinate.latitude),
+                              long: NSNumber(value: location.placemark.coordinate.longitude),
+                              type: .normal)
+      }
+      completion(.init(items: searchResults), nil)
+    }
   }
 
   private func retrieveFavoruitesLocations() -> [WidgetLocation] {
