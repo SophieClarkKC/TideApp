@@ -18,7 +18,7 @@ struct WaterTemperatureView: View {
   }
 }
 
-// MARK: - SubSubViews
+// MARK: - AnimatedDataLabel -
 struct AnimatedDataLabel: View {
   @State var appearing = false
   let title: String
@@ -27,7 +27,7 @@ struct AnimatedDataLabel: View {
   let systemAsset: SystemAsset?
   let delay: Double
 
-  init(title: String, value: Int, symbol: String = "", delay: Double = 1.3, systemAsset: SystemAsset?) {
+  init(title: String, value: Int, symbol: String = "", delay: Double = 1, systemAsset: SystemAsset?) {
     self.title = title
     self.value = value
     self.symbol = symbol
@@ -63,6 +63,7 @@ struct AnimatedDataLabel: View {
   }
 }
 
+// MARK: - ThermometerBarView -
 struct ThermometerBarView: View {
   @State var temperature: Int
   @State var appearing = false
@@ -76,12 +77,13 @@ struct ThermometerBarView: View {
   var body: some View {
     HStack {
       AnimatedGradientBar(colors: barColors, value: temperature, maxValue: safeMax)
-      Scale(maxValue: safeMax, minValue: 0)
+      ThermometerScale(maxValue: safeMax, minValue: 0)
     }
     .frame(height: 160)
   }
 }
 
+// MARK: - AnimatedGradientBar -
 struct AnimatedGradientBar: View {
   @State var appearing = false
   let colors: [Color]
@@ -110,7 +112,7 @@ struct AnimatedGradientBar: View {
         }
       }
       .frame(width: 15)
-      .animation(Animation.easeInOut.delay(1))
+      .animation(Animation.easeInOut.delay(0.7))
     }
     .rotationEffect(.init(degrees: 180))
     .onAppear{
@@ -121,7 +123,8 @@ struct AnimatedGradientBar: View {
   }
 }
 
-struct Scale: View {
+// MARK: - ThermometerScale
+struct ThermometerScale: View {
   let maxValue: Int
   let minValue: Int
   var midValue: String {
@@ -141,19 +144,19 @@ struct Scale: View {
     .frame(minWidth: 10)
     .foregroundColor(.bodyTextColor)
   }
-}
 
-private func cleanValue(for value: Double) -> String {
-  let valueString = String(format:"%.2f", value)
-  let lastDigits = valueString.suffix(2)
+  private func cleanValue(for value: Double) -> String {
+    let valueString = String(format:"%.2f", value)
+    let lastDigits = valueString.suffix(2)
 
-  if lastDigits == "00" {
-    return "\(Int(value))"
+    if lastDigits == "00" {
+      return "\(Int(value))"
+    }
+    if lastDigits.last == "0"{
+      return "\(valueString.dropLast())"
+    }
+    return valueString
   }
-  if lastDigits.last == "0"{
-    return "\(valueString.dropLast())"
-  }
-  return valueString
 }
 
 struct WaterTemperatureView_Previews: PreviewProvider {
