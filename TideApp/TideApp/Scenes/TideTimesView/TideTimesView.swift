@@ -25,15 +25,22 @@ struct TideTimesView: View {
           BodyLabel(text: tideStatus)
             .padding(.bottom, PaddingValues.tiny)
         }
-        ForEach(weatherInfo.tideTimes) { tideTime in
-          BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
+
+        HStack {
+          VStack {
+            ForEach(weatherInfo.tideTimes) { tideTime in
+              BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
+                .padding(.bottom, 15)
+            }
+          }
+          if let waterTemperature = weatherInfo.waterTemperature {
+            Spacer()
+            WaterTemperatureView(temperature: Int(waterTemperature))
+          }
         }
+
         if let tideHeight = weatherInfo.tideHeight {
           SubtitleLabel(text: tideHeight)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
-        if let waterTemperature = weatherInfo.waterTemperature {
-          SubtitleLabel(text: waterTemperature)
             .padding([.bottom, .top], PaddingValues.small)
         }
       })
@@ -45,6 +52,6 @@ struct TideTimesView: View {
 
 struct TideTimesView_Previews: PreviewProvider {
   static var previews: some View {
-    TideTimesView(weatherInfo: .init(locationName: "Brighton", subTitle: "Tide times", tideTimes: [], tideHeight: nil, waterTemperature: nil))
+    TideTimesView(weatherInfo: .init(locationName: "Brighton", subTitle: "Tide times", tideTimes: [], tideHeight: nil, waterTemperature: 15))
   }
 }

@@ -109,7 +109,7 @@ extension WeatherData {
     return GeneralHelpers.getWeightedValue(from: lastTideTime, middleDate: date, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
   }
   
-  func currentWaterTemperature(with date: Date) -> Double? {
+  func currentWaterTemperature(with date: Date) ->  Double? {
     guard let hourlyData = weather.first?.hourly else {
       return nil
     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		12266B86264BE04A00DE7FCA /* CLLocationManager+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */; };
 		12266B8C264BE59A00DE7FCA /* UserLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12266B8B264BE59A00DE7FCA /* UserLocator.swift */; };
+		1286F56C265596CA008EB791 /* WaterTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1286F56B265596CA008EB791 /* WaterTemperatureView.swift */; };
 		12EF61A82643F41F002C94B4 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF61A72643F41F002C94B4 /* Keys.swift */; };
 		12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E8C2642B719000F7476 /* WeatherResponse.swift */; };
 		12FE3E952642B778000F7476 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FE3E942642B778000F7476 /* WeatherError.swift */; };
@@ -137,6 +138,7 @@
 /* Begin PBXFileReference section */
 		12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Publisher.swift"; sourceTree = "<group>"; };
 		12266B8B264BE59A00DE7FCA /* UserLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocator.swift; sourceTree = "<group>"; };
+		1286F56B265596CA008EB791 /* WaterTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTemperatureView.swift; sourceTree = "<group>"; };
 		12EF61A72643F41F002C94B4 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		12FE3E8C2642B719000F7476 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		12FE3E942642B778000F7476 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
@@ -247,6 +249,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1286F56A265596B1008EB791 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				1286F56B265596CA008EB791 /* WaterTemperatureView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		129055FA264A997E00E1A560 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +421,7 @@
 		36D4BE7426443336005CA64F /* TideTimesView */ = {
 			isa = PBXGroup;
 			children = (
+				1286F56A265596B1008EB791 /* SubViews */,
 				36D4BE7626443336005CA64F /* TideTimesView.swift */,
 			);
 			path = TideTimesView;
@@ -815,6 +826,7 @@
 				12266B8C264BE59A00DE7FCA /* UserLocator.swift in Sources */,
 				12FE3E8D2642B719000F7476 /* WeatherResponse.swift in Sources */,
 				909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */,
+				1286F56C265596CA008EB791 /* WaterTemperatureView.swift in Sources */,
 				91F7CFB926550FF40013DFCC /* NetworkError.swift in Sources */,
 				90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */,
 				911E7B75264ECC1E0000BC15 /* LocationButton.swift in Sources */,

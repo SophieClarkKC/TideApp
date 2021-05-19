@@ -28,6 +28,7 @@ enum SystemAsset: String {
   case favouriteEmpty = "star"
   case favouriteFilled = "star.fill"
   case search = "magnifyingglass"
+  case thermometer = "thermometer"
 }
 
 extension Image {

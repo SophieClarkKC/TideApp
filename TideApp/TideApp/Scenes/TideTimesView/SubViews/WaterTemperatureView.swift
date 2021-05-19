@@ -1,0 +1,163 @@
+//
+//  WaterTemperatureView.swift
+//  TideApp
+//
+//  Created by Dan Smith on 19/05/2021.
+//
+
+import SwiftUI
+
+struct WaterTemperatureView: View {
+  @State var temperature: Int
+
+  var body: some View {
+    HStack {
+      AnimatedDataLabel(title: "Water", value: temperature, symbol: "℃", systemAsset: .thermometer)
+      ThermometerBarView(temperature: temperature)
+    }
+  }
+}
+
+// MARK: - SubSubViews
+struct AnimatedDataLabel: View {
+  @State var appearing = false
+  let title: String
+  let value: Int
+  let symbol: String
+  let systemAsset: SystemAsset?
+  let delay: Double
+
+  init(title: String, value: Int, symbol: String = "", delay: Double = 1.3, systemAsset: SystemAsset?) {
+    self.title = title
+    self.value = value
+    self.symbol = symbol
+    self.delay = delay
+    self.systemAsset = systemAsset
+  }
+
+  var body: some View {
+    VStack {
+      HStack {
+        Text(title)
+        .font(.title3)
+
+        if let systemAsset = systemAsset {
+          Image(.thermometer)
+        }
+      }
+
+      Text("\(value)\(symbol)")
+        .font(.largeTitle)
+        .scaleEffect(appearing ? 1 : 0)
+        .animation(Animation.spring(response: 0.2,
+                                    dampingFraction: 0.4,
+                                    blendDuration: 0.7)
+                    .delay(delay))
+    }
+    .onAppear {
+      withAnimation {
+        appearing.toggle()
+      }
+    }
+    .foregroundColor(.titleColor)
+  }
+}
+
+struct ThermometerBarView: View {
+  @State var temperature: Int
+  @State var appearing = false
+
+  var maxTemp: Int = 26 // NB: The highest ever recorded sea temperature was 25.9 ℃
+  var safeMax : Int {
+    max(temperature, maxTemp)
+  }
+  var barColors: [Color] = [.bodyTextColor, .subtitleColor]
+
+  var body: some View {
+    HStack {
+      AnimatedGradientBar(colors: barColors, value: temperature, maxValue: safeMax)
+      Scale(maxValue: safeMax, minValue: 0)
+    }
+    .frame(height: 160)
+  }
+}
+
+struct AnimatedGradientBar: View {
+  @State var appearing = false
+  let colors: [Color]
+  let value: Int
+  let maxValue: Int
+
+  var barPercentage: CGFloat {
+    CGFloat(Double(value) / Double(maxValue))
+  }
+
+  var body: some View {
+    ZStack {
+      GeometryReader { geometry in
+        Group {
+          Capsule()
+            .shadow(radius: 4)
+            .foregroundColor(.titleColor)
+            .opacity(0.15)
+
+          LinearGradient(gradient: Gradient(colors: colors),
+                         startPoint: .topLeading,
+                         endPoint: .bottomTrailing)
+            .frame(width: 15,
+                   height: appearing ? barPercentage * geometry.size.height : 0)
+            .clipShape(Capsule())
+        }
+      }
+      .frame(width: 15)
+      .animation(Animation.easeInOut.delay(1))
+    }
+    .rotationEffect(.init(degrees: 180))
+    .onAppear{
+      withAnimation {
+        appearing.toggle()
+      }
+    }
+  }
+}
+
+struct Scale: View {
+  let maxValue: Int
+  let minValue: Int
+  var midValue: String {
+    let midValue = Double((maxValue - minValue) / 2)
+    return cleanValue(for: midValue)
+  }
+
+  var body: some View {
+    VStack {
+      Text("\(maxValue)")
+      Spacer()
+      Text(midValue)
+      Spacer()
+      Text("\(minValue)")
+    }
+    .font(.caption)
+    .frame(minWidth: 10)
+    .foregroundColor(.bodyTextColor)
+  }
+}
+
+private func cleanValue(for value: Double) -> String {
+  let valueString = String(format:"%.2f", value)
+  let lastDigits = valueString.suffix(2)
+
+  if lastDigits == "00" {
+    return "\(Int(value))"
+  }
+  if lastDigits.last == "0"{
+    return "\(valueString.dropLast())"
+  }
+  return valueString
+}
+
+struct WaterTemperatureView_Previews: PreviewProvider {
+  static var previews: some View {
+    WaterTemperatureView(temperature: 18)
+  }
+}

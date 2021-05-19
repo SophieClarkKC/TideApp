@@ -15,7 +15,7 @@ struct WeatherInfo {
   let subTitle: String
   let tideTimes: [TideData]
   let tideHeight: String?
-  let waterTemperature: String?
+  let waterTemperature: Double?
 }
 
 extension Array where Element == WeatherInfo.TideData {
