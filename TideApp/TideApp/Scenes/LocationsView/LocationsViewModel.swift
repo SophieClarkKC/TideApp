@@ -24,14 +24,22 @@ final class LocationsViewModel: ObservableObject {
   // MARK: Private
 
   private let userLocator: UserLocator
+  private let favouritesManager: FavouritesManager
   private let networkManager: NetworkManagerType
   private var cancellables: [AnyCancellable] = []
+
+  private var weatherInfo: Set<WeatherInfo> = [] {
+    didSet {
+      state = .success(weatherInfo)
+    }
+  }
 
 
   // MARK: - Initialiser -
 
-  init(userLocator: UserLocator = UserLocator(forWidget: false), networkManager: NetworkManagerType = NetworkManager()) {
+  init(userLocator: UserLocator = UserLocator(forWidget: fa), favouritesManager: FavouritesManager = FavouritesManager(), networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
+    self.favouritesManager = favouritesManager
     self.networkManager = networkManager
   }
 
@@ -54,6 +62,13 @@ final class LocationsViewModel: ObservableObject {
         }
       })
       .store(in: &cancellables)
+
+    favouritesManager.start()
+    favouritesManager.$favourites
+      .sink { locations in
+        locations.forEach { self.getTideTimes(at: $0) }
+      }
+      .store(in: &cancellables)
   }
 
   func refresh() {
@@ -72,7 +87,9 @@ final class LocationsViewModel: ObservableObject {
       .sink(receiveCompletion: { completion in
         guard case let .failure(error) = completion else { return }
         self.state = .error(error.localizedDescription)
-      }, receiveValue: { self.state = .success([$0]) })
+      }, receiveValue: { 
+        self.weatherInfo.insert($0)
+      })
       .store(in: &cancellables)
   }
 }

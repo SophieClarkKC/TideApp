@@ -84,6 +84,7 @@
 		914C913E2652C67E00D16031 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C913D2652C67E00D16031 /* SearchViewModel.swift */; };
 		914C91442652C6F100D16031 /* SearchControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C91432652C6F100D16031 /* SearchControllerProvider.swift */; };
 		914C914A2652C70C00D16031 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C91492652C70C00D16031 /* ViewControllerResolver.swift */; };
+		9155060F2656609D00473968 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9155060E2656609D00473968 /* FavouritesManager.swift */; };
 		91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AAFC4A264D6EAB00E8A76E /* LocationsView.swift */; };
 		91BA455726554A010072755D /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA455626554A010072755D /* TideTimesViewModel.swift */; };
 		91BA455E26554AFA0072755D /* TideTimesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA455D26554AFA0072755D /* TideTimesInfoView.swift */; };
@@ -219,6 +220,7 @@
 		914C913D2652C67E00D16031 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		914C91432652C6F100D16031 /* SearchControllerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerProvider.swift; sourceTree = "<group>"; };
 		914C91492652C70C00D16031 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
+		9155060E2656609D00473968 /* FavouritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
 		91AAFC4A264D6EAB00E8A76E /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
 		91BA455626554A010072755D /* TideTimesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
 		91BA455D26554AFA0072755D /* TideTimesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideTimesInfoView.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				909BA5DB26417C2B000FFBD5 /* App */,
 				36D04EB626458CC9006EB2DC /* Scenes */,
 				36D4BE7326443311005CA64F /* CommonUI */,
+				9155060D2656608B00473968 /* Managers */,
 				909BA5C12641715B000FFBD5 /* Configs */,
 				12EF61A72643F41F002C94B4 /* Keys.swift */,
 				36D04EB826458D51006EB2DC /* Domain */,
@@ -588,6 +591,14 @@
 				91BA456426554CD60072755D /* SearchResultButton.swift */,
 			);
 			path = SearchView;
+			sourceTree = "<group>";
+		};
+		9155060D2656608B00473968 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9155060E2656609D00473968 /* FavouritesManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		91AAFC49264D6E9300E8A76E /* LocationsView */ = {
@@ -879,6 +890,7 @@
 				91BA456526554CD60072755D /* SearchResultButton.swift in Sources */,
 				911E7B75264ECC1E0000BC15 /* LocationButton.swift in Sources */,
 				91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */,
+				9155060F2656609D00473968 /* FavouritesManager.swift in Sources */,
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
 				9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */,
