@@ -9,11 +9,10 @@ import Combine
 import CoreLocation
 
 final class LocationsViewModel: ObservableObject {
-
   enum State {
     case idle
     case loading
-    case error(Error)
+    case error(String)
     case success([WeatherInfo])
   }
 
@@ -31,7 +30,7 @@ final class LocationsViewModel: ObservableObject {
 
   // MARK: - Initialiser -
 
-  init(userLocator: UserLocator = UserLocator(), networkManager: NetworkManagerType = NetworkManager()) {
+  init(userLocator: UserLocator = UserLocator(requestedByWidget: false), networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
     self.networkManager = networkManager
   }
@@ -40,14 +39,28 @@ final class LocationsViewModel: ObservableObject {
   // MARK: Internal
 
   func start() {
-    userLocator.start()
-    userLocator.$location
-      .sink { self.getTideTimes(at: $0) }
+    userLocator.$locationResult
+      .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+      .sink(receiveValue: { result in
+        switch result {
+        case .awaiting:
+          self.state = .loading
+
+        case .unauthorized:
+          self.state = .error("TideApp cannot access your current location.\nSearch for a specific location or authorize the app in Configuration -> Privacy -> Location services.")
+
+        case .success(let location):
+          self.getTideTimes(at: location)
+        }
+      })
       .store(in: &cancellables)
   }
 
   func refresh() {
-    getTideTimes(at: userLocator.location)
+    guard case let .success(location) = userLocator.locationResult else {
+      return self.state = .error("Current location not found")
+    }
+    getTideTimes(at: location)
   }
 
   // MARK: Private
@@ -57,10 +70,8 @@ final class LocationsViewModel: ObservableObject {
     let request = GetWeatherInformationRequest(location: newLocation, date: date, networkManager: networkManager)
     request.perform()
       .sink(receiveCompletion: { completion in
-        guard case let .failure(error) = completion else {
-          return
-        }
-        self.state = .error(error)
+        guard case let .failure(error) = completion else { return }
+        self.state = .error(error.localizedDescription)
       }, receiveValue: { self.state = .success([$0]) })
       .store(in: &cancellables)
   }

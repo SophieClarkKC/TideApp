@@ -24,7 +24,6 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
     self.networkManager = networkManager
     self.userLocator = userLocator
     super.init()
-    self.userLocator.start()
   }
 
   func retrieveData(for config: WidgetConfigurationIntent, completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -53,17 +52,20 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
   }
 
   private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
-    guard userLocator.isAuthorizedForWidgetUpdates() else {
-      return completion(.failure(error: "Widget cannot access your current location. Edit the widget configuration to use a fixed location or authorize the app in Configuration -> Privacy -> Location services."))
-    }
-    userLocator.$location
-      .filter { $0.coordinate.latitude != 0 || $0.coordinate.longitude != 0  }
+    userLocator.$locationResult
       .receive(on: DispatchQueue.main)
-      .sink(receiveCompletion: { result in
-        guard case .failure = result else { return }
-        completion(.failure(error: "Error on retrieving your current location"))
-      }, receiveValue: { location in
-        self.getDataFor(location: location, completion: completion)
+      .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+      .sink(receiveValue: { result in
+        switch result {
+        case .awaiting:
+          break // loading is authomated in widget
+
+        case .unauthorized:
+          completion(.failure(error: "Widget cannot access your current location.\nEdit the widget configuration to use a fixed location or authorize the app in Configuration -> Privacy -> Location services."))
+
+        case .success(let location):
+          self.getDataFor(location: location, completion: completion)
+        }
       }).store(in: &cancellable)
   }
 
