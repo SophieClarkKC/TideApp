@@ -6,29 +6,112 @@
 //
 
 import Intents
+import UIKit
 
 final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
-  func provideFavouriteOptionsCollection(for intent: WidgetConfigurationIntent, with completion: @escaping (INObjectCollection<WidgetFavouriteLocation>?, Error?) -> Void) {
-    let first = WidgetFavouriteLocation(identifier: "Southwark", display: "Southwark")
-    first.latitude = 51.4500
-    first.longitude = -0.0833
+  private let locationSearcher = LocationSearcher()
+  
+  func defaultLocationConfig(for intent: WidgetConfigurationIntent) -> WidgetLocation? {
+    return createCurrentPositionItem()
+  }
+  
+  func provideLocationConfigOptionsCollection(for intent: WidgetConfigurationIntent, searchTerm: String?, with completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
+    guard let query = searchTerm, !query.isEmpty else {
+      providePresetOptions(completion: completion)
+      return
+    }
 
-    let second = WidgetFavouriteLocation(identifier: "Rome", display: "Rome")
-    second.latitude = 41.902782
-    second.longitude = 12.496366
+    performLocationsSearch(with: query, completion: completion)
+  }
 
-    let third = WidgetFavouriteLocation(identifier: "Buenos Aires", display: "Buenos Aires")
-    third.latitude = -34.603722
-    third.longitude = -58.381592
+  private func providePresetOptions(completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
+    let currentPosition = createCurrentPositionItem()
 
-    let fourth = WidgetFavouriteLocation(identifier: "Sydney", display: "Sydney")
-    fourth.latitude = -33.865143
-    fourth.longitude = 151.209900
+    let favourites = retrieveFavoruitesLocations()
 
-    let fifth = WidgetFavouriteLocation(identifier: "Dakar", display: "Dakar")
-    fifth.latitude = 14.716677
-    fifth.longitude = -17.467686
+    completion(.init(items: [[currentPosition], favourites].flatMap { $0 } ), nil)
+  }
 
-    completion(INObjectCollection(items: [first, second, third, fourth, fifth]), nil)
+  private func createCurrentPositionItem() -> WidgetLocation {
+    let currentPosition = WidgetLocation(name: "Current Position",
+                                         lat: 0,
+                                         long: 0,
+                                         type: .currentLocation)
+    return currentPosition
+  }
+
+  private func performLocationsSearch(with query: String, completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
+    locationSearcher.search(query: query) { items, error in
+      guard error == nil else {
+        return completion(nil, NSError(domain: "LocationSearcherError",
+                                       code: 0,
+                                       userInfo: [NSLocalizedDescriptionKey: "No result found. Please try to be more specific."]))
+      }
+      guard let items = items else {
+        return completion(.init(items: []), nil)
+      }
+
+      let searchResults = items.compactMap { location -> WidgetLocation? in
+        guard let name = location.name else { return nil }
+        return WidgetLocation(name: name,
+                              lat: NSNumber(value: location.placemark.coordinate.latitude),
+                              long: NSNumber(value: location.placemark.coordinate.longitude),
+                              type: .normal)
+      }
+      completion(.init(items: searchResults), nil)
+    }
+  }
+
+  private func retrieveFavoruitesLocations() -> [WidgetLocation] {
+    // TODO: Implement real retrievement of favourites locations
+    let first = WidgetLocation(name: "Southwark", lat: 51.4500, long: -0.0833, type: .favourite)
+
+    let second = WidgetLocation(name: "Rome", lat: 41.902782, long: 12.496366, type: .favourite)
+
+    let third = WidgetLocation(name: "Buenos Aires", lat: -34.603722, long: -58.381592, type: .favourite)
+
+    let fourth = WidgetLocation(name: "Sydney", lat: -33.865143, long: 151.209900, type: .favourite)
+
+    let fifth = WidgetLocation(name: "Dakar", lat: 14.716677, long: -17.467686, type: .favourite)
+
+    return [first, second, third, fourth, fifth]
+  }
+}
+
+fileprivate extension WidgetLocation {
+  enum `Type` {
+    case favourite
+    case currentLocation
+    case normal
+  }
+
+  private struct Images {
+    static let gps = INImage(imageData: UIImage(systemName: SystemAsset.location.rawValue)?.pngData() ?? Data())
+    static let favourite = INImage(imageData: UIImage(systemName: SystemAsset.favouriteFilled.rawValue)?.pngData() ?? Data())
+  }
+
+  convenience init(name: String, lat: NSNumber, long: NSNumber, type: Type) {
+    let image: INImage?
+    let subtitle: String?
+    switch type {
+    case .favourite:
+      image = Images.favourite
+      subtitle = nil
+
+    case .currentLocation:
+      image = Images.gps
+      subtitle = "Use GPS, need to be authorized"
+
+    default:
+      image = nil
+      subtitle = nil
+    }
+    self.init(identifier: name,
+              display: name,
+              subtitle: subtitle,
+              image: image)
+    self.latitude = lat
+    self.longitude = long
+    self.isCurrentPosition = NSNumber(value: type == .currentLocation)
   }
 }

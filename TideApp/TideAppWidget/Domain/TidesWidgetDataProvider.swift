@@ -32,16 +32,14 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
     let longitude: Double?
 
     switch config.locationConfig {
-    case .favourite where config.favourite?.latitude != nil && config.favourite?.longitude != nil:
-      latitude = config.favourite?.latitude?.doubleValue
-      longitude = config.favourite?.longitude?.doubleValue
-
-    case .search where config.search?.location?.coordinate != nil:
-      latitude = config.search?.location?.coordinate.latitude
-      longitude = config.search?.location?.coordinate.longitude
-
-    case .current:
+    case .some(let location) where location.isCurrentPosition?.boolValue == true:
+      // Use GPS for Location
       return getDataUsingCurrentUserLocation(completion: completion)
+
+    case .some(let location) where location.isCurrentPosition?.boolValue == false:
+      // Use coordinates for location
+      latitude = location.latitude?.doubleValue
+      longitude = location.longitude?.doubleValue
 
     default:
       return completion(.failure(error: "Seems that the current widget configuration is wrong. Please check it."))
@@ -56,7 +54,7 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
 
   private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
     guard userLocator.isAuthorizedForWidgetUpdates() else {
-      return completion(.failure(error: "Location to show not found. Please check the widget configuration."))
+      return completion(.failure(error: "Widget cannot access your current location. Edit the widget configuration to use a fixed location or authorize the app in Configuration -> Privacy -> Location services."))
     }
     userLocator.$location
       .filter { $0.coordinate.latitude != 0 || $0.coordinate.longitude != 0  }

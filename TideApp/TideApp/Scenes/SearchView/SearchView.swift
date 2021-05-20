@@ -74,15 +74,7 @@ private struct ResultsView: View {
 
   var body: some View {
     List {
-      ForEach(results, id: \.self) { placemark in
-        Button(action: {}) {
-          VStack(alignment: .leading, spacing: PaddingValues.tiny) {
-            SubtitleLabel(text: placemark.name ?? "")
-            BodyLabel(text: placemark.title ?? "")
-          }
-          .padding(PaddingValues.small)
-        }
-      }
+      ForEach(results, id: \.self, content: SearchResultButton.init)
     }
   }
 }

@@ -42,7 +42,7 @@ struct LocationButton: View {
     .accentColor(.primaryActionColor)
     .background(Rectangle().shadow(radius: 4))
     .sheet(isPresented: $showSheet, content: {
-      TideTimesView(weatherInfo: weatherInfo)
+      TideTimesView(viewModel: TideTimesLocalViewModel(weatherInfo: weatherInfo))
     })
   }
 }

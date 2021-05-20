@@ -9,52 +9,33 @@ import SwiftUI
 import Combine
 import CoreLocation
 
-struct TideTimesView: View {
+struct TideTimesView<ViewModel: TideTimesViewModelType>: View {
 
-  let weatherInfo: WeatherInfo
+  @ObservedObject var viewModel: ViewModel
 
   var body: some View {
-    GeometryReader { geometry in
-      ScrollView(.vertical, showsIndicators: false, content: {
-        VStack(alignment: .leading, spacing: nil, content: {
-          TitleLabel(text: weatherInfo.locationName)
-            .accessibility(label: Text("You are looking at tide times for \(weatherInfo.locationName)"))
-            .padding([.bottom, .top], PaddingValues.medium)
-          SubtitleLabel(text: weatherInfo.subTitle)
-            .padding(.bottom, PaddingValues.tiny)
-          if let tideStatus = weatherInfo.tideTimes.current?.tideType.description.full {
-            BodyLabel(text: tideStatus)
-              .padding(.bottom, PaddingValues.tiny)
-          }
+    makeView(for: viewModel.state)
+      .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
+      .onAppear { viewModel.getTideTimes() }
+  }
 
-          HStack {
-            VStack {
-              ForEach(weatherInfo.tideTimes) { tideTime in
-                BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
-                  .padding(.bottom, 15)
-              }
-            }
-            if let waterTemperature = weatherInfo.waterTemperature {
-              Spacer()
-              WaterTemperatureView(temperature: Int(waterTemperature))
-            }
-          }
-          .frame(height: geometry.size.height / 4)
-
-          if let tideHeight = weatherInfo.tideHeight {
-            SubtitleLabel(text: tideHeight)
-              .padding([.bottom, .top], PaddingValues.small)
-          }
-        })
-        .padding([.leading, .trailing], PaddingValues.medium)
-      })
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+  private func makeView(for state: TideTimesState) -> AnyView {
+    switch viewModel.state {
+    case .idle:
+      return AnyView(Color.backgroundColor)
+    case .loading:
+      return AnyView(TitleLabel(text: "Loading..."))
+    case .error(let error):
+      return AnyView(ErrorView(error: error, buttonAction: { viewModel.getTideTimes() }))
+    case .success(let info):
+      return AnyView(TideTimesInfoView(weatherInfo: info))
     }
   }
 }
 
 struct TideTimesView_Previews: PreviewProvider {
   static var previews: some View {
-    TideTimesView(weatherInfo: .init(locationName: "Brighton", subTitle: "Tide times", tideTimes: [], tideHeight: nil, waterTemperature: 15))
+    let viewModel = TideTimesLocalViewModel(weatherInfo: .init(locationName: "Brighton", subTitle: "Tide times", tideTimes: [], tideHeight: nil, waterTemperature: nil))
+    return TideTimesView(viewModel: viewModel)
   }
 }
