@@ -14,11 +14,11 @@ class DoubleExtensionTests: XCTestCase {
     let oneWhole = Double(1.000000)
     let oneAndAHalf = Double(1.500000)
     let oneAndThreeQuarter = Double(1.75000)
-    let lotsOfDigits = Double(1.2345)
+    let lotsOfDigits = Double(123.456789)
 
     XCTAssertEqual(oneWhole.cleanValue(), "1")
     XCTAssertEqual(oneAndAHalf.cleanValue(), "1.5")
     XCTAssertEqual(oneAndThreeQuarter.cleanValue(), "1.75")
-    XCTAssertEqual(lotsOfDigits.cleanValue(), "1.23")
+    XCTAssertEqual(lotsOfDigits.cleanValue(), "123.46")
   }
 }

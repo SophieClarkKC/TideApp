@@ -15,15 +15,10 @@ extension Double {
   ///     `1.0000` returns `1`
 
   func cleanValue() -> String {
-    let valueString = String(format:"%.2f", self)
-    let lastDigits = valueString.suffix(2)
-
-    if lastDigits == "00" {
-      return "\(Int(self))"
-    }
-    if lastDigits.last == "0"{
-      return "\(valueString.dropLast())"
-    }
-    return valueString
+    let formatter = NumberFormatter()
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 2
+    formatter.numberStyle = .decimal
+    return formatter.string(from: NSNumber(value: self)) ?? ""
   }
 }
