@@ -15,9 +15,9 @@ struct BezierSegmentControlPoints {
   var secondControlPoint: CGPoint
 }
 
-class BezierConfiguration {
-  var firstControlPoints: [CGPoint?] = []
-  var secondControlPoints: [CGPoint?] = []
+final class BezierConfiguration {
+  private var firstControlPoints: [CGPoint?] = []
+  private var secondControlPoints: [CGPoint?] = []
   
   func configureControlPoints(data: [CGPoint]) -> [BezierSegmentControlPoints] {
     let segments = data.count - 1
@@ -76,7 +76,7 @@ class BezierConfiguration {
     return []
   }
   
-  func thomasAlgorithm(belowDiagonal: [CGFloat], diagonal: [CGFloat], aboveDiagonal: [CGFloat], rhsArray: [CGPoint], segments: Int, data: [CGPoint]) -> [BezierSegmentControlPoints] {
+  private func thomasAlgorithm(belowDiagonal: [CGFloat], diagonal: [CGFloat], aboveDiagonal: [CGFloat], rhsArray: [CGPoint], segments: Int, data: [CGPoint]) -> [BezierSegmentControlPoints] {
     var controlPoints : [BezierSegmentControlPoints] = []
     var rhsArray = rhsArray
     
