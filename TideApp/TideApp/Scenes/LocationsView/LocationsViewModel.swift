@@ -28,16 +28,17 @@ final class LocationsViewModel: ObservableObject {
   private let networkManager: NetworkManagerType
   private var cancellables: [AnyCancellable] = []
 
-  private var weatherInfo: Set<WeatherInfo> = [] {
+  private var weatherInfo: [WeatherInfo] = [] {
     didSet {
       state = .success(weatherInfo)
     }
   }
 
-
   // MARK: - Initialiser -
 
-  init(userLocator: UserLocator = UserLocator(forWidget: fa), favouritesManager: FavouritesManager = FavouritesManager(), networkManager: NetworkManagerType = NetworkManager()) {
+  init(userLocator: UserLocator = UserLocator(forWidget: false),
+       favouritesManager: FavouritesManager = FavouritesManager(),
+       networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
     self.favouritesManager = favouritesManager
     self.networkManager = networkManager
@@ -88,7 +89,7 @@ final class LocationsViewModel: ObservableObject {
         guard case let .failure(error) = completion else { return }
         self.state = .error(error.localizedDescription)
       }, receiveValue: { 
-        self.weatherInfo.insert($0)
+        self.weatherInfo.append($0)
       })
       .store(in: &cancellables)
   }
