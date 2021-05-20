@@ -47,7 +47,7 @@ struct WeatherData: Decodable {
       }
 
       // MARK: - TideData
-      struct TideData: Identifiable, Decodable {
+      struct TideData: Identifiable {
 
         enum TideType: String, Codable {
           case high = "HIGH"
@@ -59,29 +59,6 @@ struct WeatherData: Decodable {
         let tideHeightM: Double
         let tideDateTime: Date
         let tideType: TideType
-
-        enum CodingKeys: String, CodingKey {
-          case tideTime
-          case tideHeightM = "tideHeight_mt"
-          case tideDateTime
-          case tideType = "tide_type"
-        }
-        
-        init(from decoder: Decoder) throws {
-          let values = try decoder.container(keyedBy: CodingKeys.self)
-          tideTime = try values.decode(String.self, forKey: .tideTime)
-          let tideHeightString = try values.decode(String.self, forKey: .tideHeightM)
-          tideHeightM = Double(truncating: NumberFormatter().number(from: tideHeightString) ?? 0)
-          tideDateTime = try values.decode(String.self, forKey: .tideDateTime).date(with: .dateTime) ?? Date()
-          tideType = try values.decode(TideType.self, forKey: .tideType)
-        }
-        
-        init(tideTime: String, tideHeightM: Double, tideDateTime: Date, tideType: TideType) {
-          self.tideTime = tideTime
-          self.tideHeightM = tideHeightM
-          self.tideDateTime = tideDateTime
-          self.tideType = tideType
-        }
       }
     }
 
@@ -170,5 +147,23 @@ extension WeatherData {
       return nil
     }
     return lastTideData.tideType
+  }
+}
+
+extension WeatherData.Weather.Tide.TideData: Decodable {
+  enum CodingKeys: String, CodingKey {
+    case tideTime
+    case tideHeightM = "tideHeight_mt"
+    case tideDateTime
+    case tideType = "tide_type"
+  }
+  
+  init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    tideTime = try values.decode(String.self, forKey: .tideTime)
+    let tideHeightString = try values.decode(String.self, forKey: .tideHeightM)
+    tideHeightM = Double(truncating: NumberFormatter().number(from: tideHeightString) ?? 0)
+    tideDateTime = try values.decode(String.self, forKey: .tideDateTime).date(with: .dateTime) ?? Date()
+    tideType = try values.decode(TideType.self, forKey: .tideType)
   }
 }
