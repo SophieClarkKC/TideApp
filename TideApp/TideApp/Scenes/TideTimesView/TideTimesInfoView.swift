@@ -40,7 +40,7 @@ struct TideTimesInfoView: View {
     })
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     .onAppear(perform: {
-      withAnimation(.easeInOut(duration: 2)) {
+      withAnimation(.easeInOut(duration: ComponentValues.tideAnimationTime)) {
         self.animate.toggle()
       }
     })
