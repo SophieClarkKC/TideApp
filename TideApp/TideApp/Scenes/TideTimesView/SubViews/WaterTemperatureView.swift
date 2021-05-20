@@ -129,7 +129,7 @@ struct ThermometerScale: View {
   let minValue: Int
   var midValue: String {
     let midValue = Double((maxValue - minValue) / 2)
-    return cleanValue(for: midValue)
+    return midValue.cleanValue()
   }
 
   var body: some View {
@@ -143,19 +143,6 @@ struct ThermometerScale: View {
     .font(.caption)
     .frame(minWidth: 10)
     .foregroundColor(.bodyTextColor)
-  }
-
-  private func cleanValue(for value: Double) -> String {
-    let valueString = String(format:"%.2f", value)
-    let lastDigits = valueString.suffix(2)
-
-    if lastDigits == "00" {
-      return "\(Int(value))"
-    }
-    if lastDigits.last == "0"{
-      return "\(valueString.dropLast())"
-    }
-    return valueString
   }
 }
 
