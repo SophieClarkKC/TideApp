@@ -29,7 +29,7 @@ struct TideTimesInfoView: View {
           VStack {
             ForEach(weatherInfo.tideTimes) { tideTime in
               BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
-                .padding(.bottom, 15)
+                .padding(.bottom, PaddingValues.medium)
             }
           }
           if let waterTemperature = weatherInfo.waterTemperature {
