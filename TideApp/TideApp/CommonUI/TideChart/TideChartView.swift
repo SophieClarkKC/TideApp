@@ -168,8 +168,8 @@ struct TideChartView: View {
           let currentHeight = GeneralHelpers.getWeightedValue(from: tidePoint.0.tideDateTime, middleDate: date, endDate: nextTide.0.tideDateTime, startValue: tidePoint.0.tideHeightM, endValue: nextTide.0.tideHeightM)
           let y = size.height - (CGFloat((currentHeight - peakTides.lowest.tideHeightM) / normalisedData.highestTide) * size.height)
           var x: CGFloat
-          if tidePoint.1.x + xOffset > size.width * 0.9 {
-            x = tidePoint.1.x + (CGFloat(xOffset) * 0.8)
+          if tidePoint.1.x + xOffset > size.width * 0.8 {
+            x = tidePoint.1.x - (CGFloat(xOffset) * 0.1)
           } else {
             x = tidePoint.1.x + CGFloat(xOffset)
           }
