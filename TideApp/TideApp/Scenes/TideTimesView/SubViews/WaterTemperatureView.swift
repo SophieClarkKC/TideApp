@@ -79,7 +79,6 @@ struct ThermometerBarView: View {
       AnimatedGradientBar(colors: barColors, value: temperature, maxValue: safeMax)
       ThermometerScale(maxValue: safeMax, minValue: 0)
     }
-    .frame(height: 160)
   }
 }
 
