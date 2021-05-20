@@ -99,23 +99,43 @@ struct TideChartView: View {
     guard let peakTides = getHighestAndLowestTides() else {
       return []
     }
-    guard let latestTime = tideData.sorted(by: { $0.tideDateTime > $1.tideDateTime }).first?.tideDateTime else {
-      return []
-    }
-    guard let earliestTime = tideData.sorted(by: { $0.tideDateTime < $1.tideDateTime }).first?.tideDateTime else {
+    guard let normalisedData = getNormalisedPeakData(with: peakTides) else {
       return []
     }
     guard let dayBefore = Calendar.current.date(byAdding: .day, value: -1, to: date) else {
       return []
     }
-    let highestTideNormalised = peakTides.highest.tideHeightM - peakTides.lowest.tideHeightM
-    let latestTimeNormalised = latestTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)
+    guard let earliestAndLatestTime = getEarliestAndLatestTime() else {
+      return []
+    }
     let points: [CGPoint] = tideData.map({ data in
-      let tidePoint = size.height - (CGFloat((data.tideHeightM - peakTides.lowest.tideHeightM) / highestTideNormalised) * size.height)
-      let timePoint = CGFloat((data.tideDateTime.timeIntervalSince(dayBefore) - earliestTime.timeIntervalSince(dayBefore)) / latestTimeNormalised) * size.width
+      let tidePoint = size.height - (CGFloat((data.tideHeightM - peakTides.lowest.tideHeightM) / normalisedData.highestTide) * size.height)
+      let timePoint = CGFloat((data.tideDateTime.timeIntervalSince(dayBefore) - earliestAndLatestTime.earliest.timeIntervalSince(dayBefore)) / normalisedData.latestTime) * size.width
       return CGPoint(x: timePoint, y: tidePoint)
     })
     return points
+  }
+  
+  private func getEarliestAndLatestTime() -> (earliest: Date, latest: Date)? {
+    guard let latestTime = tideData.sorted(by: { $0.tideDateTime > $1.tideDateTime }).first?.tideDateTime else {
+      return nil
+    }
+    guard let earliestTime = tideData.sorted(by: { $0.tideDateTime < $1.tideDateTime }).first?.tideDateTime else {
+      return nil
+    }
+    return (earliest: earliestTime, latest: latestTime)
+  }
+  
+  private func getNormalisedPeakData(with peakTides: (highest: TideData, lowest: TideData)) -> (highestTide: Double, latestTime: TimeInterval)? {
+    guard let earliestAndLatestTime = getEarliestAndLatestTime() else {
+      return nil
+    }
+    guard let dayBefore = Calendar.current.date(byAdding: .day, value: -1, to: date) else {
+      return nil
+    }
+    let highestTideNormalised = peakTides.highest.tideHeightM - peakTides.lowest.tideHeightM
+    let latestTimeNormalised = earliestAndLatestTime.latest.timeIntervalSince(dayBefore) - earliestAndLatestTime.earliest.timeIntervalSince(dayBefore)
+    return (highestTide: highestTideNormalised, latestTime: latestTimeNormalised)
   }
   
   private func getHighestAndLowestTides() -> (highest: TideData, lowest: TideData)? {
@@ -131,6 +151,9 @@ struct TideChartView: View {
     let tidesWithPoints = tideData.map { data in
       return (data, points.removeFirst())
     }
+    guard let peakTides = getHighestAndLowestTides(), let normalisedData = getNormalisedPeakData(with: peakTides) else {
+      return tidesWithPoints.first?.1 ?? .zero
+    }
     for (index, tidePoint) in tidesWithPoints.enumerated() {
       if index == 0, tidePoint.0.tideDateTime > date {
         let x = size.width * 0.1
@@ -141,13 +164,8 @@ struct TideChartView: View {
         if tidePoint.0.tideDateTime < date, nextTide.0.tideDateTime > date {
           let percentageTimePassedAtLastTidePoint = getTimePercentage(for: tidePoint.0.tideDateTime)
           let xOffset = (percentageTimePassed - percentageTimePassedAtLastTidePoint) * size.width
-          let yOffset = ((CGFloat(nextTide.0.tideHeightM - tidePoint.0.tideHeightM) * (percentageTimePassed - percentageTimePassedAtLastTidePoint)) * size.height) + PaddingValues.small
-          var y: CGFloat
-          if tidePoint.1.y + yOffset > size.height * 0.9 {
-            y = tidePoint.1.y + (CGFloat(yOffset) * 0.8)
-          } else {
-            y = tidePoint.1.y + CGFloat(yOffset)
-          }
+          let currentHeight = GeneralHelpers.getWeightedValue(from: tidePoint.0.tideDateTime, middleDate: date, endDate: nextTide.0.tideDateTime, startValue: tidePoint.0.tideHeightM, endValue: nextTide.0.tideHeightM)
+          let y = size.height - (CGFloat((currentHeight - peakTides.lowest.tideHeightM) / normalisedData.highestTide) * size.height)
           var x: CGFloat
           if tidePoint.1.x + xOffset > size.width * 0.9 {
             x = tidePoint.1.x + (CGFloat(xOffset) * 0.8)
