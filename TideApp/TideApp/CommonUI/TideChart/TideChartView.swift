@@ -49,7 +49,7 @@ struct TideChartView: View {
                             .foregroundColor(Color.backgroundColor.opacity(0.5)))
               .offset(x: timePoint.x, y: timePoint.y)
               .opacity(animate ? 1 : 0)
-              .animation(.linear.delay(ComponentValues.tideAnimationTime))
+              .animation(Animation.linear.delay(ComponentValues.tideAnimationTime))
           }
         }
         
