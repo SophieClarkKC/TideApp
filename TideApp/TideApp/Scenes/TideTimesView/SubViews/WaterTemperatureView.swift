@@ -69,14 +69,13 @@ struct ThermometerBarView: View {
   @State var appearing = false
 
   var maxTemp: Int = 26 // NB: The highest ever recorded sea temperature was 25.9 ℃
-  var safeMax : Int {
-    max(temperature, maxTemp)
-  }
+  var safeMax: Int { max(temperature, maxTemp) }
+  var barPercentage: CGFloat { CGFloat(temperature) / CGFloat(safeMax) }
   var barColors: [Color] = [.bodyTextColor, .subtitleColor]
 
   var body: some View {
     HStack {
-      AnimatedGradientBar(colors: barColors, value: temperature, maxValue: safeMax)
+      AnimatedGradientBar(colors: barColors, percentageFilled: barPercentage)
       ThermometerScale(maxValue: safeMax, minValue: 0)
     }
   }
@@ -86,19 +85,13 @@ struct ThermometerBarView: View {
 struct AnimatedGradientBar: View {
   @State var appearing = false
   let colors: [Color]
-  let value: Int
-  let maxValue: Int
-
-  var barPercentage: CGFloat {
-    CGFloat(Double(value) / Double(maxValue))
-  }
+  let percentageFilled: CGFloat
 
   var body: some View {
     ZStack {
       GeometryReader { geometry in
         Group {
           Capsule()
-            .shadow(radius: 4)
             .foregroundColor(.titleColor)
             .opacity(0.15)
 
@@ -106,7 +99,7 @@ struct AnimatedGradientBar: View {
                          startPoint: .topLeading,
                          endPoint: .bottomTrailing)
             .frame(width: 15,
-                   height: appearing ? barPercentage * geometry.size.height : 0)
+                   height: appearing ? percentageFilled * geometry.size.height : 0)
             .clipShape(Capsule())
         }
       }
