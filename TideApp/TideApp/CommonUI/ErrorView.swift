@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ErrorView: View {
-  @State var error: Error
+  @State var message: String
   var buttonAction: () -> Void
 
   var body: some View {
     VStack {
       TitleLabel(text: "Oops, something went wrong")
         .padding(PaddingValues.medium)
-      BodyLabel(text: error.localizedDescription)
+      BodyLabel(text: message)
         .padding(PaddingValues.small)
       Button("Retry", action: buttonAction)
         .buttonStyle(PrimaryActionStyle())
@@ -31,6 +31,6 @@ struct ErrorView: View {
 
 struct ErrorView_Previews: PreviewProvider {
   static var previews: some View {
-    ErrorView(error: NetworkError.invalidRequest, buttonAction: {})
+    ErrorView(message: NetworkError.invalidRequest.localizedDescription, buttonAction: {})
   }
 }

@@ -26,7 +26,11 @@ extension TidesEntry {
       widgetData = .failure(error: "Generic Error")
     } else {
       let weatherData = createMockWeatherData()
-      widgetData = .success(weatherInfo: .init(locationName: "Brighton", subTitle: "", tideTimes: weatherData.weather.first?.tides.first?.tideData ?? [], tideHeight: nil, waterTemperature: nil))
+      widgetData = .success(weatherInfo: .init(locationName: "Brighton",
+                                               subTitle: "A place near the sea",
+                                               tideTimes: weatherData.weather.first?.tides.first?.tideData ?? [],
+                                               tideHeight: "1.4m",
+                                               waterTemperature: "12.5c"))
     }
 
     return TidesEntry(widgetData: widgetData,

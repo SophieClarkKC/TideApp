@@ -21,10 +21,13 @@ struct LocationsView: View {
     switch viewModel.state {
     case .idle:
       return AnyView(Color.backgroundColor)
+
     case .loading:
       return AnyView(TitleLabel(text: "Loading..."))
+
     case .error(let error):
-      return AnyView(ErrorView(error: error, buttonAction: { viewModel.refresh() }))
+      return AnyView(ErrorView(message: error, buttonAction: { viewModel.refresh() }))
+
     case .success(let info):
       return AnyView(LocationInfoView(weatherInfo: info))
     }
