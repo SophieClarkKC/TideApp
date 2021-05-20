@@ -9,17 +9,12 @@ import Combine
 import CoreLocation
 
 final class UserLocator : ObservableObject {
-  @Published var location = CLLocation()
+  @Published var locationResult: LocationManagerResult = .awaiting
   var cancellable: AnyCancellable?
 
-  init() {}
-
-  func start() {
-    cancellable = CLLocationManager.publishLocation()
-      .assign(to: \.location, on: self)
-  }
-
-  func isAuthorizedForWidgetUpdates() -> Bool {
-    return CLLocationManager().isAuthorizedForWidgetUpdates
+  init(forWidget: Bool) {
+    cancellable = CLLocationManager.publishLocation(forWidget: forWidget)
+      .eraseToAnyPublisher()
+      .assign(to: \.locationResult, on: self)
   }
 }

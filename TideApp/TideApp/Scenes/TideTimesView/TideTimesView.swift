@@ -23,10 +23,13 @@ struct TideTimesView<ViewModel: TideTimesViewModelType>: View {
     switch viewModel.state {
     case .idle:
       return AnyView(Color.backgroundColor)
+
     case .loading:
       return AnyView(TitleLabel(text: "Loading..."))
+
     case .error(let error):
-      return AnyView(ErrorView(error: error, buttonAction: { viewModel.getTideTimes() }))
+      return AnyView(ErrorView(message: error.localizedDescription, buttonAction: { viewModel.getTideTimes() }))
+
     case .success(let info):
       return AnyView(TideTimesInfoView(weatherInfo: info))
     }

@@ -16,12 +16,7 @@ struct TidesContentViewModel {
   init(weatherInfo: WeatherInfo) {
     self.place = weatherInfo.locationName
     self.tidesTimes = weatherInfo.tideTimes
-
-    if let currentTemperature = weatherInfo.waterTemperature {
-      self.waterTemperature = "Water at ~\(String(format: "%.0f", currentTemperature))c"
-    } else {
-      self.waterTemperature = nil
-    }
+    self.waterTemperature = weatherInfo.waterTemperature
   }
 
   func hasPrincipalInfos() -> Bool {
