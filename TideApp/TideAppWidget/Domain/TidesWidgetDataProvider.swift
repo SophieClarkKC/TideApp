@@ -58,7 +58,7 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
       .sink(receiveValue: { result in
         switch result {
         case .awaiting:
-          break // loading is authomated in widget
+          break // loading is automated in widget
 
         case .unauthorized:
           completion(.failure(error: "Widget cannot access your current location.\nEdit the widget configuration to use a fixed location or authorize the app in Configuration -> Privacy -> Location services."))
