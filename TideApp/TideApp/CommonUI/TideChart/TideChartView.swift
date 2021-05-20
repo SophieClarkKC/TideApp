@@ -46,7 +46,7 @@ struct TideChartView: View {
             BodyLabel(text: tideHeight)
               .padding(PaddingValues.tiny)
               .background(Capsule()
-                            .foregroundColor(.backgroundColor.opacity(0.5)))
+                            .foregroundColor(Color.backgroundColor.opacity(0.5)))
               .offset(x: timePoint.x, y: timePoint.y)
               .opacity(animate ? 1 : 0)
           }
