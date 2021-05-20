@@ -42,7 +42,7 @@ struct AnimatedDataLabel: View {
         .font(.title3)
 
         if let systemAsset = systemAsset {
-          Image(.thermometer)
+          Image(systemAsset)
         }
       }
 
