@@ -30,7 +30,7 @@ final class LocationsViewModel: ObservableObject {
 
   // MARK: - Initialiser -
 
-  init(userLocator: UserLocator = UserLocator(requestedByWidget: false), networkManager: NetworkManagerType = NetworkManager()) {
+  init(userLocator: UserLocator = UserLocator(forWidget: false), networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
     self.networkManager = networkManager
   }

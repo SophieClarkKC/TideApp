@@ -16,33 +16,33 @@ public enum LocationManagerResult {
 
 extension CLLocationManager {
 
-  public static func publishLocation(requestedByWidget: Bool) -> LocationPublisher {
-    return .init(requestedByWidget: requestedByWidget)
+  public static func publishLocation(forWidget: Bool) -> LocationPublisher {
+    return .init(forWidget: forWidget)
   }
 
   public struct LocationPublisher: Publisher {
     public typealias Output = LocationManagerResult
     public typealias Failure = Never
-    private let requestedByWidget: Bool
+    private let forWidget: Bool
 
-    init(requestedByWidget: Bool) {
-      self.requestedByWidget = requestedByWidget
+    init(forWidget: Bool) {
+      self.forWidget = forWidget
     }
 
     public func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
-      let subscription = LocationSubscription(subscriber: subscriber, requestedByWidget: requestedByWidget)
+      let subscription = LocationSubscription(subscriber: subscriber, forWidget: forWidget)
       subscriber.receive(subscription: subscription)
     }
 
     final class LocationSubscription<S: Subscriber> : NSObject, CLLocationManagerDelegate, Subscription where S.Input == Output, S.Failure == Failure {
       private let locationManager = CLLocationManager()
-      private let requestedByWidget: Bool
+      private let forWidget: Bool
 
       let subscriber: S
 
-      init(subscriber: S, requestedByWidget: Bool) {
+      init(subscriber: S, forWidget: Bool) {
         self.subscriber = subscriber
-        self.requestedByWidget = requestedByWidget
+        self.forWidget = forWidget
         super.init()
         locationManager.delegate = self
         locationManager.distanceFilter = .init(500)
@@ -67,7 +67,7 @@ extension CLLocationManager {
       }
 
       private func checkAuthorizationStatusAndStartIfPossible() {
-        guard !requestedByWidget else {
+        guard !forWidget else {
           switch locationManager.isAuthorizedForWidgetUpdates {
           case true:
             locationManager.startUpdatingLocation()

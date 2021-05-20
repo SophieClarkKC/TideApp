@@ -12,8 +12,8 @@ final class UserLocator : ObservableObject {
   @Published var locationResult: LocationManagerResult = .awaiting
   var cancellable: AnyCancellable?
 
-  init(requestedByWidget: Bool) {
-    cancellable = CLLocationManager.publishLocation(requestedByWidget: requestedByWidget)
+  init(forWidget: Bool) {
+    cancellable = CLLocationManager.publishLocation(forWidget: forWidget)
       .eraseToAnyPublisher()
       .assign(to: \.locationResult, on: self)
   }
