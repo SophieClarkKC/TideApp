@@ -183,6 +183,7 @@
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7626443336005CA64F /* TideTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesView.swift; sourceTree = "<group>"; };
 		9000EC7126553FC300546099 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
+		90202E5E2657E0E9001811BB /* CIScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CIScript.sh; sourceTree = "<group>"; };
 		909BA5C4264171E1000FFBD5 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		909BA5C6264171E1000FFBD5 /* Config-Mock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Mock.plist"; sourceTree = "<group>"; };
 		909BA5C7264171E1000FFBD5 /* Mock.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mock.xcconfig; sourceTree = "<group>"; };
@@ -312,6 +313,7 @@
 		36007446263AB73100C53715 = {
 			isa = PBXGroup;
 			children = (
+				90202E5E2657E0E9001811BB /* CIScript.sh */,
 				36007451263AB73100C53715 /* TideApp */,
 				90F7121A2649313D002642DE /* TideAppWidget */,
 				90E2EA76264EADDA00EE93D3 /* TideAppWidgetIntentHandler */,
@@ -385,7 +387,6 @@
 		36D04EA326444184006EB2DC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */,
 				36D04EB726458CFA006EB2DC /* Extensions */,
 				36D04EA12644417F006EB2DC /* CLGeocoder+LocationName.swift */,
 				36D04EA826453521006EB2DC /* Date+Helpers.swift */,
@@ -877,7 +878,6 @@
 				91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */,
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
-				12FE3E9B2642C161000F7476 /* WeatherDecoder.swift in Sources */,
 				9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
