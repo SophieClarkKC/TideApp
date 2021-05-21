@@ -13,28 +13,43 @@ struct TideTimesInfoView: View {
   @State var animate: Bool = false
   
   var body: some View {
+    GeometryReader { reader in
     ScrollView(.vertical, showsIndicators: false, content: {
       VStack(alignment: .leading, spacing: nil, content: {
         TitleLabel(text: weatherInfo.locationName)
           .accessibility(label: Text("You are looking at tide times for \(weatherInfo.locationName)"))
           .padding([.bottom, .top], PaddingValues.medium)
+
         SubtitleLabel(text: weatherInfo.subTitle)
           .padding(.bottom, PaddingValues.tiny)
+
         if let tideStatus = weatherInfo.tideTimes.current?.tideType.description.full {
           BodyLabel(text: tideStatus)
             .padding(.bottom, PaddingValues.tiny)
         }
-        ForEach(weatherInfo.tideTimes) { tideTime in
-          BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
+
+        HStack {
+          VStack {
+            ForEach(weatherInfo.tideTimes) { tideTime in
+              BodyLabel(text: "\(tideTime.tideType.rawValue.capitalized): \(tideTime.tideTime)")
+                .padding(.bottom, PaddingValues.medium)
+            }
+          }
+          if let waterTemperature = weatherInfo.waterTemperature {
+            Spacer()
+            WaterTemperatureView(temperature: Int(waterTemperature))
+              .accessibility(label: Text("The current water temperature is 10 degrees celcius"))
+          }
         }
-        if let waterTemperature = weatherInfo.waterTemperature {
-          SubtitleLabel(text: waterTemperature)
-            .padding([.bottom, .top], PaddingValues.small)
-        }
+        .frame(height: reader.size.height / 4)
+
+        Divider()
+          .foregroundColor(.gray)
+
         SubtitleLabel(text: "Tide heights")
-        GeometryReader { reader in
+
           TideChartView(animate: animate, tideData: weatherInfo.tideTimes, tideHeight: weatherInfo.tideHeight).frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
-        }
+
       })
       .padding([.leading, .trailing], PaddingValues.medium)
     })
@@ -45,6 +60,7 @@ struct TideTimesInfoView: View {
       }
     })
   }
+}
 }
 
 struct TideTimesInfoView_Previews: PreviewProvider {

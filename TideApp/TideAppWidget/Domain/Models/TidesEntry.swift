@@ -30,7 +30,7 @@ extension TidesEntry {
                                                subTitle: "A place near the sea",
                                                tideTimes: weatherData.weather.first?.tides.first?.tideData ?? [],
                                                tideHeight: "1.4m",
-                                               waterTemperature: "12.5c"))
+                                               waterTemperature: 12))
     }
 
     return TidesEntry(widgetData: widgetData,
