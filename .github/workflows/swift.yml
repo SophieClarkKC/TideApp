@@ -17,10 +17,6 @@ jobs:
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
-    - name: test
-      run: |
-        echo $(basename ./TideApp)
-      shell: bash
     - name: Run CIScript
       run: |
          chmod +x CIScript.sh
