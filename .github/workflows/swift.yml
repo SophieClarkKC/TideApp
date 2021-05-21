@@ -15,7 +15,7 @@ jobs:
       XC_SCHEME: ${{ 'TideApp' }}
     steps:
     - name: Run CIScript
-      run: if [ -e ./TideApp/CIScript.sh ] then sh ./TideApp/CIScript.sh fi
+      run: ([ -e ./TideApp/CIScript.sh ] && sh ./TideApp/CIScript.sh) echo 0
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
