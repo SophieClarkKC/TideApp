@@ -16,12 +16,11 @@ jobs:
     steps:
     - name: test
       run: |
-        for filename in ${GITHUB_WORKSPACE};
+        for filename in ./TideApp;
         do
             echo $filename
         done;
       shell: bash
-      working-directory: TideApp
     - name: Run CIScript
       run: |
          chmod +x CIScript.sh
