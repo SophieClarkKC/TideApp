@@ -13,7 +13,7 @@ final class LocationsViewModel: ObservableObject {
     case idle
     case loading
     case error(String)
-    case success([WeatherInfo])
+    case success(Set<WeatherInfo>)
   }
 
   // MARK: - Properties -
@@ -28,7 +28,7 @@ final class LocationsViewModel: ObservableObject {
   private let networkManager: NetworkManagerType
   private var cancellables: [AnyCancellable] = []
 
-  private var weatherInfo: [WeatherInfo] = [] {
+  private var weatherInfo: Set<WeatherInfo> = [] {
     didSet {
       state = .success(weatherInfo)
     }
@@ -59,15 +59,15 @@ final class LocationsViewModel: ObservableObject {
           self.state = .error("TideApp cannot access your current location.\nSearch for a specific location or authorize the app in Configuration -> Privacy -> Location services.")
 
         case .success(let location):
-          self.getTideTimes(at: location)
+          self.getTideTimes(at: location.coordinate)
         }
       })
       .store(in: &cancellables)
 
-    favouritesManager.start()
+    favouritesManager.fetch()
     favouritesManager.$favourites
       .sink { locations in
-        locations.forEach { self.getTideTimes(at: $0) }
+        locations.forEach { self.getTideTimes(at: .init(latitude: $0.latitude, longitude: $0.longitude)) }
       }
       .store(in: &cancellables)
   }
@@ -76,20 +76,20 @@ final class LocationsViewModel: ObservableObject {
     guard case let .success(location) = userLocator.locationResult else {
       return self.state = .error("Current location not found")
     }
-    getTideTimes(at: location)
+    getTideTimes(at: location.coordinate)
   }
 
   // MARK: Private
 
-  private func getTideTimes(for date: Date = Date(), at newLocation: CLLocation) {
+  private func getTideTimes(for date: Date = Date(), at coordinate: CLLocationCoordinate2D) {
     state = .loading
-    let request = GetWeatherInformationRequest(location: newLocation, date: date, networkManager: networkManager)
+    let request = GetWeatherInformationRequest(coordinate: coordinate, date: date, networkManager: networkManager)
     request.perform()
       .sink(receiveCompletion: { completion in
         guard case let .failure(error) = completion else { return }
         self.state = .error(error.localizedDescription)
       }, receiveValue: { 
-        self.weatherInfo.append($0)
+        self.weatherInfo.insert($0)
       })
       .store(in: &cancellables)
   }

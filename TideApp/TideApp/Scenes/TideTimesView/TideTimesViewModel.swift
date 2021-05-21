@@ -55,7 +55,7 @@ final class TideTimesNetworkViewModel: TideTimesViewModelType {
       state = .error(WeatherError.parsing(description: "Invalid location"))
       return
     }
-    let request = GetWeatherInformationRequest(location: location, date: Date(), networkManager: networkManager)
+    let request = GetWeatherInformationRequest(coordinate: location.coordinate, date: Date(), networkManager: networkManager)
     cancellable = request.perform()
       .sink(receiveCompletion: { completion in
         guard case let .failure(error) = completion else { return }

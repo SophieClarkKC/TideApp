@@ -2,94 +2,65 @@
 //  FavouritesManager.swift
 //  TideApp
 //
-//  Created by John Sanderson on 20/05/2021.
+//  Created by Marco Guerrieri on 20/05/2021.
 //
 
 import Foundation
 import Combine
 import CoreLocation
 
-final class FavouritesManager {
+protocol FavouritesManagerType: AnyObject {
+  func fetch()
+  func saveToFavourite(_ location: TALocation)
+  func removeFromFavourite(_ location: TALocation)
+  func clearFavourites()
+}
 
-  // MARK: - Properties -
-  // MARK: Internal
-
-  @Published var favourites: [CLLocation] = []
+final class FavouritesManager: FavouritesManagerType {
+  @Published var favourites: [TALocation] = []
 
   // MARK: Private
-
-  private let userDefaults: UserDefaults
-  private var cancellable: AnyCancellable?
+  private static let favsLocationsKey: String = "FAVOURITES_LOCATIONS_STORAGE_KEY"
+  private let storage: UserDefaults
 
   // MARK: - Initialiser -
 
-  init(userDefaults: UserDefaults = .standard) {
-    self.userDefaults = userDefaults
+  init(with storage: UserDefaults = .standard) { //tbh I don't like to provide a default for the dependency injection in general but its fine tho
+    self.storage = storage
   }
 
   // MARK: - Functions -
   // MARK: Internal
 
   /// Tells the manager to start publishing the favourites
-  func start() {
-    cancellable = userDefaults
-      .publisher(for: \.favouriteLocations)
-      .decode(type: [Location].self, decoder: PropertyListDecoder())
-      .sink(receiveCompletion: { error in
-        self.favourites = []
-      }, receiveValue: { locations in
-        self.favourites = locations.map { CLLocation(latitude: $0.latitude, longitude: $0.longitude) }
-      })
+  func fetch() {
+    favourites = Array(retrieveLocationsDictionary().values)
   }
 
-  /// Adds a new location to the favourites
-  /// - Parameter location: The new `CLLocation` to add
-  func add(_ location: CLLocation) {
-    encodeAndUpdate(with: location) { $0 + [$1] }
+  func saveToFavourite(_ location: TALocation) {
+    var favsDictionary = retrieveLocationsDictionary()
+    favsDictionary[location.name] = location
+    updateLocationsDictionary(favsDictionary)
   }
 
-  /// Removes the given location from the favourites
-  /// - Parameter location: The `CLLocation` to remove
-  func remove(_ location: CLLocation) {
-    encodeAndUpdate(with: location) { currentFavourites, proxy in
-      currentFavourites.filter { $0 != proxy }
-    }
+  func removeFromFavourite(_ location: TALocation) {
+    var favsDictionary = retrieveLocationsDictionary()
+    favsDictionary[location.name] = nil
+    updateLocationsDictionary(favsDictionary)
   }
 
-  // MARK: Private
-
-  private func encodeAndUpdate(with location: CLLocation, modifier: ([Location], Location) -> [Location]) {
-    let proxy = Location(location: location)
-    let currentFavourites = favourites.map(Location.init)
-    let newFavourites = modifier(currentFavourites, proxy)
-    let encodedValue = try? PropertyListEncoder().encode(newFavourites)
-    userDefaults.favouriteLocations = encodedValue ?? Data()
+  func clearFavourites() {
+    storage.setValue(nil, forKey: FavouritesManager.favsLocationsKey)
   }
-}
 
-// MARK: - Helpers -
-
-/// Proxy class used to represent a `CLLocation` in a `Codable` format.
-private struct Location: Codable, Equatable {
-  let latitude: Double
-  let longitude: Double
-
-  init(location: CLLocation) {
-    self.latitude = location.coordinate.latitude
-    self.longitude = location.coordinate.longitude
+  private func updateLocationsDictionary(_ dictionary: [String: TALocation]) {
+    let data = try? PropertyListEncoder().encode(dictionary)
+    storage.setValue(data, forKey: FavouritesManager.favsLocationsKey)
+    fetch()
   }
-}
 
-private extension UserDefaults {
-
-  var favouriteLocationsKey: String { "favourite_locations" }
-
-  @objc var favouriteLocations: Data {
-    get {
-      value(forKey: favouriteLocationsKey) as? Data ?? Data()
-    }
-    set {
-      set(newValue, forKey: favouriteLocationsKey)
-    }
+  private func retrieveLocationsDictionary() -> [String: TALocation] {
+    guard let data = storage.data(forKey: FavouritesManager.favsLocationsKey) else { return [:] }
+    return (try? PropertyListDecoder().decode([String: TALocation].self, from: data)) ?? [:]
   }
 }
