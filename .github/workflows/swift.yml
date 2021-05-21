@@ -17,10 +17,7 @@ jobs:
     - name: Run CIScript
       shell: bash
       run: 
-        for entry in "$PWD"/*
-        do
-          echo "$entry"
-        done;
+        ls $PWD
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
