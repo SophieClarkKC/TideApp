@@ -21,7 +21,7 @@ jobs:
         for entry in "$PWD"/*
         do
           echo "$entry"
-        done
+        done;
         chmod +x "${GITHUB_WORKSPACE}/TideApp/CIScript.sh";
         "${GITHUB_WORKSPACE}/TideApp/CIScript.sh";
     - name: Use Xcode "$XC_VERSION"
