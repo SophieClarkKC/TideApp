@@ -41,6 +41,8 @@
 		9000EC7026553BD600546099 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
 		9000EC742655412E00546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
+		904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
+		904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
 		9065A5392656CAC1003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
 		9065A53A2656CAC5003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
 		9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9155060E2656609D00473968 /* FavouritesManager.swift */; };
@@ -194,6 +196,7 @@
 		36D4BE7626443336005CA64F /* TideTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesView.swift; sourceTree = "<group>"; };
 		9000EC7126553FC300546099 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		90202E5E2657E0E9001811BB /* CIScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CIScript.sh; sourceTree = "<group>"; };
+		904F7C732657B2A5004E582E /* GlobalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDependencies.swift; sourceTree = "<group>"; };
 		9065A5382656CAC1003A9374 /* TALocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TALocation.swift; sourceTree = "<group>"; };
 		9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		9065A5492657A4DF003A9374 /* TideAppWidgetIntentHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideAppWidgetIntentHandler.entitlements; sourceTree = "<group>"; };
@@ -413,6 +416,7 @@
 				36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */,
 				12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */,
 				914C91492652C70C00D16031 /* ViewControllerResolver.swift */,
+				904F7C732657B2A5004E582E /* GlobalDependencies.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -915,6 +919,7 @@
 				9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
+				904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */,
 				91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */,
 				91F7CFB326550FAB0013DFCC /* NetworkManager.swift in Sources */,
 				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
@@ -970,6 +975,7 @@
 				90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */,
 				9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */,
 				90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */,
+				904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */,
 				9065A53C2656D0C4003A9374 /* TALocation.swift in Sources */,
 				9000EC7026553BD600546099 /* Stylesheet.swift in Sources */,
 				9000EC742655412E00546099 /* LocationSearcher.swift in Sources */,

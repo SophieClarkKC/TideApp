@@ -37,7 +37,7 @@ final class LocationsViewModel: ObservableObject {
   // MARK: - Initialiser -
 
   init(userLocator: UserLocator = UserLocator(forWidget: false),
-       favouritesManager: FavouritesManager = FavouritesManager(),
+       favouritesManager: FavouritesManager = GlobalDependencies.shared.favouritesManager,
        networkManager: NetworkManagerType = NetworkManager()) {
     self.userLocator = userLocator
     self.favouritesManager = favouritesManager

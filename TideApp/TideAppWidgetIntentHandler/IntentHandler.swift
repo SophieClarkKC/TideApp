@@ -11,7 +11,7 @@ import UIKit
 
 final class IntentHandler: INExtension, WidgetConfigurationIntentHandling, ObservableObject {
   private let locationSearcher = LocationSearcher()
-  private let favouritesManager = FavouritesManager()
+  private let favouritesManager = GlobalDependencies.shared.favouritesManager
   private var cancellable: AnyCancellable?
   
   func defaultLocationConfig(for intent: WidgetConfigurationIntent) -> WidgetLocation? {
