@@ -14,10 +14,18 @@ jobs:
       XC_WORKSPACE: ${{ 'TideApp/TideApp.xcworkspace' }}
       XC_SCHEME: ${{ 'TideApp' }}
     steps:
+    - name: test
+      run: |
+        for filename in $PWD;
+        do
+            echo $filename
+        done;
+      shell: bash
+      working-directory: TideApp
     - name: Run CIScript
       run: |
-         chmod +x TideApp/CIScript.sh
-         TideApp/CIScript.sh
+         chmod +x CIScript.sh
+         sh CIScript.sh
       shell: bash
       working-directory: TideApp
     - name: Use Xcode "$XC_VERSION"
