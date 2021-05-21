@@ -13,9 +13,9 @@ jobs:
       XC_VERSION: ${{ '12.4' }}
       XC_WORKSPACE: ${{ 'TideApp/TideApp.xcworkspace' }}
       XC_SCHEME: ${{ 'TideApp' }}
-      CI_SCRIPT: ${{ 'TideApp/CIScript.sh' }}
     steps:
     - name: Run CIScript
+      shell: bash
       run: ${GITHUB_WORKSPACE}/CIScript.sh
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
