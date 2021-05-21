@@ -28,6 +28,10 @@
 		36D04EC0264A961E006EB2DC /* GeneralHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */; };
 		36D04EC2264A965C006EB2DC /* GeneralHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */; };
 		36D04EC8264BFF65006EB2DC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04EC7264BFF65006EB2DC /* ErrorView.swift */; };
+		36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
+		36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
+		36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECF2653BD40006EB2DC /* LineGraph.swift */; };
+		36D04ED22655206A006EB2DC /* TimeLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ED12655206A006EB2DC /* TimeLines.swift */; };
 		36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */; };
 		36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE7626443336005CA64F /* TideTimesView.swift */; };
@@ -171,6 +175,10 @@
 		36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpers.swift; sourceTree = "<group>"; };
 		36D04EC1264A965C006EB2DC /* GeneralHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralHelpersTests.swift; sourceTree = "<group>"; };
 		36D04EC7264BFF65006EB2DC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		36D04ECA264D389A006EB2DC /* TideChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideChartView.swift; sourceTree = "<group>"; };
+		36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierConfiguration.swift; sourceTree = "<group>"; };
+		36D04ECF2653BD40006EB2DC /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
+		36D04ED12655206A006EB2DC /* TimeLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLines.swift; sourceTree = "<group>"; };
 		36D4BE6D26443304005CA64F /* Stylesheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		36D4BE6E26443305005CA64F /* StylesheetComponentExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesheetComponentExample.swift; sourceTree = "<group>"; };
 		36D4BE7626443336005CA64F /* TideTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesView.swift; sourceTree = "<group>"; };
@@ -427,11 +435,23 @@
 			path = Stylesheet;
 			sourceTree = "<group>";
 		};
+		36D04ECC2652BE29006EB2DC /* TideChart */ = {
+			isa = PBXGroup;
+			children = (
+				36D04ECA264D389A006EB2DC /* TideChartView.swift */,
+				36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */,
+				36D04ECF2653BD40006EB2DC /* LineGraph.swift */,
+				36D04ED12655206A006EB2DC /* TimeLines.swift */,
+			);
+			path = TideChart;
+			sourceTree = "<group>";
+		};
 		36D4BE7326443311005CA64F /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
 				36D04EC7264BFF65006EB2DC /* ErrorView.swift */,
 				36D04EC9264C0BCD006EB2DC /* Stylesheet */,
+				36D04ECC2652BE29006EB2DC /* TideChart */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -865,6 +885,7 @@
 				91F7CFB326550FAB0013DFCC /* NetworkManager.swift in Sources */,
 				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
 				12266B86264BE04A00DE7FCA /* CLLocationManager+Publisher.swift in Sources */,
+				36D04ECE2652BE48006EB2DC /* BezierConfiguration.swift in Sources */,
 				91BA455726554A010072755D /* TideTimesViewModel.swift in Sources */,
 				36D04EA926453521006EB2DC /* Date+Helpers.swift in Sources */,
 				36D4BE7126443305005CA64F /* StylesheetComponentExample.swift in Sources */,
@@ -877,7 +898,10 @@
 				36D4BE7026443305005CA64F /* Stylesheet.swift in Sources */,
 				911E7B66264ECBC70000BC15 /* LocationsInfoView.swift in Sources */,
 				36D4BE7826443336005CA64F /* TideTimesView.swift in Sources */,
+				36D04ED02653BD40006EB2DC /* LineGraph.swift in Sources */,
+				36D04ED22655206A006EB2DC /* TimeLines.swift in Sources */,
 				12FE3E952642B778000F7476 /* WeatherError.swift in Sources */,
+				36D04ECB264D389A006EB2DC /* TideChartView.swift in Sources */,
 				914C914A2652C70C00D16031 /* ViewControllerResolver.swift in Sources */,
 				914C913E2652C67E00D16031 /* SearchViewModel.swift in Sources */,
 				12EF61A82643F41F002C94B4 /* Keys.swift in Sources */,

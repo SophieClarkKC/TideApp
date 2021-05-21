@@ -21,13 +21,13 @@ struct WeatherInfo {
 extension Array where Element == WeatherInfo.TideData {
 
   var current: Element? {
-    let dateOfTheClosestTide = Date().closestDates(in: compactMap({ $0.tideDateTime.date(with: .dateTime)})).first
-    return first(where: { $0.tideDateTime.date(with: .dateTime) == dateOfTheClosestTide })
+    let dateOfTheClosestTide = Date().closestDates(in: compactMap({ $0.tideDateTime })).first
+    return first(where: { $0.tideDateTime == dateOfTheClosestTide })
   }
 
   var next: Element? {
-    let dateOfTheNextTide = Date().closestDates(in: compactMap({ $0.tideDateTime.date(with: .dateTime)})).last
-    return first(where: { $0.tideDateTime.date(with: .dateTime) == dateOfTheNextTide })
+    let dateOfTheNextTide = Date().closestDates(in: compactMap({ $0.tideDateTime })).last
+    return first(where: { $0.tideDateTime == dateOfTheNextTide })
   }
 }
 

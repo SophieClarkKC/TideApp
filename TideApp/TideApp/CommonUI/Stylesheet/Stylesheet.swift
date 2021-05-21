@@ -77,6 +77,7 @@ struct ComponentValues {
   static let buttonPadding: CGFloat = 5.0
   static let buttonMinimumHeight: CGFloat = 50.0
   static let errorCornerRadius: CGFloat = 10.0
+  static let tideAnimationTime: Double = 2.0
 }
 
 struct PaddingValues {

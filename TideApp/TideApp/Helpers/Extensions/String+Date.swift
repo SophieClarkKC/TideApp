@@ -17,6 +17,8 @@ extension String {
     func dateFormatter() -> DateFormatter {
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = self.rawValue
+      dateFormatter.timeZone = .current
+      dateFormatter.locale = .current
       return dateFormatter
     }
   }
