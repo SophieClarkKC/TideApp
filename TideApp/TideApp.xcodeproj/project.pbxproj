@@ -41,6 +41,10 @@
 		9000EC7026553BD600546099 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
 		9000EC742655412E00546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
+		90202E592657C304001811BB /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
+		90202E5A2657C370001811BB /* TimeLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ED12655206A006EB2DC /* TimeLines.swift */; };
+		90202E5B2657C377001811BB /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECF2653BD40006EB2DC /* LineGraph.swift */; };
+		90202E5C2657C37C001811BB /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
 		904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
 		904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
 		9065A5392656CAC1003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
@@ -1005,11 +1009,14 @@
 				91F7CFED2655124B0013DFCC /* NetworkManager.swift in Sources */,
 				90F71257264A9AF8002642DE /* AppConfig.swift in Sources */,
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
+				90202E592657C304001811BB /* TideChartView.swift in Sources */,
 				911E7B6F264ECBCE0000BC15 /* WeatherInfo.swift in Sources */,
+				90202E5A2657C370001811BB /* TimeLines.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
 				9000EC6E26527F8200546099 /* UserLocator.swift in Sources */,
 				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
 				91F7CFF32655124D0013DFCC /* NetworkError.swift in Sources */,
+				90202E5B2657C377001811BB /* LineGraph.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
 				91F7D005265513560013DFCC /* RequestType.swift in Sources */,
 				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,
@@ -1017,6 +1024,7 @@
 				90F71244264948D3002642DE /* TidesErrorView.swift in Sources */,
 				9065A5472657A476003A9374 /* UserDefaults+Extension.swift in Sources */,
 				90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */,
+				90202E5C2657C37C001811BB /* BezierConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
