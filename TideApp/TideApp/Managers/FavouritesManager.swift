@@ -12,7 +12,7 @@ import CoreLocation
 protocol FavouritesManagerType: AnyObject {
   func fetch()
   func saveToFavourite(_ location: TALocation)
-  func removeFromFavourite(_ location: TALocation)
+  func removeFromFavouriteLocation(named: String)
   func clearFavourites()
 }
 
@@ -42,9 +42,9 @@ final class FavouritesManager: FavouritesManagerType {
     updateLocationsDictionary(favsDictionary)
   }
 
-  func removeFromFavourite(_ location: TALocation) {
+  func removeFromFavouriteLocation(named: String) {
     var favsDictionary = retrieveLocationsDictionary()
-    favsDictionary[location.name] = nil
+    favsDictionary[named] = nil
     updateLocationsDictionary(favsDictionary)
   }
 
