@@ -14,12 +14,12 @@ jobs:
       XC_WORKSPACE: ${{ 'TideApp/TideApp.xcworkspace' }}
       XC_SCHEME: ${{ 'TideApp' }}
     steps:
+    - name: Use Xcode "$XC_VERSION"
+      run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
+    - uses: actions/checkout@v2
     - name: test
       run: |
-        for filename in ./TideApp;
-        do
-            echo $filename
-        done;
+        echo $(basename ./TideApp)
       shell: bash
     - name: Run CIScript
       run: |
@@ -27,8 +27,5 @@ jobs:
          sh CIScript.sh
       shell: bash
       working-directory: TideApp
-    - name: Use Xcode "$XC_VERSION"
-      run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
-    - uses: actions/checkout@v2
     - name: Run Unit and UI Tests
       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
