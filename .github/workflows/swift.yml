@@ -16,7 +16,7 @@ jobs:
       CI_SCRIPT: ${{ 'TideApp/CIScript.sh' }}
     steps:
     - name: Run CIScript
-      run: ([ -e "$CI_SCRIPT" ] && sh "$CI_SCRIPT") || echo 'WARNING - $CI_SCRIPT file not found'
+      run: ${GITHUB_WORKSPACE}/TideApp/CIScript.sh
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
