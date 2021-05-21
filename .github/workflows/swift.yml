@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: test
       run: |
-        for filename in $PWD;
+        for filename in ${GITHUB_WORKSPACE};
         do
             echo $filename
         done;
