@@ -23,6 +23,7 @@ struct LocationInfoView: View {
         .padding([.top, .bottom])
       }
       .navigationTitle("My Locations")
+      .background(Color.backgroundColor.ignoresSafeArea())
       .navigationBarItems(trailing: Button(action: {
         showSearch.toggle()
       }) { Image(.search) }
