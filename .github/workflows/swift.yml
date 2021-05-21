@@ -16,8 +16,8 @@ jobs:
     steps:
     - name: Run CIScript
       run: |
-         chmod +x ./TideApp/CIScript.sh
-         ./TideApp/CIScript.sh
+         chmod +x ./TideApp/TideApp/CIScript.sh
+         ./TideApp/TideApp/CIScript.sh
       shell: bash
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
