@@ -69,7 +69,7 @@ struct ThermometerBarView: View {
   @State var appearing = false
 
   var maxTemp: Int = 26 // NB: The highest ever recorded sea temperature was 25.9 ℃
-  var safeMax: Int { max(temperature, maxTemp) }
+  var safeMax: Int { maxTemp - temperature >= 5 ? maxTemp : temperature + 5 }
   var barPercentage: CGFloat { CGFloat(temperature) / CGFloat(safeMax) }
   var barColors: [Color] = [.bodyTextColor, .subtitleColor]
 
