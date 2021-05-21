@@ -16,7 +16,9 @@ jobs:
     steps:
     - name: Run CIScript
       shell: bash
-      run: "${GITHUB_WORKSPACE}/CIScript.sh"
+      run: 
+        chmod +x "${GITHUB_WORKSPACE}/TideApp/CIScript.sh"
+        "${GITHUB_WORKSPACE}/TideApp/CIScript.sh"
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
