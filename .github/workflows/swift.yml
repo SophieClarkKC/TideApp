@@ -17,6 +17,7 @@ jobs:
     - name: Run CIScript
       shell: bash
       run: 
+        echo $PWD
         chmod +x "${GITHUB_WORKSPACE}/TideApp/CIScript.sh"
         "${GITHUB_WORKSPACE}/TideApp/CIScript.sh"
     - name: Use Xcode "$XC_VERSION"
