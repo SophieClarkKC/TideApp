@@ -12,13 +12,18 @@ struct LocationsView: View {
   @ObservedObject var viewModel: LocationsViewModel
 
   var body: some View {
-    makeView(for: viewModel.state)
-      .background(Color.backgroundColor.ignoresSafeArea(.all, edges: [.top, .bottom]))
-      .onAppear { viewModel.start() }
+    ZStack {
+      Color.backgroundColor
+        .ignoresSafeArea()
+
+      makeView(for: viewModel.state)
+    }
+    .onAppear { viewModel.start() }
   }
 
   private func makeView(for state: LocationsViewModel.State) -> AnyView {
     switch viewModel.state {
+
     case .idle:
       return AnyView(Color.backgroundColor)
 

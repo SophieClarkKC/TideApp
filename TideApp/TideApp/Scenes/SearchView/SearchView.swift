@@ -27,6 +27,7 @@ struct SearchView: View {
             viewController.navigationItem.searchController = searchControllerProvider.searchController
           }.frame(width: 0, height: 0)
         )
+        .background(Color.backgroundColor.ignoresSafeArea())
         .onAppear {
           viewModel.start()
         }
