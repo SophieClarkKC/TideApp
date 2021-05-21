@@ -17,13 +17,10 @@ jobs:
     - name: Run CIScript
       shell: bash
       run: 
-        echo $PWD;
         for entry in "$PWD"/*
         do
           echo "$entry"
         done;
-        chmod +x "${GITHUB_WORKSPACE}/TideApp/CIScript.sh";
-        "${GITHUB_WORKSPACE}/TideApp/CIScript.sh";
     - name: Use Xcode "$XC_VERSION"
       run: sudo xcode-select -switch /Applications/Xcode_$XC_VERSION.app
     - uses: actions/checkout@v2
