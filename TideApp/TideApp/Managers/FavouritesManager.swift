@@ -25,14 +25,13 @@ final class FavouritesManager: FavouritesManagerType {
 
   // MARK: - Initialiser -
 
-  init(with storage: UserDefaults = .standard) { //tbh I don't like to provide a default for the dependency injection in general but its fine tho
+  init(with storage: UserDefaults = UserDefaults.shared) {
     self.storage = storage
   }
 
   // MARK: - Functions -
   // MARK: Internal
 
-  /// Tells the manager to start publishing the favourites
   func fetch() {
     favourites = Array(retrieveLocationsDictionary().values)
   }

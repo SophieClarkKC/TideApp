@@ -6,11 +6,13 @@
 //
 
 import Intents
+import Combine
 import UIKit
 
-final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
+final class IntentHandler: INExtension, WidgetConfigurationIntentHandling, ObservableObject {
   private let locationSearcher = LocationSearcher()
-  private let favouritesManager = FavouritesManager(with: UserDefaults.standard)
+  private let favouritesManager = FavouritesManager()
+  private var cancellable: AnyCancellable?
   
   func defaultLocationConfig(for intent: WidgetConfigurationIntent) -> WidgetLocation? {
     return createCurrentPositionItem()
@@ -27,10 +29,12 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling {
 
   private func providePresetOptions(completion: @escaping (INObjectCollection<WidgetLocation>?, Error?) -> Void) {
     let currentPosition = createCurrentPositionItem()
-
-    let favourites = retrieveFavoruitesLocations()
-
-    completion(.init(items: [[currentPosition], favourites].flatMap { $0 } ), nil)
+    favouritesManager.fetch()
+    let locationsArray = favouritesManager.favourites.map { WidgetLocation(name: $0.name,
+                                                                           lat: $0.latitude,
+                                                                           long: $0.longitude,
+                                                                           type: .favourite) }
+    completion(.init(items: [[currentPosition], locationsArray].flatMap { $0 } ), nil)
   }
 
   private func createCurrentPositionItem() -> WidgetLocation {
