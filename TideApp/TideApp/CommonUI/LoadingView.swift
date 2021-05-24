@@ -36,6 +36,7 @@ struct Spinner: View {
   @State var rotationDegreesS3 = initialDegree
 
   var body: some View {
+    GeometryReader { geometry in
     ZStack {
       Color.backgroundColor
         .opacity(0.1)
@@ -54,12 +55,13 @@ struct Spinner: View {
         SpinnerCircle(start: spinnerStart, end: spinnerEndS1, rotation: rotationDegreesS1, color: .titleColor)
           .opacity(1)
       }
-      .frame(width: 200, height: 200)
+      .frame(width: geometry.size.width / 1.5)
     }
     .onAppear() {
       Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { (mainTimer) in
         self.animateSpinner()
       }
+    }
     }
   }
 
