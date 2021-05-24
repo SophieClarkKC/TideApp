@@ -47,10 +47,7 @@
 		90202E5C2657C37C001811BB /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
 		904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
 		904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
-		9065A5392656CAC1003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
-		9065A53A2656CAC5003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
 		9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9155060E2656609D00473968 /* FavouritesManager.swift */; };
-		9065A53C2656D0C4003A9374 /* TALocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5382656CAC1003A9374 /* TALocation.swift */; };
 		9065A5462657A45C003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
 		9065A5472657A476003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
 		9065A5482657A477003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
@@ -201,7 +198,6 @@
 		9000EC7126553FC300546099 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		90202E5E2657E0E9001811BB /* CIScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CIScript.sh; sourceTree = "<group>"; };
 		904F7C732657B2A5004E582E /* GlobalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDependencies.swift; sourceTree = "<group>"; };
-		9065A5382656CAC1003A9374 /* TALocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TALocation.swift; sourceTree = "<group>"; };
 		9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		9065A5492657A4DF003A9374 /* TideAppWidgetIntentHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideAppWidgetIntentHandler.entitlements; sourceTree = "<group>"; };
 		9065A54A2657A4F2003A9374 /* TideApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideApp.entitlements; sourceTree = "<group>"; };
@@ -329,7 +325,6 @@
 			children = (
 				911E7B55264EC91A0000BC15 /* WeatherInfo.swift */,
 				12FE3E8C2642B719000F7476 /* WeatherResponse.swift */,
-				9065A5382656CAC1003A9374 /* TALocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -903,7 +898,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D04EAB2645499C006EB2DC /* TideAppApp.swift in Sources */,
-				9065A5392656CAC1003A9374 /* TALocation.swift in Sources */,
 				909BA5DD26417C48000FFBD5 /* AppDelegate.swift in Sources */,
 				91BA455E26554AFA0072755D /* TideTimesInfoView.swift in Sources */,
 				12266B8C264BE59A00DE7FCA /* UserLocator.swift in Sources */,
@@ -980,7 +974,6 @@
 				9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */,
 				90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */,
 				904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */,
-				9065A53C2656D0C4003A9374 /* TALocation.swift in Sources */,
 				9000EC7026553BD600546099 /* Stylesheet.swift in Sources */,
 				9000EC742655412E00546099 /* LocationSearcher.swift in Sources */,
 				9065A5482657A477003A9374 /* UserDefaults+Extension.swift in Sources */,
@@ -997,7 +990,6 @@
 				90F712212649313F002642DE /* TideAppWidget.intentdefinition in Sources */,
 				90F71263264AD771002642DE /* TidesContentViewModel.swift in Sources */,
 				90F7125B264A9B16002642DE /* GeneralHelpers.swift in Sources */,
-				9065A53A2656CAC5003A9374 /* TALocation.swift in Sources */,
 				90F7123026493303002642DE /* StylesheetComponentExample.swift in Sources */,
 				90F71256264A9ACD002642DE /* WeatherResponse.swift in Sources */,
 				91F7CFFF265512DC0013DFCC /* GetWeatherInformationRequest.swift in Sources */,

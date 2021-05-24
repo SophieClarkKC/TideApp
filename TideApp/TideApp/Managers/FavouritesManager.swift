@@ -11,13 +11,13 @@ import CoreLocation
 
 protocol FavouritesManagerType: AnyObject {
   func fetch()
-  func saveToFavourite(_ location: TALocation)
+  func saveToFavourite(_ location: FavouriteLocation)
   func removeFromFavouriteLocation(named: String)
   func clearFavourites()
 }
 
 final class FavouritesManager: FavouritesManagerType {
-  @Published var favourites: [TALocation] = []
+  @Published var favourites: [FavouriteLocation] = []
 
   // MARK: Private
   private static let favsLocationsKey: String = "FAVOURITES_LOCATIONS_STORAGE_KEY"
@@ -36,7 +36,7 @@ final class FavouritesManager: FavouritesManagerType {
     favourites = Array(retrieveLocationsDictionary().values)
   }
 
-  func saveToFavourite(_ location: TALocation) {
+  func saveToFavourite(_ location: FavouriteLocation) {
     var favsDictionary = retrieveLocationsDictionary()
     favsDictionary[location.name] = location
     updateLocationsDictionary(favsDictionary)
@@ -52,14 +52,26 @@ final class FavouritesManager: FavouritesManagerType {
     storage.setValue(nil, forKey: FavouritesManager.favsLocationsKey)
   }
 
-  private func updateLocationsDictionary(_ dictionary: [String: TALocation]) {
+  private func updateLocationsDictionary(_ dictionary: [String: FavouriteLocation]) {
     let data = try? PropertyListEncoder().encode(dictionary)
     storage.setValue(data, forKey: FavouritesManager.favsLocationsKey)
     fetch()
   }
 
-  private func retrieveLocationsDictionary() -> [String: TALocation] {
+  private func retrieveLocationsDictionary() -> [String: FavouriteLocation] {
     guard let data = storage.data(forKey: FavouritesManager.favsLocationsKey) else { return [:] }
-    return (try? PropertyListDecoder().decode([String: TALocation].self, from: data)) ?? [:]
+    return (try? PropertyListDecoder().decode([String: FavouriteLocation].self, from: data)) ?? [:]
+  }
+}
+
+struct FavouriteLocation: Codable {
+  let name: String
+  let latitude: Double
+  let longitude: Double
+
+  init(name: String, location: CLLocation) {
+    self.name = name
+    self.latitude = location.coordinate.latitude
+    self.longitude = location.coordinate.longitude
   }
 }
