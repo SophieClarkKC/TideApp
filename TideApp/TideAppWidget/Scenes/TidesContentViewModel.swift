@@ -26,7 +26,6 @@ struct TidesContentViewModel {
     self.tidesTimes = weatherInfo.tideTimes
     self.waterTemperatureDouble = weatherInfo.waterTemperature
     self.tideHeight = weatherInfo.tideHeight
-    self.waterTemperature = weatherInfo.waterTemperature
   }
 
   func hasPrincipalInfos() -> Bool {
