@@ -73,17 +73,6 @@ final class IntentHandler: INExtension, WidgetConfigurationIntentHandling, Obser
                                                              lat: $0.latitude,
                                                              long: $0.longitude,
                                                              type: .favourite) }
-//    let first = WidgetLocation(name: "Southwark", lat: 51.4500, long: -0.0833, type: .favourite)
-//
-//    let second = WidgetLocation(name: "Rome", lat: 41.902782, long: 12.496366, type: .favourite)
-//
-//    let third = WidgetLocation(name: "Buenos Aires", lat: -34.603722, long: -58.381592, type: .favourite)
-//
-//    let fourth = WidgetLocation(name: "Sydney", lat: -33.865143, long: 151.209900, type: .favourite)
-//
-//    let fifth = WidgetLocation(name: "Dakar", lat: 14.716677, long: -17.467686, type: .favourite)
-//
-//    return [first, second, third, fourth, fifth]
   }
 }
 
@@ -110,7 +99,7 @@ fileprivate extension WidgetLocation {
     case .currentLocation:
       image = Images.gps
       subtitle = "Use GPS, need to be authorized"
-
+      
     default:
       image = nil
       subtitle = nil
