@@ -25,7 +25,7 @@ struct TideTimesView<ViewModel: TideTimesViewModelType>: View {
       return AnyView(Color.backgroundColor)
 
     case .loading:
-      return AnyView(TitleLabel(text: "Loading..."))
+      return AnyView(LoadingView())
 
     case .error(let error):
       return AnyView(ErrorView(message: error.localizedDescription, buttonAction: { viewModel.getTideTimes() }))
