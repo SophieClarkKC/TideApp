@@ -13,14 +13,14 @@ struct GetWeatherInformationRequest: RequestType {
   // MARK: - Properties -
   // MARK: Private
 
-  private let location: CLLocation
+  private let coordinate: CLLocationCoordinate2D
   private let date: Date
   private let networkManager: NetworkManagerType
 
   // MARK: - Initialiser -
 
-  init(location: CLLocation, date: Date, networkManager: NetworkManagerType) {
-    self.location = location
+  init(coordinate: CLLocationCoordinate2D, date: Date, networkManager: NetworkManagerType) {
+    self.coordinate = coordinate
     self.date = date
     self.networkManager = networkManager
   }
@@ -29,7 +29,7 @@ struct GetWeatherInformationRequest: RequestType {
   // MARK: Internal
 
   func perform() -> AnyPublisher<WeatherInfo, Error> {
-    let resource = Resource(location: location)
+    let resource = Resource(coordinate: coordinate)
     return networkManager.fetch(resource)
       .receive(on: DispatchQueue.main)
       .map(\.data)
@@ -58,7 +58,7 @@ extension GetWeatherInformationRequest {
     typealias Output = WeatherResponse
 
     /// The location to request the weather for
-    let location: CLLocation
+    let coordinate: CLLocationCoordinate2D
     /// The number of days forecast we want to request
     var numOfDays: Int = 1
     /// Whether we want the location of the nearest weather station to the requested lat,lon
@@ -72,7 +72,7 @@ extension GetWeatherInformationRequest {
       let validTimeInterval = Set([1, 3, 6, 12, 24]).contains(timeInterval) ? timeInterval : 3 // defaults the value to 3hourly if invalid
       return [URLQueryItem(name: "key", value: Keys.apiKey),
               URLQueryItem(name: "format", value: "json"),
-              URLQueryItem(name: "q", value: "\(location.coordinate.latitude.asDouble),\(location.coordinate.longitude.asDouble)"),
+              URLQueryItem(name: "q", value: "\(coordinate.latitude),\(coordinate.longitude)"),
               URLQueryItem(name: "tide", value: "yes"),
               URLQueryItem(name: "num_of_days", value: "\(numOfDays)"),
               URLQueryItem(name: "includelocation", value: includeLocation ? "yes" : "no"),

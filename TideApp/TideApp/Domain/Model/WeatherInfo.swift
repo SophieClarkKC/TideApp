@@ -18,6 +18,17 @@ struct WeatherInfo {
   let waterTemperature: Double?
 }
 
+extension WeatherInfo: Hashable {
+
+  static func == (lhs: WeatherInfo, rhs: WeatherInfo) -> Bool {
+    return lhs.locationName == rhs.locationName
+  }
+
+  func hash(into hasher: inout Hasher) {
+      hasher.combine(locationName)
+  }
+}
+
 extension Array where Element == WeatherInfo.TideData {
 
   var current: Element? {

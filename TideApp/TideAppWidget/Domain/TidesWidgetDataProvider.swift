@@ -36,7 +36,7 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
       return getDataUsingCurrentUserLocation(completion: completion)
 
     case .some(let location) where location.isCurrentPosition?.boolValue == false:
-      // Use coordinates for location
+      // Use coordinate for location
       latitude = location.latitude?.doubleValue
       longitude = location.longitude?.doubleValue
 
@@ -48,7 +48,7 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
       return completion(.failure(error: "Location to show not found. Please check the widget configuration."))
     }
 
-    getDataFor(location: .init(latitude: lat, longitude: long), completion: completion)
+    getDataFor(coordinate: .init(latitude: lat, longitude: long), completion: completion)
   }
 
   private func getDataUsingCurrentUserLocation(completion: @escaping (TidesEntry.WidgetData) -> ()) {
@@ -64,13 +64,13 @@ class TidesWidgetDataProvider: NSObject, TidesWidgetDataProviderType, Observable
           completion(.failure(error: "Widget cannot access your current location.\nEdit the widget configuration to use a fixed location or authorize the app in Configuration -> Privacy -> Location services."))
 
         case .success(let location):
-          self.getDataFor(location: location, completion: completion)
+          self.getDataFor(coordinate: location.coordinate, completion: completion)
         }
       }).store(in: &cancellable)
   }
 
-  private func getDataFor(location: CLLocation, completion: @escaping (TidesEntry.WidgetData) -> ()) {
-    let request = GetWeatherInformationRequest(location: location, date: Date(), networkManager: networkManager)
+  private func getDataFor(coordinate: CLLocationCoordinate2D, completion: @escaping (TidesEntry.WidgetData) -> ()) {
+    let request = GetWeatherInformationRequest(coordinate: coordinate, date: Date(), networkManager: networkManager)
     request.perform()
       .sink(receiveCompletion: { result in
         guard case .failure = result else { return }

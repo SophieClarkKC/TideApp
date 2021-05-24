@@ -9,6 +9,7 @@ import Foundation
 
 struct TidesContentViewModel {
   let place: String
+
   let waterTemperatureDouble: Double?
   var waterTemperature: String? {
     if let temp = waterTemperatureDouble {
@@ -16,6 +17,7 @@ struct TidesContentViewModel {
     }
     return nil
   }
+  let tideHeight: String?
   let tidesTimes: [WeatherData.Weather.Tide.TideData]?
   var tideStatus: String? { tidesTimes?.current?.tideType.description.abbreviated }
 
@@ -23,6 +25,7 @@ struct TidesContentViewModel {
     self.place = weatherInfo.locationName
     self.tidesTimes = weatherInfo.tideTimes
     self.waterTemperatureDouble = weatherInfo.waterTemperature
+    self.tideHeight = weatherInfo.tideHeight
   }
 
   func hasPrincipalInfos() -> Bool {

@@ -10,13 +10,13 @@ import SwiftUI
 struct LocationInfoView: View {
 
   @State private var showSearch: Bool = false
-  let weatherInfo: [WeatherInfo]
+  let weatherInfo: Set<WeatherInfo>
 
   var body: some View {
     NavigationView {
       ScrollView(showsIndicators: false) {
         LazyVStack(alignment: .leading) {
-          ForEach(weatherInfo, id: \.locationName) { info in
+          ForEach(Array(weatherInfo), id: \.locationName) { info in
             LocationButton(weatherInfo: info, type: .current)
           }
         }

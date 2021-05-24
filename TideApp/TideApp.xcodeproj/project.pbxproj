@@ -41,6 +41,16 @@
 		9000EC7026553BD600546099 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D4BE6D26443304005CA64F /* Stylesheet.swift */; };
 		9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
 		9000EC742655412E00546099 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9000EC7126553FC300546099 /* LocationSearcher.swift */; };
+		90202E592657C304001811BB /* TideChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECA264D389A006EB2DC /* TideChartView.swift */; };
+		90202E5A2657C370001811BB /* TimeLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ED12655206A006EB2DC /* TimeLines.swift */; };
+		90202E5B2657C377001811BB /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECF2653BD40006EB2DC /* LineGraph.swift */; };
+		90202E5C2657C37C001811BB /* BezierConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D04ECD2652BE48006EB2DC /* BezierConfiguration.swift */; };
+		904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
+		904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904F7C732657B2A5004E582E /* GlobalDependencies.swift */; };
+		9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9155060E2656609D00473968 /* FavouritesManager.swift */; };
+		9065A5462657A45C003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
+		9065A5472657A476003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
+		9065A5482657A477003A9374 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */; };
 		908AD3DE2645A32300D45801 /* MockServer in Frameworks */ = {isa = PBXBuildFile; productRef = 908AD3DD2645A32300D45801 /* MockServer */; };
 		909BA5CD264171E1000FFBD5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BA5C4264171E1000FFBD5 /* AppConfig.swift */; };
 		909BA5D0264171E1000FFBD5 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909BA5C8264171E1000FFBD5 /* Config.plist */; };
@@ -84,6 +94,7 @@
 		914C913E2652C67E00D16031 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C913D2652C67E00D16031 /* SearchViewModel.swift */; };
 		914C91442652C6F100D16031 /* SearchControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C91432652C6F100D16031 /* SearchControllerProvider.swift */; };
 		914C914A2652C70C00D16031 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C91492652C70C00D16031 /* ViewControllerResolver.swift */; };
+		9155060F2656609D00473968 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9155060E2656609D00473968 /* FavouritesManager.swift */; };
 		91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AAFC4A264D6EAB00E8A76E /* LocationsView.swift */; };
 		91BA455726554A010072755D /* TideTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA455626554A010072755D /* TideTimesViewModel.swift */; };
 		91BA455E26554AFA0072755D /* TideTimesInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BA455D26554AFA0072755D /* TideTimesInfoView.swift */; };
@@ -186,6 +197,11 @@
 		36D4BE7626443336005CA64F /* TideTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TideTimesView.swift; sourceTree = "<group>"; };
 		9000EC7126553FC300546099 /* LocationSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		90202E5E2657E0E9001811BB /* CIScript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CIScript.sh; sourceTree = "<group>"; };
+		904F7C732657B2A5004E582E /* GlobalDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDependencies.swift; sourceTree = "<group>"; };
+		9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		9065A5492657A4DF003A9374 /* TideAppWidgetIntentHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideAppWidgetIntentHandler.entitlements; sourceTree = "<group>"; };
+		9065A54A2657A4F2003A9374 /* TideApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideApp.entitlements; sourceTree = "<group>"; };
+		9065A54B2657A52A003A9374 /* TideAppWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TideAppWidgetExtension.entitlements; sourceTree = "<group>"; };
 		909BA5C4264171E1000FFBD5 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		909BA5C6264171E1000FFBD5 /* Config-Mock.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-Mock.plist"; sourceTree = "<group>"; };
 		909BA5C7264171E1000FFBD5 /* Mock.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mock.xcconfig; sourceTree = "<group>"; };
@@ -219,6 +235,7 @@
 		914C913D2652C67E00D16031 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		914C91432652C6F100D16031 /* SearchControllerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerProvider.swift; sourceTree = "<group>"; };
 		914C91492652C70C00D16031 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
+		9155060E2656609D00473968 /* FavouritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
 		91AAFC4A264D6EAB00E8A76E /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
 		91BA455626554A010072755D /* TideTimesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideTimesViewModel.swift; sourceTree = "<group>"; };
 		91BA455D26554AFA0072755D /* TideTimesInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideTimesInfoView.swift; sourceTree = "<group>"; };
@@ -316,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				90202E5E2657E0E9001811BB /* CIScript.sh */,
+				9065A54B2657A52A003A9374 /* TideAppWidgetExtension.entitlements */,
 				36007451263AB73100C53715 /* TideApp */,
 				90F7121A2649313D002642DE /* TideAppWidget */,
 				90E2EA76264EADDA00EE93D3 /* TideAppWidgetIntentHandler */,
@@ -344,10 +362,12 @@
 		36007451263AB73100C53715 /* TideApp */ = {
 			isa = PBXGroup;
 			children = (
+				9065A54A2657A4F2003A9374 /* TideApp.entitlements */,
 				36007456263AB73300C53715 /* Assets.xcassets */,
 				909BA5DB26417C2B000FFBD5 /* App */,
 				36D04EB626458CC9006EB2DC /* Scenes */,
 				36D4BE7326443311005CA64F /* CommonUI */,
+				9155060D2656608B00473968 /* Managers */,
 				909BA5C12641715B000FFBD5 /* Configs */,
 				12EF61A72643F41F002C94B4 /* Keys.swift */,
 				36D04EB826458D51006EB2DC /* Domain */,
@@ -395,6 +415,7 @@
 				36D04EBF264A961E006EB2DC /* GeneralHelpers.swift */,
 				12266B85264BE04A00DE7FCA /* CLLocationManager+Publisher.swift */,
 				914C91492652C70C00D16031 /* ViewControllerResolver.swift */,
+				904F7C732657B2A5004E582E /* GlobalDependencies.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -415,6 +436,7 @@
 				36D04EA626453128006EB2DC /* String+Date.swift */,
 				36D04EAC264567EB006EB2DC /* Date+String.swift */,
 				1274CC1F265659CA005AC9E6 /* Double+Ext.swift */,
+				9065A5452657A45C003A9374 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -524,6 +546,7 @@
 		90E2EA76264EADDA00EE93D3 /* TideAppWidgetIntentHandler */ = {
 			isa = PBXGroup;
 			children = (
+				9065A5492657A4DF003A9374 /* TideAppWidgetIntentHandler.entitlements */,
 				90E2EA77264EADDA00EE93D3 /* IntentHandler.swift */,
 				90E2EA79264EADDA00EE93D3 /* Info.plist */,
 			);
@@ -588,6 +611,14 @@
 				91BA456426554CD60072755D /* SearchResultButton.swift */,
 			);
 			path = SearchView;
+			sourceTree = "<group>";
+		};
+		9155060D2656608B00473968 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				9155060E2656609D00473968 /* FavouritesManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		91AAFC49264D6E9300E8A76E /* LocationsView */ = {
@@ -877,13 +908,16 @@
 				91F7CFB926550FF40013DFCC /* NetworkError.swift in Sources */,
 				90F7124826494BB8002642DE /* TideAppWidget.intentdefinition in Sources */,
 				91BA456526554CD60072755D /* SearchResultButton.swift in Sources */,
+				9065A5462657A45C003A9374 /* UserDefaults+Extension.swift in Sources */,
 				911E7B75264ECC1E0000BC15 /* LocationButton.swift in Sources */,
 				91F7CFC52655102D0013DFCC /* RequestType.swift in Sources */,
+				9155060F2656609D00473968 /* FavouritesManager.swift in Sources */,
 				911E7B56264EC91A0000BC15 /* WeatherInfo.swift in Sources */,
 				914C91382652B84200D16031 /* SearchView.swift in Sources */,
 				9000EC7226553FC300546099 /* LocationSearcher.swift in Sources */,
 				36D04EA22644417F006EB2DC /* CLGeocoder+LocationName.swift in Sources */,
 				91F7CFBF265510010013DFCC /* HTTPMethod.swift in Sources */,
+				904F7C742657B2A5004E582E /* GlobalDependencies.swift in Sources */,
 				91AAFC4B264D6EAB00E8A76E /* LocationsView.swift in Sources */,
 				91F7CFB326550FAB0013DFCC /* NetworkManager.swift in Sources */,
 				36D04EAD264567EB006EB2DC /* Date+String.swift in Sources */,
@@ -937,9 +971,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E2EA81264EAEFB00EE93D3 /* TideAppWidget.intentdefinition in Sources */,
+				9065A53B2656D060003A9374 /* FavouritesManager.swift in Sources */,
 				90E2EA78264EADDA00EE93D3 /* IntentHandler.swift in Sources */,
+				904F7C762657B2A8004E582E /* GlobalDependencies.swift in Sources */,
 				9000EC7026553BD600546099 /* Stylesheet.swift in Sources */,
 				9000EC742655412E00546099 /* LocationSearcher.swift in Sources */,
+				9065A5482657A477003A9374 /* UserDefaults+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,17 +1001,22 @@
 				91F7CFED2655124B0013DFCC /* NetworkManager.swift in Sources */,
 				90F71257264A9AF8002642DE /* AppConfig.swift in Sources */,
 				90F71237264937FC002642DE /* Date+String.swift in Sources */,
+				90202E592657C304001811BB /* TideChartView.swift in Sources */,
 				911E7B6F264ECBCE0000BC15 /* WeatherInfo.swift in Sources */,
+				90202E5A2657C370001811BB /* TimeLines.swift in Sources */,
 				90F7122E26493207002642DE /* TidesEntryView.swift in Sources */,
 				9000EC6E26527F8200546099 /* UserLocator.swift in Sources */,
 				90F71254264A9ACD002642DE /* WeatherError.swift in Sources */,
 				91F7CFF32655124D0013DFCC /* NetworkError.swift in Sources */,
+				90202E5B2657C377001811BB /* LineGraph.swift in Sources */,
 				90F7124626494A36002642DE /* TidesEntry.swift in Sources */,
 				91F7D005265513560013DFCC /* RequestType.swift in Sources */,
 				90F7125C264A9C29002642DE /* CLGeocoder+LocationName.swift in Sources */,
 				90F7123E26494625002642DE /* TidesWidgetDataProvider.swift in Sources */,
 				90F71244264948D3002642DE /* TidesErrorView.swift in Sources */,
+				9065A5472657A476003A9374 /* UserDefaults+Extension.swift in Sources */,
 				90F7121C2649313D002642DE /* TideAppWidget.swift in Sources */,
+				90202E5C2657C37C001811BB /* BezierConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,9 +1170,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TideApp/TideApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TideApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TideApp/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1140,6 +1184,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1151,9 +1196,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TideApp/TideApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TideApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TideApp/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1163,6 +1210,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1320,9 +1368,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TideApp/TideApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TideApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TideApp/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1332,6 +1382,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1382,8 +1433,9 @@
 		90E2EA7E264EADDA00EE93D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetIntentHandler/TideAppWidgetIntentHandler.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = Y3BQ9H8CU8;
 				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1393,6 +1445,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1402,8 +1455,9 @@
 		90E2EA7F264EADDA00EE93D3 /* Mock */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetIntentHandler/TideAppWidgetIntentHandler.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1413,6 +1467,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1422,8 +1477,9 @@
 		90E2EA80264EADDA00EE93D3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetIntentHandler/TideAppWidgetIntentHandler.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TideAppWidgetIntentHandler/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1433,6 +1489,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kinandcarta.TideApp.TideAppWidgetIntentHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1444,8 +1501,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1466,8 +1524,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1488,8 +1547,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TideAppWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3GF9WCSXRZ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TideAppWidget/Configs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
