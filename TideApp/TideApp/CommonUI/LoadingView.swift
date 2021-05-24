@@ -14,9 +14,9 @@ struct LoadingView: View {
       Color.backgroundColor
         .ignoresSafeArea()
 
-        Spinner()
+      Spinner()
 
-        TitleLabel(text: "Loading")
+      TitleLabel(text: "Loading")
     }
   }
 }
@@ -37,31 +37,31 @@ struct Spinner: View {
 
   var body: some View {
     GeometryReader { geometry in
-    ZStack {
-      Color.backgroundColor
-        .opacity(0.1)
-        .ignoresSafeArea()
-
       ZStack {
-        // Spinner 3
-        SpinnerCircle(start: spinnerStart, end: spinnerEndS2S3, rotation: rotationDegreesS3, color: .titleColor)
-          .opacity(0.25)
+        Color.backgroundColor
+          .opacity(0.1)
+          .ignoresSafeArea()
 
-        // Spinner 2
-        SpinnerCircle(start: spinnerStart, end: spinnerEndS2S3, rotation: rotationDegreesS2, color: .titleColor)
-          .opacity(0.75)
+        ZStack {
+          // Spinner 3
+          SpinnerCircle(start: spinnerStart, end: spinnerEndS2S3, rotation: rotationDegreesS3, color: .titleColor)
+            .opacity(0.25)
 
-        // Spinner 1
-        SpinnerCircle(start: spinnerStart, end: spinnerEndS1, rotation: rotationDegreesS1, color: .titleColor)
-          .opacity(1)
+          // Spinner 2
+          SpinnerCircle(start: spinnerStart, end: spinnerEndS2S3, rotation: rotationDegreesS2, color: .titleColor)
+            .opacity(0.75)
+
+          // Spinner 1
+          SpinnerCircle(start: spinnerStart, end: spinnerEndS1, rotation: rotationDegreesS1, color: .titleColor)
+            .opacity(1)
+        }
+        .frame(width: geometry.size.width / 1.5)
       }
-      .frame(width: geometry.size.width / 1.5)
-    }
-    .onAppear() {
-      Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { (mainTimer) in
-        self.animateSpinner()
+      .onAppear() {
+        Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { (mainTimer) in
+          self.animateSpinner()
+        }
       }
-    }
     }
   }
 
