@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import WidgetKit
+#if DEBUG
 import MockServer
+#endif
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -16,16 +19,30 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     startMockServerIfNeeded()
     #endif
 
+    WidgetCenter.shared.reloadAllTimelines()
+
     return true
   }
 }
 
+#if DEBUG
 extension AppDelegate {
-  #if DEBUG
   private func startMockServerIfNeeded() {
     if AppConfig.isTestEnv {
       MockServer().start()
     }
   }
-  #endif
+}
+
+extension UIWindow {
+  open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    if motion == .motionShake {
+      NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
+    }
+  }
+}
+#endif
+
+extension UIDevice {
+  static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
 }

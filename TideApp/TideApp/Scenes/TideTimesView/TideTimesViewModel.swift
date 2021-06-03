@@ -2,120 +2,94 @@
 //  TideTimesViewModel.swift
 //  TideApp
 //
-//  Created by Sophie Clark on 04/05/2021.
+//  Created by John Sanderson on 19/05/2021.
 //
 
 import Foundation
 import Combine
 import CoreLocation
 
-final class TideTimesViewModel: ObservableObject {
-  typealias TideData = WeatherData.Weather.Tide.TideData
-  typealias Hourly = WeatherData.Weather.Hourly
-  
-  @Published var locationName: String = ""
-  @Published var subTitle: String = ""
-  @Published var tideTimes: [TideData] = []
-  @Published var tideHeight: String = ""
-  @Published var waterTemperature: String = ""
-  @Published var error: WeatherError?
-  
-  private var weatherFetcher: WeatherDataFetchable
-  private var cancellables = [AnyCancellable]()
+enum TideTimesState {
+  case idle
+  case loading
+  case error(Error)
+  case success(WeatherInfo)
+}
 
-  init(weatherFetcher: WeatherDataFetchable) {
-    self.weatherFetcher = weatherFetcher
+protocol TideTimesViewModelType: ObservableObject {
+
+  var state: TideTimesState { get }
+
+  func getTideTimes()
+}
+
+// MARK: - Network ViewModel -
+
+/// A `TideTimesViewModelType` that fetches the `WeatherInfo` from the network using the provided location
+final class TideTimesNetworkViewModel: TideTimesViewModelType {
+
+  // MARK: - Properties -
+  // MARK: Internal
+
+  @Published var state: TideTimesState = .idle
+
+  // MARK: Private
+
+  private let location: CLLocation?
+  private let networkManager: NetworkManagerType
+  private var cancellable: AnyCancellable?
+
+  // MARK: - Initialiser -
+
+  init(location: CLLocation?, networkManager: NetworkManagerType = NetworkManager()) {
+    self.location = location
+    self.networkManager = networkManager
   }
-  
+
+  // MARK: - Functions -
+  // MARK: Internal
+
   func getTideTimes() {
-    weatherFetcher.getStandardWeatherData(lat: 51.489134, lon: -0.229391)
-      .receive(on: DispatchQueue.main)
-      .flatMap { CLGeocoder().getLocationName(for: $0) }
-      .sink { completion in
-        switch completion {
-        case .failure(let error):
-          self.error = error
-        case .finished:
-          break
-        }
-      } receiveValue: { (placeName, weatherData) in
-        let tideData = weatherData.weather.first?.tides.first?.tideData ?? []
-        self.subTitle = "Tide times"
-        self.tideTimes = tideData
-        self.locationName = placeName
-        let currentTideHeight = self.calculateCurrentTideHeight(from: tideData)
-        self.tideHeight = "Current tide height: ~\(String(format: "%.2f", currentTideHeight))m"
-        if let hourly = weatherData.weather.first?.hourly {
-          let currentTemperature = self.currentWaterTemperature(from: hourly)
-          self.waterTemperature = "Current water temperature: ~\(String(format: "%.0f", currentTemperature))c"
-        }
-      }
-      .store(in: &cancellables)
+    state = .loading
+    guard let location = location else {
+      state = .error(WeatherError.parsing(description: "Invalid location"))
+      return
+    }
+    let request = GetWeatherInformationRequest(coordinate: location.coordinate, date: Date(), networkManager: networkManager)
+    cancellable = request.perform()
+      .sink(receiveCompletion: { completion in
+        guard case let .failure(error) = completion else { return }
+        self.state = .error(error)
+      }, receiveValue: {
+        self.state = .success($0)
+      })
   }
-  
-  private func calculateCurrentTideHeight(from tideData: [TideData]) -> Double {
-    let now = Date()
-    let tideDates = tideData.compactMap { data in
-      data.tideDateTime.date(with: .dateTime)
-    }
-    let closestDates = now.closestDates(in: tideDates)
-    
-    let lastTideData = tideData.first(where: { data in
-      data.tideDateTime.date(with: .dateTime) == closestDates.first
-    })
-    let nextTideData = tideData.first(where: { data in
-      data.tideDateTime.date(with: .dateTime) == closestDates.last
-    })
-    
-    guard let lastTideHeightString = lastTideData?.tideHeightM,
-          let nextTideHeightString = nextTideData?.tideHeightM,
-          let lastTideTime = closestDates.first,
-          let nextTideTime = closestDates.last,
-          let lastTideHeight = Double(lastTideHeightString),
-          let nextTideHeight = Double(nextTideHeightString) else {
-      return 0
-    }
-    
-    return getWeightedValue(from: lastTideTime, middleDate: now, endDate: nextTideTime, startValue: lastTideHeight, endValue: nextTideHeight)
+}
+
+// MARK: - Local ViewModel -
+
+/// A `TideTimesViewModelType` that is initialised directly with a `WeatherInfo` object
+final class TideTimesLocalViewModel: TideTimesViewModelType {
+
+  // MARK: - Properties -
+  // MARK: Internal
+
+  @Published var state: TideTimesState = .idle
+
+  // MARK: Private
+
+  private let weatherInfo: WeatherInfo
+
+  // MARK: - Initialiser -
+
+  init(weatherInfo: WeatherInfo) {
+    self.weatherInfo = weatherInfo
   }
-  
-  private func currentWaterTemperature(from hourlyData: [Hourly]) -> Double {
-    let timeNowDate = Date().string(with: .timeNoColon).date(with: .timeNoColon)
-    let closestTwoDates = timeNowDate?.closestDates(in: hourlyData.compactMap { $0.time.date(with: .timeNoColon) })
-    guard let closestDates = closestTwoDates else {
-      return 0
-    }
-    
-    guard let lastTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
-      return 0
-    }
-    guard let nextTempData = hourlyData.first(where: { data in data.time.date(with: .timeNoColon) == closestDates.first }) else {
-      return Double(lastTempData.waterTempC) ?? 0
-    }
-    
-    guard let timeNow = timeNowDate,
-          let lastTempTime = closestDates.first,
-          let nextTempTime = closestDates.last,
-          let lastTemp = Double(lastTempData.waterTempC),
-          let nextTemp = Double(nextTempData.waterTempC) else {
-      return 0
-    }
-    
-    return getWeightedValue(from: lastTempTime, middleDate: timeNow, endDate: nextTempTime, startValue: lastTemp, endValue: nextTemp)
-  }
-  
-  private func getWeightedValue(from beginDate: Date, middleDate: Date, endDate: Date, startValue: Double, endValue: Double) -> Double {
-    let beginningAndEndDifference = endDate.difference(from: beginDate)
-    let middleAndBeginningDifference = middleDate.difference(from: beginDate)
-    
-    let safeMiddleAndBeginningDifference = middleAndBeginningDifference == 0 ? 1 : middleAndBeginningDifference
-    let safeTimeDifferenceBetweenTides = beginningAndEndDifference == 0 ? 1 : beginningAndEndDifference
-    
-    let timeFraction = safeMiddleAndBeginningDifference / safeTimeDifferenceBetweenTides
-    let deltaLowHigh = startValue - endValue
-    let heightFraction = timeFraction * deltaLowHigh
-    let currentHeight = heightFraction + endValue
-    
-    return currentHeight
+
+  // MARK: - Functions -
+  // MARK: Internal
+
+  func getTideTimes() {
+    state = .success(weatherInfo)
   }
 }

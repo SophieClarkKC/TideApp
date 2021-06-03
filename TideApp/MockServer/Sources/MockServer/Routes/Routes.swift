@@ -26,6 +26,12 @@ enum Route {
   case error(code: Int, message: String)
 
   func handle(request: HttpRequest) -> HttpResponse {
+    let responseToReturn = MockServerStore.shared.get(key: request.path)
+
+    guard case .success = responseToReturn else {
+      return Response.Error.generic
+    }
+
     switch self {
     case .jsonFile(let fileName):
       guard let filePath = Bundle.module.path(forResource: fileName, ofType: "json") else {
